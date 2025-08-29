@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mascotas Store - Peluquería, Spa Canino & Pet Shop | Ecuador</title>
+    <meta name="description" content="Centro veterinario profesional con servicios de peluquería, grooming, consultas veterinarias y productos premium. Sucursales en Ibarra, Tulcán y Otavalo">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Variables CSS */
+        :root {
+            --primary-cyan: #00bfff;
+            --primary-blue: #0066ff;
+            --neon-cyan: #00ffff;
+            --neon-pink: #ff1493;
+            --neon-green: #00ff7f;
+            --dark-navy: #0a0e27;
+            --darker-navy: #050814;
+            
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(0, 191, 255, 0.3);
+            
+            --text-white: #ffffff;
+            --text-cyan: #00bfff;
+            --text-light: #e0e6ed;
+            --text-dim: #9ca3af;
+            
+            --shadow-neon: 0 0 20px rgba(0, 191, 255, 0.3);
+            --shadow-glow: 0 0 40px rgba(0, 191, 255, 0.2);
+            
+            --transition: all 0.3s ease;
+            --radius: 12px;
+            --spacing: 1rem;
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-white);
+            background: linear-gradient(135deg, var(--dark-navy), var(--darker-navy));
+            overflow-x: hidden;
+        }
+
+        /* Fondo animado */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(0, 191, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 80% at 80% 20%, rgba(255, 20, 147, 0.12) 0%, transparent 50%);
+            animation: backgroundShift 15s ease infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Utilities */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-blue));
+            color: var(--text-white);
+            border-color: var(--primary-cyan);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-neon);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-cyan);
+            border-color: var(--primary-cyan);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-cyan);
+            color: var(--text-white);
+        }
+
+        .btn-emergency {
+            background: linear-gradient(135deg, var(--neon-pink), #ff0080);
+            color: var(--text-white);
+            border-color: var(--neon-pink);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header */
+        .header {
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: var(--transition);
+            border-bottom: 2px solid var(--primary-cyan);
+        }
+
+        .header.scrolled {
+            background: rgba(5, 8, 20, 0.98);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .header-top {
+            background: linear-gradient(90deg, var(--primary-cyan), var(--primary-blue));
+            padding: 8px 0;
+            font-size: 13px;
+        }
+
+        .header-top-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header-info {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-info-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+        }
+
+        .header-social {
+            display: flex;
+            gap: 8px;
+        }
+
+        .header-social a {
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .header-social a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .header-main {
+            padding: 15px 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--neon-cyan));
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            box-shadow: var(--shadow-neon);
+        }
+
+        .logo-text h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary-cyan), var(--neon-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .logo-subtitle {
+            font-size: 12px;
+            color: var(--text-cyan);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-white);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .nav-menu a::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: var(--primary-cyan);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-menu a:hover::before,
+        .nav-menu a.active::before {
+            width: 100%;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-cyan);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary-cyan);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 80px;
+            position: relative;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--text-white), var(--primary-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--primary-cyan);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .hero-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .hero-feature:hover {
+            border-color: var(--primary-cyan);
+            transform: translateY(-2px);
+        }
+
+        .hero-feature-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--neon-cyan));
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            text-align: center;
+        }
+
+        .hero-main-image {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            background: var(--glass-bg);
+            border: 2px solid var(--glass-border);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .hero-badges {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .hero-badge {
+            background: linear-gradient(135deg, var(--neon-pink), #ff0080);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-alt {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary-cyan), var(--neon-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--primary-cyan);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .section-description {
+            font-size: 1rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 2px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 191, 255, 0.05), rgba(255, 20, 147, 0.05));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-cyan);
+            box-shadow: 0 20px 40px rgba(0, 191, 255, 0.2);
+        }
+
+        .card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--neon-cyan));
+            color: white;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .service-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-cyan);
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .service-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: var(--neon-green);
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            background: rgba(0, 255, 127, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        /* Branches Grid */
+        .branches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .branch-card {
+            text-align: center;
+        }
+
+        .branch-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--neon-cyan));
+            color: white;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 20px;
+        }
+
+        .branch-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-cyan);
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .branch-info-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .branch-phone {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--neon-green);
+            cursor: pointer;
+            margin: 15px 0;
+            transition: var(--transition);
+        }
+
+        .branch-phone:hover {
+            transform: scale(1.05);
+        }
+
+        /* About Features */
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .about-feature:hover {
+            border-color: var(--primary-cyan);
+            transform: translateY(-2px);
+        }
+
+        .about-feature-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--neon-cyan));
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .about-feature h4 {
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 5px;
+        }
+
+        .about-feature p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-blue));
+            position: relative;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .contact-info h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: white;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            color: white;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-item-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+
+        .contact-item h4 {
+            font-weight: 700;
+            margin-bottom: 3px;
+            color: white;
+        }
+
+        .contact-item p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .emergency-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .emergency-card h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .emergency-phone {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--neon-green);
+            cursor: pointer;
+            margin: 15px 0;
+            transition: var(--transition);
+        }
+
+        .emergency-phone:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--darker-navy);
+            border-top: 2px solid var(--primary-cyan);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-family: 'Orbitron', monospace;
+            color: var(--primary-cyan);
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .footer-section p {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-cyan);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--neon-cyan));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            transform: scale(1.1);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(0, 191, 255, 0.3);
+            padding-top: 20px;
+            text-align: center;
+            color: var(--text-dim);
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
+            z-index: 1000;
+            animation: whatsappPulse 3s infinite;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes whatsappPulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(0, 191, 255, 0.3);
+            border-top: 3px solid var(--primary-cyan);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .header-info {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10, 14, 39, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+                border-top: 2px solid var(--primary-cyan);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-actions {
+                display: none;
+            }
+
+            .hero {
+                padding: 120px 0 60px;
+            }
+
+            .hero-features {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid,
+            .branches-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .whatsapp-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <!-- Top Bar -->
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <div class="header-info">
+                        <div class="header-info-item">
+                            <i class="fas fa-phone"></i>
+                            <strong>0999929069</strong>
+                        </div>
+                        <div class="header-info-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Lun-Vie 8AM-7PM</span>
+                        </div>
+                        <div class="header-info-item">
+                            <i class="fas fa-ambulance"></i>
+                            <span>Emergencias 24/7</span>
+                        </div>
+                    </div>
+                    <div class="header-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Navigation -->
+        <div class="header-main">
+            <div class="container">
+                <nav class="nav">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-paw"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h1>MASCOTAS STORE</h1>
+                            <div class="logo-subtitle">Peluquería, Spa Canino & Pet Shop</div>
+                        </div>
+                    </a>
+
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a href="#inicio" class="active">Inicio</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#sucursales">Sucursales</a></li>
+                        <li><a href="#nosotros">Nosotros</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+
+                    <div class="nav-actions">
+                        <a href="tel:0999929069" class="btn btn-outline">
+                            <i class="fas fa-phone"></i> Llamar
+                        </a>
+                        <a href="https://wa.me/593999929069" class="btn btn-emergency">
+                            <i class="fas fa-ambulance"></i> Emergencias
+                        </a>
+                    </div>
+
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero section" id="inicio">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <div class="hero-text">
+                    <h1>MASCOTAS STORE</h1>
+                    <div class="hero-subtitle">Peluquería, Spa Canino & Pet Shop</div>
+                    <p class="hero-description">
+                        Centro veterinario profesional especializado en servicios de peluquería, grooming, 
+                        consultas veterinarias y productos premium. Brindamos atención integral de excelencia 
+                        para el bienestar y felicidad de tu mascota.
+                    </p>
+                    
+                    <div class="hero-features">
+                        <div class="hero-feature">
+                            <div class="hero-feature-icon">
+                                <i class="fas fa-stethoscope"></i>
+                            </div>
+                            <span>Consultorio Veterinario</span>
+                        </div>
+                        <div class="hero-feature">
+                            <div class="hero-feature-icon">
+                                <i class="fas fa-cut"></i>
+                            </div>
+                            <span>Peluquería Profesional</span>
+                        </div>
+                        <div class="hero-feature">
+                            <div class="hero-feature-icon">
+                                <i class="fas fa-bath"></i>
+                            </div>
+                            <span>Grooming & Spa</span>
+                        </div>
+                        <div class="hero-feature">
+                            <div class="hero-feature-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <span>Pet Shop Premium</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-buttons">
+                        <a href="#servicios" class="btn btn-primary">
+                            <i class="fas fa-hospital"></i> Ver Servicios
+                        </a>
+                        <a href="tel:0999929069" class="btn btn-emergency">
+                            <i class="fas fa-phone"></i> Emergencias 24/7
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hero-image">
+                    <div class="hero-main-image">
+                        <i class="fas fa-paw"></i>
+                        <div class="hero-badges">
+                            <div class="hero-badge">10+ Años</div>
+                            <div class="hero-badge">Profesional</div>
+                            <div class="hero-badge">24/7</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="servicios">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">SERVICIOS PROFESIONALES</h2>
+                <div class="section-subtitle">Atención Integral de Excelencia</div>
+                <p class="section-description">
+                    Ofrecemos servicios veterinarios especializados, peluquería profesional y productos premium 
+                    con tecnología de vanguardia y profesionales altamente capacitados.
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h3 class="service-title">Consultorio Veterinario</h3>
+                    <p class="section-description">
+                        Atención médica integral con veterinarios especializados y equipos modernos 
+                        para garantizar la salud de tu mascota.
+                    </p>
+                    <ul class="service-features">
+                        <li>Esterilizaciones profesionales</li>
+                        <li>Hospitalizaciones con monitoreo 24/7</li>
+                        <li>Consultas médicas especializadas</li>
+                        <li>Profilaxis y vacunación completa</li>
+                        <li>Cirugías con tecnología avanzada</li>
+                        <li>Análisis clínicos y radiografías</li>
+                    </ul>
+                    <a href="https://wa.me/593999929069" class="btn btn-primary">
+                        <i class="fas fa-calendar"></i> Agendar Consulta
+                    </a>
+                </div>
+
+                <div class="service-card card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3 class="service-title">Peluquería Profesional</h3>
+                    <p class="section-description">
+                        Servicios estéticos especializados con técnicas profesionales y productos premium 
+                        para mantener a tu mascota siempre hermosa.
+                    </p>
+                    <ul class="service-features">
+                        <li>Corte breed específico profesional</li>
+                        <li>Baño completo con productos premium</li>
+                        <li>Limpieza de oídos especializada</li>
+                        <li>Corte de uñas y cuidado de almohadillas</li>
+                        <li>Desparasitación externa</li>
+                        <li>Tratamientos de piel especializados</li>
+                    </ul>
+                    <a href="https://wa.me/593999929069" class="btn btn-primary">
+                        <i class="fas fa-calendar"></i> Reservar Cita
+                    </a>
+                </div>
+
+                <div class="service-card card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-bath"></i>
+                    </div>
+                    <h3 class="service-title">Grooming & Spa</h3>
+                    <p class="section-description">
+                        Servicios de spa y relajación canina con tratamientos especializados 
+                        para el bienestar completo de tu mascota.
+                    </p>
+                    <ul class="service-features">
+                        <li>Spa relajante con aromaterapia</li>
+                        <li>Masajes terapéuticos caninos</li>
+                        <li>Tratamientos de hidratación profunda</li>
+                        <li>Limpieza dental sin anestesia</li>
+                        <li>Paquetes de embellecimiento completo</li>
+                        <li>Ambiente relajante y profesional</li>
+                    </ul>
+                    <a href="https://wa.me/593999929069" class="btn btn-primary">
+                        <i class="fas fa-calendar"></i> Reservar Spa
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Branches Section -->
+    <section class="section section-alt" id="sucursales">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">NUESTRAS SUCURSALES</h2>
+                <div class="section-subtitle">Atención Profesional en Todo el Norte del País</div>
+                <p class="section-description">
+                    Contamos con sucursales estratégicamente ubicadas en las principales ciudades del norte 
+                    de Ecuador para brindar servicios veterinarios de calidad cerca de ti.
+                </p>
+            </div>
+
+            <div class="branches-grid">
+                <div class="branch-card card fade-in">
+                    <div class="branch-icon">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <h3 class="branch-name">IBARRA</h3>
+                    <div class="branch-info">
+                        <div class="branch-info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Centro de Ibarra, Imbabura</span>
+                        </div>
+                        <div class="branch-info-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Lun-Vie: 8AM-7PM | Sáb: 8AM-6PM</span>
+                        </div>
+                        <div class="branch-info-item">
+                            <i class="fas fa-hospital"></i>
+                            <span>Servicios Completos</span>
+                        </div>
+                    </div>
+                    <div class="branch-phone" onclick="window.location.href='tel:0999929069'">
+                        <i class="fas fa-phone"></i> 0999929069
+                    </div>
+                    <a href="https://wa.me/593999929069?text=Hola! Me interesa información sobre la sucursal de Ibarra" 
+                       class="btn btn-primary">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Ibarra
+                    </a>
+                </div>
+
+                <div class="branch-card card fade-in">
+                    <div class="branch-icon">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <h3 class="branch-name">TULCÁN</h3>
+                    <div class="branch-info">
+                        <div class="branch-info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Centro de Tulcán, Carchi</span>
+                        </div>
+                        <div class="branch-info-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Lun-Vie: 8AM-6PM | Sáb: 9AM-5PM</span>
+                        </div>
+                        <div class="branch-info-item">
+                            <i class="fas fa-hospital"></i>
+                            <span>Servicios Especializados</span>
+                        </div>
+                    </div>
+                    <div class="branch-phone" onclick="window.location.href='tel:0999929069'">
+                        <i class="fas fa-phone"></i> 0999929069
+                    </div>
+                    <a href="https://wa.me/593999929069?text=Hola! Me interesa información sobre la sucursal de Tulcán" 
+                       class="btn btn-primary">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Tulcán
+                    </a>
+                </div>
+
+                <div class="branch-card card fade-in">
+                    <div class="branch-icon">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <h3 class="branch-name">OTAVALO</h3>
+                    <div class="branch-info">
+                        <div class="branch-info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Centro de Otavalo, Imbabura</span>
+                        </div>
+                        <div class="branch-info-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Lun-Vie: 8AM-6PM | Sáb: 9AM-4PM</span>
+                        </div>
+                        <div class="branch-info-item">
+                            <i class="fas fa-hospital"></i>
+                            <span>Atención Integral</span>
+                        </div>
+                    </div>
+                    <div class="branch-phone" onclick="window.location.href='tel:0999929069'">
+                        <i class="fas fa-phone"></i> 0999929069
+                    </div>
+                    <a href="https://wa.me/593999929069?text=Hola! Me interesa información sobre la sucursal de Otavalo" 
+                       class="btn btn-primary">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Otavalo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="nosotros">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">SOBRE NOSOTROS</h2>
+                <div class="section-subtitle">Más de 10 Años de Experiencia</div>
+                <p class="section-description">
+                    Somos un equipo de profesionales especializados en el cuidado integral de mascotas, 
+                    comprometidos con brindar servicios de excelencia y tecnología de vanguardia.
+                </p>
+            </div>
+
+            <div class="about-features fade-in">
+                <div class="about-feature">
+                    <div class="about-feature-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div>
+                        <h4>Veterinarios Certificados</h4>
+                        <p>Profesionales con formación especializada</p>
+                    </div>
+                </div>
+                
+                <div class="about-feature">
+                    <div class="about-feature-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div>
+                        <h4>10+ Años de Experiencia</h4>
+                        <p>Trayectoria consolidada en el sector</p>
+                    </div>
+                </div>
+                
+                <div class="about-feature">
+                    <div class="about-feature-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <div>
+                        <h4>Tecnología Avanzada</h4>
+                        <p>Equipos modernos y técnicas innovadoras</p>
+                    </div>
+                </div>
+                
+                <div class="about-feature">
+                    <div class="about-feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div>
+                        <h4>Atención Personalizada</h4>
+                        <p>Cuidado individualizado para cada mascota</p>
+                    </div>
+                </div>
+                
+                <div class="about-feature">
+                    <div class="about-feature-icon">
+                        <i class="fas fa-ambulance"></i>
+                    </div>
+                    <div>
+                        <h4>Emergencias 24/7</h4>
+                        <p>Disponibles cuando más nos necesitas</p>
+                    </div>
+                </div>
+                
+                <div class="about-feature">
+                    <div class="about-feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h4>Capacitación Continua</h4>
+                        <p>Actualización constante en nuevas técnicas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section section" id="contacto">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info fade-in">
+                    <h2>CONTÁCTANOS AHORA</h2>
+                    <p>
+                        Estamos disponibles para atender todas tus consultas y brindar la mejor atención a tu mascota. 
+                        Nuestro equipo de profesionales está listo para ayudarte las 24 horas del día.
+                    </p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4>Línea Principal</h4>
+                                <p>0999929069 (Llamadas y WhatsApp)</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4>Horarios de Atención</h4>
+                                <p>Lun-Vie: 8AM-7PM | Sáb: 8AM-6PM</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email Corporativo</h4>
+                                <p>info@mascotasstore.ec</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <div>
+                                <h4>Asesoramiento Técnico</h4>
+                                <p>Disponible en todas nuestras sucursales</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-in">
+                    <div class="emergency-card">
+                        <h3><i class="fas fa-ambulance"></i> EMERGENCIAS 24/7</h3>
+                        <p>Para casos urgentes y emergencias veterinarias, contáctanos inmediatamente</p>
+                        <div class="emergency-phone" onclick="window.location.href='tel:0999929069'">
+                            0999929069
+                        </div>
+                        <a href="https://wa.me/593999929069?text=🚨 EMERGENCIA - Necesito atención veterinaria urgente" 
+                           class="btn btn-outline" style="color: white; border-color: white;">
+                            <i class="fab fa-whatsapp"></i> WhatsApp Emergencia
+                        </a>
+                        <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">
+                            Atención inmediata para: Intoxicaciones, accidentes, crisis convulsivas, 
+                            problemas respiratorios y emergencias cardiacas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section fade-in">
+                    <h3>Mascotas Store</h3>
+                    <p>
+                        Centro veterinario integral con más de 10 años de experiencia brindando servicios 
+                        profesionales de salud animal, peluquería especializada, grooming y productos premium 
+                        en Ibarra, Tulcán y Otavalo.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section fade-in">
+                    <h3>Servicios</h3>
+                    <ul>
+                        <li><a href="#servicios">Consultorio Veterinario</a></li>
+                        <li><a href="#servicios">Esterilizaciones</a></li>
+                        <li><a href="#servicios">Hospitalizaciones</a></li>
+                        <li><a href="#servicios">Cirugías</a></li>
+                        <li><a href="#servicios">Peluquería Profesional</a></li>
+                        <li><a href="#servicios">Grooming & Spa</a></li>
+                        <li><a href="#servicios">Pet Shop Premium</a></li>
+                        <li><a href="#servicios">Emergencias 24/7</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section fade-in">
+                    <h3>Sucursales</h3>
+                    <ul>
+                        <li><a href="#sucursales">Ibarra Centro</a></li>
+                        <li><a href="#sucursales">Tulcán Centro</a></li>
+                        <li><a href="#sucursales">Otavalo Centro</a></li>
+                        <li><a href="#contacto">Horarios de Atención</a></li>
+                        <li><a href="#contacto">Teléfonos y Contactos</a></li>
+                        <li><a href="#contacto">Emergencias 24/7</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section fade-in">
+                    <h3>Enlaces</h3>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#nosotros">Sobre Nosotros</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                        <li><a href="#">Políticas de Privacidad</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>
+                    © 2024 <strong>Mascotas Store</strong> - Todos los derechos reservados | 
+                    Diseñado por <strong>Leonardo Luna</strong>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/593999929069" class="whatsapp-btn" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JavaScript -->
+    <script>
+        // App Class
+        class MascotasStoreApp {
+            constructor() {
+                this.lastScroll = 0;
+                this.init();
+            }
+
+            init() {
+                this.bindEvents();
+                this.setupAnimations();
+                this.handleLoadingScreen();
+            }
+
+            // Event Binding
+            bindEvents() {
+                window.addEventListener('load', () => this.handleLoadingScreen());
+                window.addEventListener('scroll', () => this.handleScroll());
+                window.addEventListener('resize', () => this.handleResize());
+
+                // Mobile menu toggle
+                const menuToggle = document.getElementById('menuToggle');
+                const navMenu = document.getElementById('navMenu');
+                
+                if (menuToggle && navMenu) {
+                    menuToggle.addEventListener('click', () => {
+                        navMenu.classList.toggle('active');
+                        const isActive = navMenu.classList.contains('active');
+                        menuToggle.innerHTML = isActive 
+                            ? '<i class="fas fa-times"></i>' 
+                            : '<i class="fas fa-bars"></i>';
+                    });
+                }
+
+                // Smooth scroll for navigation links
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const target = document.querySelector(anchor.getAttribute('href'));
+                        if (target) {
+                            const headerHeight = document.getElementById('header').offsetHeight;
+                            const targetPosition = target.offsetTop - headerHeight;
+                            
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
+                            });
+
+                            // Close mobile menu
+                            if (navMenu && navMenu.classList.contains('active')) {
+                                navMenu.classList.remove('active');
+                                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                            }
+                        }
+                    });
+                });
+
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (navMenu && !navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                        navMenu.classList.remove('active');
+                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                });
+
+                // Phone clicks
+                document.querySelectorAll('.branch-phone, .emergency-phone').forEach(phone => {
+                    phone.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const phoneNumber = phone.textContent.replace(/\D/g, '');
+                        window.location.href = `tel:${phoneNumber}`;
+                    });
+                });
+            }
+
+            // Loading Screen
+            handleLoadingScreen() {
+                const loadingScreen = document.getElementById('loadingScreen');
+                if (loadingScreen) {
+                    setTimeout(() => {
+                        loadingScreen.classList.add('hidden');
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                        }, 500);
+                    }, 1000);
+                }
+            }
+
+            // Scroll Handling
+            handleScroll() {
+                const header = document.getElementById('header');
+                const currentScroll = window.pageYOffset;
+
+                // Header scroll effect
+                if (currentScroll > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+
+                // Update animations
+                this.updateAnimations();
+
+                // Update active navigation
+                this.updateActiveNavigation();
+
+                this.lastScroll = currentScroll;
+            }
+
+            // Animations
+            setupAnimations() {
+                this.fadeElements = document.querySelectorAll('.fade-in');
+                this.updateAnimations();
+            }
+
+            updateAnimations() {
+                this.fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+
+            // Navigation
+            updateActiveNavigation() {
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('.nav-menu a');
+                let current = '';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (window.pageYOffset >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // Resize Handling
+            handleResize() {
+                const navMenu = document.getElementById('navMenu');
+                const menuToggle = document.getElementById('menuToggle');
+                
+                if (window.innerWidth > 768) {
+                    if (navMenu && navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+
+                this.updateAnimations();
+            }
+        }
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            new MascotasStoreApp();
+        });
+
+        // Error Handling
+        window.addEventListener('error', (e) => {
+            console.error('Error:', e.error);
+        });
+
+        // Performance
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // Service worker would go here for PWA
+            });
+        }
+    </script>
+</body>
+</html>
