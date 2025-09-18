@@ -1,0 +1,2230 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Shop Online - Productos Premium | Mascotas Store</title>
+    <meta name="description" content="Descubre nuestra tienda online con productos premium para mascotas. Alimentos, juguetes, accesorios y más con delivery a domicilio en Ecuador.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <style>
+        /* Estilos específicos para productos */
+        :root {
+            --header-height: 120px;
+        }
+
+        .products-hero {
+            padding: 140px 0 80px;
+            background: linear-gradient(135deg, var(--primary-cyan) 0%, var(--primary-blue) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .products-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 40%),
+                linear-gradient(45deg, rgba(0, 255, 136, 0.1) 0%, transparent 50%);
+            animation: productsFloat 25s ease-in-out infinite;
+        }
+
+        @keyframes productsFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-10px, -20px) rotate(0.5deg); }
+            50% { transform: translate(15px, -10px) rotate(-0.5deg); }
+            75% { transform: translate(-5px, -15px) rotate(0.3deg); }
+        }
+
+        .products-hero h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            font-weight: 900;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+            font-weight: 600;
+        }
+
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .hero-feature:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+        }
+
+        .hero-feature i {
+            font-size: 28px;
+            color: var(--neon-green);
+        }
+
+        .hero-feature-text {
+            text-align: left;
+        }
+
+        .hero-feature-title {
+            font-weight: 800;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .hero-feature-desc {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Categorías destacadas */
+        .featured-categories {
+            background: white;
+            padding: 60px 0;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .category-card {
+            background: var(--light-bg);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 3px solid transparent;
+        }
+
+        .category-card:hover {
+            background: white;
+            border-color: var(--primary-cyan);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.15);
+        }
+
+        .category-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-bg);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 20px;
+            transition: var(--transition);
+        }
+
+        .category-card:hover .category-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .category-name {
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .category-count {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Filtros y Búsqueda */
+        .products-filters {
+            background: white;
+            padding: 40px 0;
+            border-bottom: 3px solid var(--light-bg);
+            position: sticky;
+            top: var(--header-height);
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+
+        .filters-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: 2px solid var(--glass-border);
+            border-radius: 25px;
+            font-size: 16px;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-cyan);
+            box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 18px;
+        }
+
+        .category-select,
+        .sort-select {
+            padding: 15px 20px;
+            border: 2px solid var(--glass-border);
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 600;
+            background: white;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: var(--transition);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+            background-position: right 15px center;
+            background-repeat: no-repeat;
+            background-size: 20px;
+            padding-right: 45px;
+        }
+
+        .category-select:focus,
+        .sort-select:focus {
+            outline: none;
+            border-color: var(--primary-cyan);
+            box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.1);
+        }
+
+        /* Grid de Productos */
+        .products-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8fcff 0%, #e6f7ff 30%, #f0f9ff 70%, #f8fcff 100%);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            position: relative;
+            border: 3px solid transparent;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.15);
+            border-color: var(--primary-cyan);
+        }
+
+        .product-card.hidden {
+            display: none;
+        }
+
+        .product-image-container {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--vibrant-pink);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            z-index: 5;
+        }
+
+        .product-badge.new {
+            background: var(--neon-green);
+        }
+
+        .product-badge.sale {
+            background: var(--vibrant-pink);
+        }
+
+        .product-badge.premium {
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+        }
+
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.9), rgba(0, 153, 204, 0.9));
+            opacity: 0;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 15px;
+            transform: scale(0);
+            transition: transform 0.3s ease 0.1s;
+        }
+
+        .product-card:hover .product-actions {
+            transform: scale(1);
+        }
+
+        .action-btn {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--primary-cyan);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .action-btn:hover {
+            background: var(--primary-cyan);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-category {
+            background: var(--light-bg);
+            color: var(--primary-cyan);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 12px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .product-description {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .stars {
+            color: #ffd700;
+            font-size: 14px;
+        }
+
+        .rating-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .price-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .current-price {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary-cyan);
+        }
+
+        .original-price {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-decoration: line-through;
+        }
+
+        .discount {
+            background: var(--vibrant-pink);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            background: var(--gradient-bg);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .add-to-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Carrito flotante */
+        .floating-cart {
+            position: fixed;
+            top: 50%;
+            right: -350px;
+            transform: translateY(-50%);
+            width: 320px;
+            max-height: 80vh;
+            background: white;
+            border-radius: 25px 0 0 25px;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: right 0.4s ease;
+            border: 3px solid var(--primary-cyan);
+        }
+
+        .floating-cart.active {
+            right: 0;
+        }
+
+        .cart-header {
+            background: var(--gradient-bg);
+            color: white;
+            padding: 20px;
+            border-radius: 22px 0 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-title {
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cart-close:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-content {
+            padding: 20px;
+            max-height: 50vh;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--light-bg);
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .cart-item-price {
+            font-family: 'Orbitron', monospace;
+            font-weight: 800;
+            color: var(--primary-cyan);
+            font-size: 16px;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            background: var(--light-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .quantity-btn:hover {
+            background: var(--primary-cyan);
+            color: white;
+        }
+
+        .quantity {
+            font-weight: 700;
+            min-width: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .remove-item {
+            background: var(--vibrant-pink);
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .remove-item:hover {
+            transform: scale(1.05);
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 2px solid var(--light-bg);
+            background: var(--light-bg);
+            border-radius: 0 0 22px 0;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .total-price {
+            font-family: 'Orbitron', monospace;
+            color: var(--primary-cyan);
+            font-size: 24px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--gradient-bg);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 15px;
+            font-weight: 800;
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Botón carrito flotante */
+        .cart-toggle {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-bg);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
+            animation: cartPulse 3s infinite;
+        }
+
+        .cart-toggle:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        @keyframes cartPulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4); }
+            50% { box-shadow: 0 4px 30px rgba(0, 212, 255, 0.6); }
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 25px;
+            height: 25px;
+            background: var(--vibrant-pink);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 800;
+            animation: bounce 0.6s ease;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Modal de producto */
+        .product-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+        }
+
+        .product-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .modal-content {
+            max-width: 1000px;
+            max-height: 90vh;
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .product-modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-image {
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .modal-info {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10001;
+        }
+
+        .modal-close:hover {
+            background: var(--vibrant-pink);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* Loading y estados vacíos */
+        .products-loading {
+            text-align: center;
+            padding: 60px 0;
+            display: none;
+        }
+
+        .products-loading.active {
+            display: block;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--light-bg);
+            border-top: 4px solid var(--primary-cyan);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        .no-products {
+            text-align: center;
+            padding: 80px 20px;
+            display: none;
+        }
+
+        .no-products.active {
+            display: block;
+        }
+
+        .no-products-icon {
+            font-size: 80px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .no-products h3 {
+            font-size: 24px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .no-products p {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        /* WhatsApp Button Override */
+        .whatsapp-btn {
+            bottom: 100px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .filters-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+
+            .search-container {
+                grid-column: 1 / -1;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 25px;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .floating-cart {
+                width: 300px;
+                right: -320px;
+            }
+
+            .modal-content {
+                grid-template-columns: 1fr;
+                max-width: 90vw;
+            }
+
+            .modal-image {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-hero {
+                padding: 120px 0 60px;
+            }
+
+            .hero-features {
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+            }
+
+            .hero-feature {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .filters-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 20px;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .floating-cart {
+                width: 280px;
+                right: -300px;
+            }
+
+            .cart-toggle {
+                right: 15px;
+                width: 55px;
+                height: 55px;
+                font-size: 20px;
+            }
+
+            .modal-container {
+                padding: 20px;
+            }
+
+            .modal-content {
+                max-width: 95vw;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-image-container {
+                height: 220px;
+            }
+
+            .product-info {
+                padding: 20px;
+            }
+
+            .hero-feature {
+                padding: 15px 20px;
+            }
+
+            .cart-content {
+                padding: 15px;
+            }
+
+            .modal-info {
+                padding: 30px 20px;
+            }
+
+            .hero-features {
+                gap: 15px;
+            }
+
+            .hero-feature {
+                padding: 15px 20px;
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <div class="header-info">
+                        <div class="header-info-item">
+                            <i class="fas fa-phone"></i>
+                            <strong>0999929069</strong>
+                        </div>
+                        <div class="header-info-item">
+                            <i class="fas fa-truck"></i>
+                            <span>Delivery Gratis +$25</span>
+                        </div>
+                    </div>
+                    <div class="header-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <nav class="nav">
+                    <a href="../index.html" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-paw"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h1>MASCOTAS STORE</h1>
+                            <div class="logo-subtitle">Peluquería, Spa Canino & Pet Shop</div>
+                        </div>
+                    </a>
+
+                    <div class="nav-menu" id="navMenu">
+                        <a href="../index.html">INICIO</a>
+                        <a href="../index.html#servicios">SERVICIOS</a>
+                        <a href="./galeria.html">GALERÍA</a>
+                        <a href="../index.html#contacto">CONTACTO</a>
+                        <a href="./citas.html" class="btn btn-outline" style="margin-left: 15px;">
+                            <i class="fas fa-calendar"></i> CITAS
+                        </a>
+                    </div>
+
+                    <div class="nav-actions">
+                        <a href="tel:0999929069" class="btn btn-outline">
+                            <i class="fas fa-phone"></i> LLAMAR
+                        </a>
+                    </div>
+
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero de Productos -->
+    <section class="products-hero">
+        <div class="container">
+            <h1>Pet Shop Online</h1>
+            <p class="hero-subtitle">Productos premium para tu mascota con delivery a domicilio</p>
+            
+            <div class="hero-features">
+                <div class="hero-feature">
+                    <i class="fas fa-shipping-fast"></i>
+                    <div class="hero-feature-text">
+                        <div class="hero-feature-title">Delivery Rápido</div>
+                        <div class="hero-feature-desc">Entrega en 24-48h</div>
+                    </div>
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <div class="hero-feature-text">
+                        <div class="hero-feature-title">Garantía Total</div>
+                        <div class="hero-feature-desc">100% Satisfacción</div>
+                    </div>
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-award"></i>
+                    <div class="hero-feature-text">
+                        <div class="hero-feature-title">Productos Premium</div>
+                        <div class="hero-feature-desc">Marcas reconocidas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categorías Destacadas -->
+    <section class="featured-categories">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Categorías Populares</h2>
+                <p class="section-subtitle">Encuentra todo lo que necesita tu mascota</p>
+            </div>
+
+            <div class="categories-grid">
+                <div class="category-card" data-category="alimentos">
+                    <div class="category-icon">
+                        <i class="fas fa-bone"></i>
+                    </div>
+                    <div class="category-name">Alimentos</div>
+                    <div class="category-count">45+ productos</div>
+                </div>
+
+                <div class="category-card" data-category="juguetes">
+                    <div class="category-icon">
+                        <i class="fas fa-baseball-ball"></i>
+                    </div>
+                    <div class="category-name">Juguetes</div>
+                    <div class="category-count">28+ productos</div>
+                </div>
+
+                <div class="category-card" data-category="accesorios">
+                    <div class="category-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="category-name">Accesorios</div>
+                    <div class="category-count">35+ productos</div>
+                </div>
+
+                <div class="category-card" data-category="cuidado">
+                    <div class="category-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <div class="category-name">Cuidado</div>
+                    <div class="category-count">22+ productos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtros y Búsqueda -->
+    <div class="products-filters">
+        <div class="container">
+            <div class="filters-container">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Buscar productos..." id="searchInput">
+                </div>
+
+                <select class="category-select" id="categoryFilter">
+                    <option value="">Todas las categorías</option>
+                    <option value="alimentos">Alimentos</option>
+                    <option value="juguetes">Juguetes</option>
+                    <option value="accesorios">Accesorios</option>
+                    <option value="cuidado">Cuidado e Higiene</option>
+                    <option value="medicinas">Medicinas</option>
+                    <option value="camas">Camas y Descanso</option>
+                </select>
+
+                <select class="sort-select" id="sortFilter">
+                    <option value="">Ordenar por</option>
+                    <option value="price-low">Precio: Menor a Mayor</option>
+                    <option value="price-high">Precio: Mayor a Menor</option>
+                    <option value="name">Nombre A-Z</option>
+                    <option value="rating">Mejor Valorados</option>
+                    <option value="newest">Más Recientes</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Productos -->
+    <section class="products-section">
+        <div class="container">
+            <!-- Loading -->
+            <div class="products-loading" id="productsLoading">
+                <div class="loading-spinner"></div>
+                <p>Cargando productos...</p>
+            </div>
+
+            <!-- Sin productos -->
+            <div class="no-products" id="noProducts">
+                <div class="no-products-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>No se encontraron productos</h3>
+                <p>Intenta modificar los filtros o busca otro término</p>
+                <button class="btn btn-primary" onclick="clearFilters()">
+                    <i class="fas fa-refresh"></i> Limpiar Filtros
+                </button>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Productos de Alimentos -->
+                <div class="product-card" data-category="alimentos" data-price="28.99" data-name="Royal Canin Medium Adult" data-rating="5">
+                    <div class="product-image-container">
+                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=300&h=250&fit=crop')"></div>
+                        <div class="product-badge premium">Premium</div>
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="action-btn" title="Vista rápida" onclick="openProductModal(0)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" title="Favoritos">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Alimentos</span>
+                        <h3 class="product-title">Royal Canin Medium Adult</h3>
+                        <p class="product-description">Alimento completo para perros adultos de raza mediana. Fórmula equilibrada con nutrientes esenciales.</p>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-text">(48 reseñas)</span>
+                        </div>
+                        <div class="product-price">
+                            <div class="price-container">
+                                <span class="current-price">$28.99</span>
+                                <span class="original-price">$35.99</span>
+                                <span class="discount">-19%</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(0)">
+                            <i class="fas fa-shopping-cart"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="juguetes" data-price="15.50" data-name="Pelota Interactiva LED" data-rating="4">
+                    <div class="product-image-container">
+                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=300&h=250&fit=crop')"></div>
+                        <div class="product-badge new">Nuevo</div>
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="action-btn" title="Vista rápida" onclick="openProductModal(1)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" title="Favoritos">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Juguetes</span>
+                        <h3 class="product-title">Pelota Interactiva LED</h3>
+                        <p class="product-description">Pelota con luces LED que se activa con el movimiento. Perfecta para juegos nocturnos y ejercicio.</p>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-text">(23 reseñas)</span>
+                        </div>
+                        <div class="product-price">
+                            <div class="price-container">
+                                <span class="current-price">$15.50</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(1)">
+                            <i class="fas fa-shopping-cart"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="accesorios" data-price="22.90" data-name="Collar GPS Smart" data-rating="5">
+                    <div class="product-image-container">
+                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?w=300&h=250&fit=crop')"></div>
+                        <div class="product-badge premium">Premium</div>
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="action-btn" title="Vista rápida" onclick="openProductModal(2)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" title="Favoritos">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Accesorios</span>
+                        <h3 class="product-title">Collar GPS Smart</h3>
+                        <p class="product-description">Collar inteligente con GPS integrado y aplicación móvil. Seguimiento en tiempo real de tu mascota.</p>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-text">(67 reseñas)</span>
+                        </div>
+                        <div class="product-price">
+                            <div class="price-container">
+                                <span class="current-price">$22.90</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(2)">
+                            <i class="fas fa-shopping-cart"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="cuidado" data-price="18.75" data-name="Shampoo Hipoalergénico" data-rating="4">
+                    <div class="product-image-container">
+                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=300&h=250&fit=crop')"></div>
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="action-btn" title="Vista rápida" onclick="openProductModal(3)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" title="Favoritos">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Cuidado</span>
+                        <h3 class="product-title">Shampoo Hipoalergénico</h3>
+                        <p class="product-description">Shampoo suave para pieles sensibles. Fórmula natural sin sulfatos ni parabenos.</p>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-text">(34 reseñas)</span>
+                        </div>
+                        <div class="product-price">
+                            <div class="price-container">
+                                <span class="current-price">$18.75</span>
+                                <span class="original-price">$24.50</span>
+                                <span class="discount">-23%</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(3)">
+                            <i class="fas fa-shopping-cart"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="alimentos" data-price="45.99" data-name="Hills Science Diet Senior" data-rating="5">
+                    <div class="product-image-container">
+                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1552053831-71594a27632d?w=300&h=250&fit=crop')"></div>
+                        <div class="product-badge premium">Premium</div>
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="action-btn" title="Vista rápida" onclick="openProductModal(4)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" title="Favoritos">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Alimentos</span>
+                        <h3 class="product-title">Hills Science Diet Senior</h3>
+                        <p class="product-description">Nutrición científicamente balanceada para perros senior. Con antioxidantes y glucosamina.</p>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-text">(89 reseñas)</span>
+                        </div>
+                        <div class="product-price">
+                            <div class="price-container">
+                                <span class="current-price">$45.99</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(4)">
+                            <i class="fas fa-shopping-cart"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="juguetes" data-price="12.30" data-name="Cuerda de Algodón Natural" data-rating="4">
+                    <div class="product-image-container">
+                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=300&h=250&fit=crop')"></div>
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="action-btn" title="Vista rápida" onclick="openProductModal(5)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" title="Favoritos">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Juguetes</span>
+                        <h3 class="product-title">Cuerda de Algodón Natural</h3>
+                        <p class="product-description">Juguete de cuerda 100% algodón natural. Ideal para la dentición y juegos de tira y afloja.</p>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-text">(19 reseñas)</span>
+                        </div>
+                        <div class="product-price">
+                            <div class="price-container">
+                                <span class="current-price">$12.30</span>
+                                <span class="original-price">$16.40</span>
+                                <span class="discount">-25%</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(5)">
+                            <i class="fas fa-shopping-cart"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="accesorios" data-price="35.60" data-name="Correa Extensible Premium" data-rating="5">
+                    <div class="product-image-container">
+                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1605568427561-40dd23c2acea?w=300&h=250&fit=crop')"></div>
+                        <div class="product-badge premium">Premium</div>
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="action-btn" title="Vista rápida" onclick="openProductModal(6)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" title="Favoritos">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Accesorios</span>
+                        <h3 class="product-title">Correa Extensible Premium</h3>
+                        <p class="product-description">Correa retráctil de 5 metros con sistema de frenado suave. Mango ergonómico antideslizante.</p>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-text">(76 reseñas)</span>
+                        </div>
+                        <div class="product-price">
+                            <div class="price-container">
+                                <span class="current-price">$35.60</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(6)">
+                            <i class="fas fa-shopping-cart"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="cuidado" data-price="24.80" data-name="Kit Dental Completo" data-rating="4">
+                    <div class="product-image-container">
+                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1574231164645-d6f0e8553590?w=300&h=250&fit=crop')"></div>
+                        <div class="product-badge sale">Oferta</div>
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="action-btn" title="Vista rápida" onclick="openProductModal(7)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" title="Favoritos">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Cuidado</span>
+                        <h3 class="product-title">Kit Dental Completo</h3>
+                        <p class="product-description">Set completo para higiene dental: cepillo, pasta dental y enjuague bucal para mascotas.</p>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-text">(42 reseñas)</span>
+                        </div>
+                        <div class="product-price">
+                            <div class="price-container">
+                                <span class="current-price">$24.80</span>
+                                <span class="original-price">$32.90</span>
+                                <span class="discount">-25%</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(7)">
+                            <i class="fas fa-shopping-cart"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="alimentos" data-price="32.45" data-name="Whiskas Adulto Pescado" data-rating="4">
+                    <div class="product-image-container">
+                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1601758174114-e711c0cbaa69?w=300&h=250&fit=crop')"></div>
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="action-btn" title="Vista rápida" onclick="openProductModal(8)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" title="Favoritos">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Alimentos</span>
+                        <h3 class="product-title">Whiskas Adulto Pescado</h3>
+                        <p class="product-description">Alimento completo para gatos adultos con delicioso sabor a pescado. Rico en omega 3 y 6.</p>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-text">(56 reseñas)</span>
+                        </div>
+                        <div class="product-price">
+                            <div class="price-container">
+                                <span class="current-price">$32.45</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(8)">
+                            <i class="fas fa-shopping-cart"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Botón Carrito Flotante -->
+    <button class="cart-toggle" id="cartToggle">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <!-- Carrito Flotante -->
+    <div class="floating-cart" id="floatingCart">
+        <div class="cart-header">
+            <h3 class="cart-title">Mi Carrito</h3>
+            <button class="cart-close" id="cartClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-content" id="cartContent">
+            <p style="text-align: center; color: var(--text-secondary); padding: 40px 20px;">
+                Tu carrito está vacío
+            </p>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display: none;">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-price" id="totalPrice">$0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">
+                <i class="fas fa-credit-card"></i> Finalizar Compra
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de Producto -->
+    <div class="product-modal" id="productModal">
+        <div class="modal-container">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-content">
+                <div class="modal-image" id="modalImage"></div>
+                <div class="modal-info">
+                    <div>
+                        <div id="modalCategory" class="product-category">Categoría</div>
+                        <h2 id="modalTitle">Título del Producto</h2>
+                        <p id="modalDescription">Descripción detallada del producto...</p>
+                        
+                        <div class="product-rating">
+                            <div class="stars" id="modalStars"></div>
+                            <span class="rating-text" id="modalRatingText"></span>
+                        </div>
+
+                        <div class="product-price">
+                            <div class="price-container">
+                                <span class="current-price" id="modalPrice">$0.00</span>
+                                <span class="original-price" id="modalOriginalPrice" style="display: none;"></span>
+                                <span class="discount" id="modalDiscount" style="display: none;"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <button class="add-to-cart-btn" id="modalAddToCart">
+                            <i class="fas fa-shopping-cart"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mascotas Store</h3>
+                    <p>Tu tienda online de confianza con los mejores productos para mascotas. Delivery rápido y seguro a todo Ecuador.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Categorías</h3>
+                    <ul>
+                        <li><a href="#" onclick="filterByCategory('alimentos')">Alimentos</a></li>
+                        <li><a href="#" onclick="filterByCategory('juguetes')">Juguetes</a></li>
+                        <li><a href="#" onclick="filterByCategory('accesorios')">Accesorios</a></li>
+                        <li><a href="#" onclick="filterByCategory('cuidado')">Cuidado</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Servicios</h3>
+                    <ul>
+                        <li><a href="./citas.html">Grooming Premium</a></li>
+                        <li><a href="./citas.html">Spa Canino</a></li>
+                        <li><a href="./citas.html">Consultas Veterinarias</a></li>
+                        <li><a href="./citas.html">Emergencias 24/7</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> 0999929069</li>
+                        <li><i class="fas fa-envelope"></i> info@mascotasstore.ec</li>
+                        <li><i class="fas fa-truck"></i> Delivery a domicilio</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Todo Ecuador</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2024 Mascotas Store - Todos los derechos reservados | Pet Shop Online con productos premium</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/593999929069" class="whatsapp-btn" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script>
+        // Variables globales del carrito
+        let cart = [];
+        let cartTotal = 0;
+
+        // Datos de productos
+        const products = [
+            {
+                id: 0,
+                name: "Royal Canin Medium Adult",
+                category: "alimentos",
+                price: 28.99,
+                originalPrice: 35.99,
+                rating: 5,
+                reviews: 48,
+                image: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=300&h=250&fit=crop",
+                description: "Alimento completo para perros adultos de raza mediana. Fórmula equilibrada con nutrientes esenciales y proteínas de alta calidad.",
+                badge: "premium"
+            },
+            {
+                id: 1,
+                name: "Pelota Interactiva LED",
+                category: "juguetes",
+                price: 15.50,
+                rating: 4,
+                reviews: 23,
+                image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=300&h=250&fit=crop",
+                description: "Pelota con luces LED que se activa con el movimiento. Perfecta para juegos nocturnos y ejercicio divertido.",
+                badge: "new"
+            },
+            {
+                id: 2,
+                name: "Collar GPS Smart",
+                category: "accesorios",
+                price: 22.90,
+                rating: 5,
+                reviews: 67,
+                image: "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?w=300&h=250&fit=crop",
+                description: "Collar inteligente con GPS integrado y aplicación móvil. Seguimiento en tiempo real de tu mascota con alertas de ubicación.",
+                badge: "premium"
+            },
+            {
+                id: 3,
+                name: "Shampoo Hipoalergénico",
+                category: "cuidado",
+                price: 18.75,
+                originalPrice: 24.50,
+                rating: 4,
+                reviews: 34,
+                image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=300&h=250&fit=crop",
+                description: "Shampoo suave para pieles sensibles. Fórmula natural sin sulfatos ni parabenos, ideal para mascotas con alergias."
+            },
+            {
+                id: 4,
+                name: "Hills Science Diet Senior",
+                category: "alimentos",
+                price: 45.99,
+                rating: 5,
+                reviews: 89,
+                image: "https://images.unsplash.com/photo-1552053831-71594a27632d?w=300&h=250&fit=crop",
+                description: "Nutrición científicamente balanceada para perros senior. Con antioxidantes y glucosamina para articulaciones sanas.",
+                badge: "premium"
+            },
+            {
+                id: 5,
+                name: "Cuerda de Algodón Natural",
+                category: "juguetes",
+                price: 12.30,
+                originalPrice: 16.40,
+                rating: 4,
+                reviews: 19,
+                image: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=300&h=250&fit=crop",
+                description: "Juguete de cuerda 100% algodón natural. Ideal para la dentición y juegos de tira y afloja. Fibras naturales seguras."
+            },
+            {
+                id: 6,
+                name: "Correa Extensible Premium",
+                category: "accesorios",
+                price: 35.60,
+                rating: 5,
+                reviews: 76,
+                image: "https://images.unsplash.com/photo-1605568427561-40dd23c2acea?w=300&h=250&fit=crop",
+                description: "Correa retráctil de 5 metros con sistema de frenado suave. Mango ergonómico antideslizante y mecanismo duradero.",
+                badge: "premium"
+            },
+            {
+                id: 7,
+                name: "Kit Dental Completo",
+                category: "cuidado",
+                price: 24.80,
+                originalPrice: 32.90,
+                rating: 4,
+                reviews: 42,
+                image: "https://images.unsplash.com/photo-1574231164645-d6f0e8553590?w=300&h=250&fit=crop",
+                description: "Set completo para higiene dental: cepillo especial, pasta dental y enjuague bucal específicos para mascotas.",
+                badge: "sale"
+            },
+            {
+                id: 8,
+                name: "Whiskas Adulto Pescado",
+                category: "alimentos",
+                price: 32.45,
+                rating: 4,
+                reviews: 56,
+                image: "https://images.unsplash.com/photo-1601758174114-e711c0cbaa69?w=300&h=250&fit=crop",
+                description: "Alimento completo para gatos adultos con delicioso sabor a pescado. Rico en omega 3 y 6 para pelaje brillante."
+            }
+        ];
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeProductsPage();
+            setupEventListeners();
+            simulateLoading();
+        });
+
+        // Inicializar página de productos
+        function initializeProductsPage() {
+            // Cargar carrito desde localStorage si existe
+            const savedCart = localStorage.getItem('mascotasStoreCart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCartUI();
+            }
+
+            // Setup filtros
+            setupFilters();
+            setupCategoryCards();
+        }
+
+        // Event listeners principales
+        function setupEventListeners() {
+            // Carrito flotante
+            document.getElementById('cartToggle').addEventListener('click', toggleCart);
+            document.getElementById('cartClose').addEventListener('click', closeCart);
+
+            // Modal
+            document.getElementById('modalClose').addEventListener('click', closeModal);
+            document.getElementById('productModal').addEventListener('click', function(e) {
+                if (e.target === this) closeModal();
+            });
+
+            // Filtros
+            document.getElementById('searchInput').addEventListener('input', applyFilters);
+            document.getElementById('categoryFilter').addEventListener('change', applyFilters);
+            document.getElementById('sortFilter').addEventListener('change', applyFilters);
+
+            // Cerrar modal con Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                    closeCart();
+                }
+            });
+        }
+
+        // Setup de tarjetas de categorías
+        function setupCategoryCards() {
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    filterByCategory(category);
+                });
+            });
+        }
+
+        // Filtros
+        function setupFilters() {
+            // Buscar productos en tiempo real
+            let searchTimeout;
+            document.getElementById('searchInput').addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(applyFilters, 300);
+            });
+        }
+
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            const sortFilter = document.getElementById('sortFilter').value;
+
+            let filteredProducts = products.filter(product => {
+                const matchesSearch = product.name.toLowerCase().includes(searchTerm) ||
+                                    product.description.toLowerCase().includes(searchTerm);
+                const matchesCategory = !categoryFilter || product.category === categoryFilter;
+                return matchesSearch && matchesCategory;
+            });
+
+            // Aplicar ordenamiento
+            if (sortFilter) {
+                filteredProducts.sort((a, b) => {
+                    switch (sortFilter) {
+                        case 'price-low':
+                            return a.price - b.price;
+                        case 'price-high':
+                            return b.price - a.price;
+                        case 'name':
+                            return a.name.localeCompare(b.name);
+                        case 'rating':
+                            return b.rating - a.rating;
+                        case 'newest':
+                            return b.id - a.id; // Asumiendo que IDs más altos son más nuevos
+                        default:
+                            return 0;
+                    }
+                });
+            }
+
+            displayFilteredProducts(filteredProducts);
+        }
+
+        function displayFilteredProducts(filteredProducts) {
+            const productCards = document.querySelectorAll('.product-card');
+            const noProductsDiv = document.getElementById('noProducts');
+
+            // Ocultar todas las tarjetas primero
+            productCards.forEach(card => card.classList.add('hidden'));
+
+            if (filteredProducts.length === 0) {
+                noProductsDiv.classList.add('active');
+            } else {
+                noProductsDiv.classList.remove('active');
+                
+                // Mostrar productos filtrados
+                filteredProducts.forEach(product => {
+                    const card = document.querySelector(`[data-name="${product.name}"]`);
+                    if (card) {
+                        card.classList.remove('hidden');
+                        // Animación de entrada
+                        card.style.animation = 'none';
+                        setTimeout(() => {
+                            card.style.animation = 'fadeInUp 0.6s ease forwards';
+                        }, 50);
+                    }
+                });
+            }
+        }
+
+        function filterByCategory(category) {
+            document.getElementById('categoryFilter').value = category;
+            applyFilters();
+            
+            // Scroll suave a productos
+            document.getElementById('productsGrid').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        function clearFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('categoryFilter').value = '';
+            document.getElementById('sortFilter').value = '';
+            applyFilters();
+        }
+
+        // Carrito de compras
+        function addToCart(productId) {
+            const product = products[productId];
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+
+            updateCartUI();
+            saveCartToStorage();
+            showNotification(`${product.name} agregado al carrito`, 'success');
+            
+            // Animación del botón de carrito
+            const cartToggle = document.getElementById('cartToggle');
+            cartToggle.style.animation = 'bounce 0.6s ease';
+            setTimeout(() => {
+                cartToggle.style.animation = '';
+            }, 600);
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+            saveCartToStorage();
+            showNotification('Producto eliminado del carrito', 'info');
+        }
+
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    updateCartUI();
+                    saveCartToStorage();
+                }
+            }
+        }
+
+        function updateCartUI() {
+            const cartContent = document.getElementById('cartContent');
+            const cartCount = document.getElementById('cartCount');
+            const totalPrice = document.getElementById('totalPrice');
+            const cartFooter = document.getElementById('cartFooter');
+
+            // Actualizar contador
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+
+            if (cart.length === 0) {
+                cartContent.innerHTML = `
+                    <div style="text-align: center; color: var(--text-secondary); padding: 40px 20px;">
+                        <i class="fas fa-shopping-cart" style="font-size: 60px; opacity: 0.3; margin-bottom: 20px;"></i>
+                        <p>Tu carrito está vacío</p>
+                        <p style="font-size: 14px; opacity: 0.7;">¡Agrega algunos productos para empezar!</p>
+                    </div>
+                `;
+                cartFooter.style.display = 'none';
+            } else {
+                cartContent.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <div class="cart-item-image" style="background-image: url('${item.image}')"></div>
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-price">${item.price.toFixed(2)}</div>
+                            <div class="cart-item-controls">
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                                <span class="quantity">${item.quantity}</span>
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                                <button class="remove-item" onclick="removeFromCart(${item.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+                cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                totalPrice.textContent = `${cartTotal.toFixed(2)}`;
+                cartFooter.style.display = 'block';
+            }
+        }
+
+        function toggleCart() {
+            const cart = document.getElementById('floatingCart');
+            cart.classList.toggle('active');
+        }
+
+        function closeCart() {
+            document.getElementById('floatingCart').classList.remove('active');
+        }
+
+        function saveCartToStorage() {
+            localStorage.setItem('mascotasStoreCart', JSON.stringify(cart));
+        }
+
+        // Modal de producto
+        function openProductModal(productId) {
+            const product = products[productId];
+            const modal = document.getElementById('productModal');
+            
+            // Llenar datos del modal
+            document.getElementById('modalImage').style.backgroundImage = `url('${product.image}')`;
+            document.getElementById('modalCategory').textContent = product.category.charAt(0).toUpperCase() + product.category.slice(1);
+            document.getElementById('modalTitle').textContent = product.name;
+            document.getElementById('modalDescription').textContent = product.description;
+            document.getElementById('modalPrice').textContent = `${product.price.toFixed(2)}`;
+            
+            // Rating
+            const modalStars = document.getElementById('modalStars');
+            modalStars.innerHTML = '';
+            for (let i = 1; i <= 5; i++) {
+                modalStars.innerHTML += i <= product.rating 
+                    ? '<i class="fas fa-star"></i>' 
+                    : '<i class="far fa-star"></i>';
+            }
+            document.getElementById('modalRatingText').textContent = `(${product.reviews} reseñas)`;
+
+            // Precios originales y descuentos
+            if (product.originalPrice) {
+                document.getElementById('modalOriginalPrice').textContent = `${product.originalPrice.toFixed(2)}`;
+                document.getElementById('modalOriginalPrice').style.display = 'inline';
+                
+                const discountPercent = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+                document.getElementById('modalDiscount').textContent = `-${discountPercent}%`;
+                document.getElementById('modalDiscount').style.display = 'inline';
+            } else {
+                document.getElementById('modalOriginalPrice').style.display = 'none';
+                document.getElementById('modalDiscount').style.display = 'none';
+            }
+
+            // Botón de agregar al carrito
+            document.getElementById('modalAddToCart').onclick = () => {
+                addToCart(productId);
+                closeModal();
+            };
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Checkout
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification('Tu carrito está vacío', 'warning');
+                return;
+            }
+
+            // Crear mensaje para WhatsApp
+            let message = `🛒 PEDIDO ONLINE - MASCOTAS STORE\n\n`;
+            message += `📋 PRODUCTOS:\n`;
+            
+            cart.forEach(item => {
+                message += `• ${item.name}\n`;
+                message += `  Cantidad: ${item.quantity}\n`;
+                message += `  Precio: ${item.price.toFixed(2)} c/u\n`;
+                message += `  Subtotal: ${(item.price * item.quantity).toFixed(2)}\n\n`;
+            });
+            
+            message += `💰 TOTAL: ${cartTotal.toFixed(2)}\n\n`;
+            message += `📞 Por favor confirmen disponibilidad y tiempo de entrega.\n`;
+            message += `🚚 ¿Incluye delivery a domicilio?`;
+
+            // Abrir WhatsApp
+            window.open(`https://wa.me/593999929069?text=${encodeURIComponent(message)}`, '_blank');
+            
+            showNotification('Redirigiendo a WhatsApp para finalizar tu pedido...', 'success');
+        }
+
+        // Utilidades
+        function simulateLoading() {
+            const loading = document.getElementById('productsLoading');
+            loading.classList.add('active');
+            
+            setTimeout(() => {
+                loading.classList.remove('active');
+            }, 1500);
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: ${type === 'success' ? 'linear-gradient(135deg, #00ff88, #00cc6a)' : 
+                           type === 'warning' ? 'linear-gradient(135deg, #ff9800, #f57c00)' : 
+                           'var(--gradient-bg)'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-weight: 600;
+                z-index: 10000;
+                animation: slideIn 0.5s ease;
+                max-width: 300px;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.5s ease';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+
+        // Agregar animaciones CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOut {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+
+            /* Mejorar scrollbar del carrito */
+            .cart-content::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            .cart-content::-webkit-scrollbar-track {
+                background: var(--light-bg);
+            }
+
+            .cart-content::-webkit-scrollbar-thumb {
+                background: var(--primary-cyan);
+                border-radius: 2px;
+            }
+
+            .cart-content::-webkit-scrollbar-thumb:hover {
+                background: var(--primary-blue);
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>

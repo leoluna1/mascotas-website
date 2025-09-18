@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agendar Cita - Mascotas Store</title>
+    <title>Agendar Cita Online - Mascotas Store</title>
+    <meta name="description" content="Agenda tu cita veterinaria online de forma rápida y sencilla. Servicios de consulta médica, peluquería canina y grooming profesional.">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,79 +21,221 @@
             background: var(--gradient-bg);
             color: white;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .appointment-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse 60% 80% at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse 80% 60% at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+            animation: heroFloat 15s ease-in-out infinite;
+        }
+
+        @keyframes heroFloat {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-10px, -5px); }
         }
 
         .appointment-hero h1 {
             font-family: 'Orbitron', monospace;
-            font-size: 3rem;
+            font-size: clamp(2.5rem, 5vw, 4rem);
             margin-bottom: 20px;
             text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px 25px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .hero-feature:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .hero-feature i {
+            font-size: 20px;
         }
 
         .appointment-container {
-            max-width: 900px;
-            margin: -50px auto 80px;
+            max-width: 1000px;
+            margin: -80px auto 80px;
             position: relative;
             z-index: 10;
+            padding: 0 20px;
         }
 
         .appointment-form {
-            background: white;
-            border-radius: 25px;
+            background: var(--card-bg);
+            border-radius: 30px;
             padding: 50px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-hover);
+            border: 2px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .appointment-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-bg);
         }
 
         .form-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .form-header h2 {
             color: var(--text-dark);
-            margin-bottom: 10px;
+            font-family: 'Orbitron', monospace;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .form-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
         }
 
         .form-steps {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-bottom: 40px;
+            gap: 50px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .form-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--glass-border) 0%, var(--primary-cyan) 50%, var(--glass-border) 100%);
+            transform: translateX(-50%);
+            z-index: 1;
         }
 
         .step {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
             color: var(--text-secondary);
+            position: relative;
+            z-index: 2;
+            transition: var(--transition);
         }
 
         .step.active {
             color: var(--primary-cyan);
         }
 
+        .step.completed {
+            color: var(--neon-green);
+        }
+
         .step-number {
-            width: 40px;
-            height: 40px;
-            border: 2px solid currentColor;
+            width: 50px;
+            height: 50px;
+            border: 3px solid currentColor;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 800;
+            font-size: 18px;
+            background: white;
+            transition: var(--transition);
         }
 
         .step.active .step-number {
-            background: var(--gradient-bg);
+            background: var(--primary-cyan);
             color: white;
-            border-color: var(--primary-cyan);
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .step.completed .step-number {
+            background: var(--neon-green);
+            color: white;
+            border-color: var(--neon-green);
+        }
+
+        .step.completed .step-number::before {
+            content: '✓';
+            font-weight: bold;
+        }
+
+        .step-label {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        .form-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .form-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
+            gap: 30px;
+            margin-bottom: 30px;
         }
 
         .form-group {
@@ -105,27 +248,34 @@
         }
 
         .form-label {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            font-size: 15px;
         }
 
         .form-label .required {
             color: var(--vibrant-pink);
+            font-size: 18px;
+        }
+
+        .form-label i {
+            color: var(--primary-cyan);
         }
 
         .form-input,
         .form-select,
         .form-textarea {
-            padding: 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
+            padding: 18px 20px;
+            border: 2px solid var(--glass-border);
+            border-radius: 15px;
             font-size: 1rem;
             transition: var(--transition);
-            background: white;
+            background: var(--card-bg);
+            font-family: 'Inter', sans-serif;
             width: 100%;
         }
 
@@ -134,122 +284,352 @@
         .form-textarea:focus {
             outline: none;
             border-color: var(--primary-cyan);
-            box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.1);
+            box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.15);
+            transform: translateY(-2px);
         }
 
         .form-select {
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
-            background-position: right 15px center;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2300d4ff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+            background-position: right 20px center;
             background-repeat: no-repeat;
             background-size: 20px;
-            padding-right: 45px;
+            padding-right: 50px;
+            cursor: pointer;
         }
 
         .form-textarea {
-            min-height: 150px;
+            min-height: 120px;
             resize: vertical;
+            font-family: 'Inter', sans-serif;
         }
 
         .time-slots {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-top: 10px;
+            gap: 15px;
+            margin-top: 15px;
         }
 
         .time-slot {
-            padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
+            padding: 15px 12px;
+            border: 2px solid var(--glass-border);
+            border-radius: 12px;
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
+            font-weight: 600;
+            background: var(--card-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .time-slot::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .time-slot:hover::before {
+            left: 100%;
         }
 
         .time-slot:hover {
             border-color: var(--primary-cyan);
             background: var(--light-bg);
+            transform: translateY(-3px);
         }
 
         .time-slot.selected {
             background: var(--gradient-bg);
             color: white;
             border-color: var(--primary-cyan);
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
         }
 
         .time-slot.disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
+            background: #f5f5f5;
+            color: var(--text-light);
+        }
+
+        .time-slot.disabled:hover {
+            transform: none;
+            border-color: var(--glass-border);
             background: #f5f5f5;
         }
 
         .form-actions {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
             margin-top: 30px;
         }
 
+        .btn-step {
+            min-width: 140px;
+            padding: 15px 30px;
+            font-size: 16px;
+        }
+
         .appointment-info {
-            background: var(--light-bg);
-            border-radius: 15px;
-            padding: 25px;
-            margin-top: 40px;
+            background: linear-gradient(135deg, var(--light-bg) 0%, #e6f7ff 100%);
+            border: 2px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 35px;
+            margin-top: 50px;
+            position: relative;
+        }
+
+        .appointment-info h3 {
+            color: var(--primary-cyan);
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-align: center;
         }
 
         .info-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            margin-top: 20px;
+            gap: 30px;
+            margin-top: 25px;
         }
 
         .info-item {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+        }
+
+        .info-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-card);
         }
 
         .info-icon {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             background: var(--gradient-bg);
             color: white;
-            border-radius: 10px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .info-content h4 {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .info-content p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* Confirmation Step */
+        .confirmation-summary {
+            background: var(--light-bg);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 2px solid var(--glass-border);
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .summary-value {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* Success Animation */
+        .success-animation {
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--neon-green), #00cc6a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: white;
+            margin: 0 auto 30px;
+            animation: successPulse 2s infinite;
+        }
+
+        @keyframes successPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(0, 255, 136, 0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .appointment-form {
+                padding: 40px 30px;
+            }
         }
 
         @media (max-width: 768px) {
+            .appointment-hero {
+                padding: 120px 0 50px;
+            }
+
+            .appointment-container {
+                margin: -60px auto 60px;
+            }
+
             .appointment-form {
-                padding: 30px 20px;
+                padding: 30px 25px;
+                border-radius: 25px;
             }
 
             .form-grid {
                 grid-template-columns: 1fr;
+                gap: 25px;
             }
 
             .form-steps {
                 flex-direction: column;
+                gap: 25px;
+                align-items: center;
+            }
+
+            .form-steps::before {
+                display: none;
+            }
+
+            .hero-features {
+                flex-direction: column;
                 gap: 15px;
+                align-items: center;
             }
 
             .time-slots {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
             }
 
             .info-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .appointment-form {
+                padding: 25px 20px;
+            }
+
+            .time-slots {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-step {
+                min-width: 120px;
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+        }
+
+        /* Loading State */
+        .form-loading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            border-radius: 30px;
+        }
+
+        .form-loading.active {
+            display: flex;
+        }
+
+        .form-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--glass-border);
+            border-top: 4px solid var(--primary-cyan);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
     </style>
 </head>
 
 <body>
-    <!-- Header (reutilizable) -->
+    <!-- Header -->
     <header class="header" id="header">
         <div class="header-top">
             <div class="container">
@@ -311,127 +691,196 @@
     <section class="appointment-hero">
         <div class="container">
             <h1>Agenda Tu Cita Online</h1>
-            <p>Reserva tu cita de manera rápida y sencilla</p>
+            <p class="hero-subtitle">Reserva de manera rápida y sencilla con nuestro sistema inteligente</p>
+            
+            <div class="hero-features">
+                <div class="hero-feature">
+                    <i class="fas fa-clock"></i>
+                    <span>Disponibilidad 24/7</span>
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Confirmación Inmediata</span>
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>100% Mobile</span>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Formulario de Citas -->
     <div class="appointment-container">
         <div class="appointment-form">
+            <!-- Loading Overlay -->
+            <div class="form-loading" id="formLoading">
+                <div class="form-spinner"></div>
+            </div>
+
             <div class="form-header">
-                <h2>Complete el Formulario de Reserva</h2>
-                <p>Todos los campos marcados con * son obligatorios</p>
+                <h2>Complete Su Reserva</h2>
+                <p>Todos los campos marcados con <span style="color: var(--vibrant-pink);">*</span> son obligatorios</p>
             </div>
 
             <!-- Pasos del formulario -->
             <div class="form-steps">
-                <div class="step active">
+                <div class="step active" data-step="1">
                     <div class="step-number">1</div>
-                    <span>Datos Personales</span>
+                    <div class="step-label">Datos Personales</div>
                 </div>
-                <div class="step">
+                <div class="step" data-step="2">
                     <div class="step-number">2</div>
-                    <span>Servicio</span>
+                    <div class="step-label">Servicio & Fecha</div>
                 </div>
-                <div class="step">
+                <div class="step" data-step="3">
                     <div class="step-number">3</div>
-                    <span>Confirmación</span>
+                    <div class="step-label">Confirmación</div>
                 </div>
             </div>
 
             <form id="appointmentForm">
-                <!-- Datos Personales -->
-                <div class="form-section" id="step1">
+                <!-- PASO 1: Datos Personales -->
+                <div class="form-section active" id="step1">
                     <div class="form-grid">
                         <div class="form-group">
                             <label class="form-label">
+                                <i class="fas fa-user"></i>
                                 Nombre Completo <span class="required">*</span>
                             </label>
-                            <input type="text" class="form-input" name="name" required>
+                            <input type="text" class="form-input" name="name" required placeholder="Ingrese su nombre completo">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">
+                                <i class="fas fa-phone"></i>
                                 Teléfono <span class="required">*</span>
                             </label>
-                            <input type="tel" class="form-input" name="phone" required>
+                            <input type="tel" class="form-input" name="phone" required placeholder="0999999999">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">
+                                <i class="fas fa-envelope"></i>
                                 Email <span class="required">*</span>
                             </label>
-                            <input type="email" class="form-input" name="email" required>
+                            <input type="email" class="form-input" name="email" required placeholder="correo@ejemplo.com">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">
+                                <i class="fas fa-paw"></i>
                                 Nombre de la Mascota <span class="required">*</span>
                             </label>
-                            <input type="text" class="form-input" name="pet" required>
+                            <input type="text" class="form-input" name="pet" required placeholder="Nombre de su mascota">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">
+                                <i class="fas fa-dog"></i>
                                 Tipo de Mascota <span class="required">*</span>
                             </label>
                             <select class="form-select" name="petType" required>
-                                <option value="">Seleccione...</option>
-                                <option value="perro">Perro</option>
-                                <option value="gato">Gato</option>
-                                <option value="ave">Ave</option>
-                                <option value="otro">Otro</option>
+                                <option value="">Seleccione el tipo...</option>
+                                <option value="perro">🐕 Perro</option>
+                                <option value="gato">🐱 Gato</option>
+                                <option value="ave">🦜 Ave</option>
+                                <option value="conejo">🐰 Conejo</option>
+                                <option value="hamster">🐹 Hámster</option>
+                                <option value="otro">🐾 Otro</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">
-                                Raza
+                                <i class="fas fa-info-circle"></i>
+                                Raza (Opcional)
                             </label>
-                            <input type="text" class="form-input" name="breed">
+                            <input type="text" class="form-input" name="breed" placeholder="Ej: Labrador, Persa, etc.">
                         </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-weight"></i>
+                                Peso Aproximado (Opcional)
+                            </label>
+                            <select class="form-select" name="weight">
+                                <option value="">Seleccione peso...</option>
+                                <option value="menos-5kg">Menos de 5kg</option>
+                                <option value="5-15kg">5kg - 15kg</option>
+                                <option value="15-30kg">15kg - 30kg</option>
+                                <option value="mas-30kg">Más de 30kg</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-calendar-alt"></i>
+                                Edad de la Mascota (Opcional)
+                            </label>
+                            <select class="form-select" name="age">
+                                <option value="">Seleccione edad...</option>
+                                <option value="cachorro">Cachorro (0-1 año)</option>
+                                <option value="joven">Joven (1-3 años)</option>
+                                <option value="adulto">Adulto (3-7 años)</option>
+                                <option value="senior">Senior (7+ años)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-navigation">
+                        <div></div>
+                        <button type="button" class="btn btn-primary btn-step" onclick="nextStep()">
+                            Siguiente <i class="fas fa-arrow-right"></i>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Servicio y Fecha -->
-                <div class="form-section">
+                <!-- PASO 2: Servicio y Fecha -->
+                <div class="form-section" id="step2">
                     <div class="form-grid">
                         <div class="form-group">
                             <label class="form-label">
+                                <i class="fas fa-stethoscope"></i>
                                 Servicio Requerido <span class="required">*</span>
                             </label>
                             <select class="form-select" name="service" required>
                                 <option value="">Seleccione un servicio...</option>
-                                <optgroup label="Consultas Médicas">
-                                    <option value="consulta-general">Consulta General</option>
-                                    <option value="vacunacion">Vacunación</option>
-                                    <option value="desparasitacion">Desparasitación</option>
-                                    <option value="cirugia">Cirugía</option>
-                                    <option value="emergencia">Emergencia</option>
+                                <optgroup label="🏥 Consultas Médicas">
+                                    <option value="consulta-general">Consulta General - $25</option>
+                                    <option value="vacunacion">Vacunación - $15</option>
+                                    <option value="desparasitacion">Desparasitación - $12</option>
+                                    <option value="cirugia">Cirugía - Consultar precio</option>
+                                    <option value="emergencia">Emergencia - $35</option>
+                                    <option value="control-prenatal">Control Prenatal - $30</option>
                                 </optgroup>
-                                <optgroup label="Estética">
-                                    <option value="peluqueria">Peluquería</option>
-                                    <option value="bano">Baño y Secado</option>
-                                    <option value="grooming">Grooming Completo</option>
-                                    <option value="spa">Spa Relajante</option>
+                                <optgroup label="✂️ Estética & Grooming">
+                                    <option value="peluqueria-basica">Peluquería Básica - $20</option>
+                                    <option value="peluqueria-completa">Peluquería Completa - $35</option>
+                                    <option value="bano-secado">Baño y Secado - $15</option>
+                                    <option value="grooming-premium">Grooming Premium - $50</option>
+                                    <option value="spa-relajante">Spa Relajante - $45</option>
+                                    <option value="corte-unas">Corte de Uñas - $8</option>
                                 </optgroup>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">
+                                <i class="fas fa-map-marker-alt"></i>
                                 Sucursal <span class="required">*</span>
                             </label>
                             <select class="form-select" name="branch" required>
                                 <option value="">Seleccione sucursal...</option>
-                                <option value="ibarra">Ibarra</option>
-                                <option value="tulcan">Tulcán</option>
-                                <option value="otavalo">Otavalo</option>
+                                <option value="ibarra">🏢 Ibarra - Centro</option>
+                                <option value="tulcan">🏢 Tulcán - Centro</option>
+                                <option value="otavalo">🏢 Otavalo - Centro</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">
+                                <i class="fas fa-calendar"></i>
                                 Fecha Preferida <span class="required">*</span>
                             </label>
                             <input type="date" class="form-input" name="date" required>
@@ -439,51 +888,188 @@
 
                         <div class="form-group">
                             <label class="form-label">
+                                <i class="fas fa-clock"></i>
                                 Hora Preferida <span class="required">*</span>
                             </label>
                             <div class="time-slots">
-                                <div class="time-slot" data-time="08:00">8:00 AM</div>
-                                <div class="time-slot" data-time="09:00">9:00 AM</div>
-                                <div class="time-slot" data-time="10:00">10:00 AM</div>
-                                <div class="time-slot" data-time="11:00">11:00 AM</div>
-                                <div class="time-slot" data-time="14:00">2:00 PM</div>
-                                <div class="time-slot" data-time="15:00">3:00 PM</div>
-                                <div class="time-slot" data-time="16:00">4:00 PM</div>
-                                <div class="time-slot" data-time="17:00">5:00 PM</div>
+                                <div class="time-slot" data-time="08:00">
+                                    <div>8:00 AM</div>
+                                    <small>Disponible</small>
+                                </div>
+                                <div class="time-slot" data-time="09:00">
+                                    <div>9:00 AM</div>
+                                    <small>Disponible</small>
+                                </div>
+                                <div class="time-slot" data-time="10:00">
+                                    <div>10:00 AM</div>
+                                    <small>Disponible</small>
+                                </div>
+                                <div class="time-slot" data-time="11:00">
+                                    <div>11:00 AM</div>
+                                    <small>Disponible</small>
+                                </div>
+                                <div class="time-slot" data-time="14:00">
+                                    <div>2:00 PM</div>
+                                    <small>Disponible</small>
+                                </div>
+                                <div class="time-slot" data-time="15:00">
+                                    <div>3:00 PM</div>
+                                    <small>Disponible</small>
+                                </div>
+                                <div class="time-slot" data-time="16:00">
+                                    <div>4:00 PM</div>
+                                    <small>Disponible</small>
+                                </div>
+                                <div class="time-slot disabled" data-time="17:00">
+                                    <div>5:00 PM</div>
+                                    <small>No disponible</small>
+                                </div>
                             </div>
                         </div>
 
                         <div class="form-group full-width">
                             <label class="form-label">
-                                Mensaje o Síntomas (Opcional)
+                                <i class="fas fa-comment-medical"></i>
+                                Motivo de la Consulta o Síntomas
                             </label>
-                            <textarea class="form-textarea" name="message" placeholder="Describe los síntomas o necesidades especiales de tu mascota..."></textarea>
+                            <textarea class="form-textarea" name="message" 
+                                placeholder="Describe los síntomas, comportamiento o necesidades especiales de tu mascota. Esto nos ayuda a preparar mejor la consulta."></textarea>
                         </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                ¿Es una emergencia?
+                            </label>
+                            <select class="form-select" name="emergency">
+                                <option value="no">No, es consulta regular</option>
+                                <option value="urgente">Urgente (dentro de 24 horas)</option>
+                                <option value="emergencia">EMERGENCIA (inmediata)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-outline btn-step" onclick="prevStep()">
+                            <i class="fas fa-arrow-left"></i> Anterior
+                        </button>
+                        <button type="button" class="btn btn-primary btn-step" onclick="nextStep()">
+                            Revisar <i class="fas fa-arrow-right"></i>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Acciones -->
-                <div class="form-actions">
-                    <button type="button" class="btn btn-outline" onclick="window.history.back()">
-                        <i class="fas fa-arrow-left"></i> Cancelar
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-calendar-check"></i> Confirmar Cita
-                    </button>
+                <!-- PASO 3: Confirmación -->
+                <div class="form-section" id="step3">
+                    <div class="confirmation-summary">
+                        <h3 style="text-align: center; color: var(--primary-cyan); margin-bottom: 30px;">
+                            <i class="fas fa-clipboard-check"></i> Resumen de su Cita
+                        </h3>
+                        
+                        <div class="summary-grid">
+                            <div>
+                                <h4 style="color: var(--text-dark); margin-bottom: 15px;">
+                                    <i class="fas fa-user"></i> Datos Personales
+                                </h4>
+                                <div class="summary-item">
+                                    <span class="summary-label">Propietario:</span>
+                                    <span class="summary-value" id="summary-name">-</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Teléfono:</span>
+                                    <span class="summary-value" id="summary-phone">-</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Email:</span>
+                                    <span class="summary-value" id="summary-email">-</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 style="color: var(--text-dark); margin-bottom: 15px;">
+                                    <i class="fas fa-paw"></i> Datos de la Mascota
+                                </h4>
+                                <div class="summary-item">
+                                    <span class="summary-label">Nombre:</span>
+                                    <span class="summary-value" id="summary-pet">-</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Tipo:</span>
+                                    <span class="summary-value" id="summary-pet-type">-</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Raza:</span>
+                                    <span class="summary-value" id="summary-breed">-</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 30px;">
+                            <h4 style="color: var(--text-dark); margin-bottom: 15px; text-align: center;">
+                                <i class="fas fa-calendar-alt"></i> Detalles de la Cita
+                            </h4>
+                            <div class="summary-grid">
+                                <div class="summary-item">
+                                    <span class="summary-label">Servicio:</span>
+                                    <span class="summary-value" id="summary-service">-</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Sucursal:</span>
+                                    <span class="summary-value" id="summary-branch">-</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Fecha:</span>
+                                    <span class="summary-value" id="summary-date">-</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Hora:</span>
+                                    <span class="summary-value" id="summary-time">-</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="summary-message-container" style="margin-top: 20px; display: none;">
+                            <h4 style="color: var(--text-dark); margin-bottom: 10px;">
+                                <i class="fas fa-comment-medical"></i> Motivo/Síntomas:
+                            </h4>
+                            <p id="summary-message" style="background: white; padding: 15px; border-radius: 10px; margin: 0;"></p>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin: 30px 0;">
+                        <div style="background: linear-gradient(135deg, #e8f8ff, #f0f9ff); padding: 25px; border-radius: 15px; border: 2px solid var(--primary-cyan);">
+                            <h4 style="color: var(--primary-cyan); margin-bottom: 15px;">
+                                <i class="fas fa-info-circle"></i> Importante
+                            </h4>
+                            <p style="color: var(--text-secondary); margin: 0; line-height: 1.6;">
+                                Al confirmar su cita, recibirá un mensaje de WhatsApp con los detalles. 
+                                Nuestro equipo se contactará con usted para confirmar la disponibilidad.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-outline btn-step" onclick="prevStep()">
+                            <i class="fas fa-arrow-left"></i> Modificar
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-step" style="background: linear-gradient(135deg, var(--neon-green), #00cc6a);">
+                            <i class="fas fa-check-circle"></i> Confirmar Cita
+                        </button>
+                    </div>
                 </div>
             </form>
 
             <!-- Información adicional -->
             <div class="appointment-info">
-                <h3>Información Importante</h3>
+                <h3><i class="fas fa-info-circle"></i> Información Importante</h3>
                 <div class="info-grid">
                     <div class="info-item">
                         <div class="info-icon">
                             <i class="fas fa-clock"></i>
                         </div>
-                        <div>
-                            <strong>Puntualidad</strong>
-                            <p>Llega 10 minutos antes</p>
+                        <div class="info-content">
+                            <h4>Puntualidad</h4>
+                            <p>Llegue 10 minutos antes de su cita para el registro</p>
                         </div>
                     </div>
 
@@ -491,19 +1077,49 @@
                         <div class="info-icon">
                             <i class="fas fa-file-medical"></i>
                         </div>
-                        <div>
-                            <strong>Documentos</strong>
-                            <p>Trae el carnet de vacunas</p>
+                        <div class="info-content">
+                            <h4>Documentos</h4>
+                            <p>Traiga el carnet de vacunas y historial médico</p>
                         </div>
                     </div>
 
                     <div class="info-item">
                         <div class="info-icon">
-                            <i class="fas fa-phone"></i>
+                            <i class="fas fa-phone-alt"></i>
                         </div>
-                        <div>
-                            <strong>Confirmación</strong>
-                            <p>Te llamaremos para confirmar</p>
+                        <div class="info-content">
+                            <h4>Confirmación</h4>
+                            <p>Le llamaremos para confirmar su cita</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Métodos de Pago</h4>
+                            <p>Efectivo, tarjetas de crédito y transferencias</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Protocolo COVID</h4>
+                            <p>Seguimos todos los protocolos de bioseguridad</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-undo-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Cancelaciones</h4>
+                            <p>Cancele con 2 horas de anticipación mínimo</p>
                         </div>
                     </div>
                 </div>
@@ -514,6 +1130,38 @@
     <!-- Footer simplificado -->
     <footer class="footer">
         <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mascotas Store</h3>
+                    <p>Centro veterinario integral con más de 10 años de experiencia brindando atención profesional.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="../index.html#servicios">Servicios</a></li>
+                        <li><a href="../index.html#sucursales">Sucursales</a></li>
+                        <li><a href="../index.html#contacto">Contacto</a></li>
+                        <li><a href="./testimonios.html">Testimonios</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> 0999929069</li>
+                        <li><i class="fas fa-envelope"></i> info@mascotasstore.ec</li>
+                        <li><i class="fas fa-clock"></i> Lun-Vie: 8AM-7PM</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Ibarra, Tulcán, Otavalo</li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="footer-bottom">
                 <p>© 2024 Mascotas Store - Todos los derechos reservados</p>
             </div>
@@ -521,101 +1169,838 @@
     </footer>
 
     <!-- WhatsApp Button -->
-    <a href="https://wa.me/593999929069" class="whatsapp-btn">
+    <a href="https://wa.me/593999929069" class="whatsapp-btn" aria-label="WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <!-- JavaScript -->
     <script src="../js/main.js"></script>
     <script>
-        // Script específico para citas
+        // Variables globales
+        let currentStep = 1;
+        let selectedTime = null;
+        let formData = {};
+
+        // Inicialización
         document.addEventListener('DOMContentLoaded', function() {
-            // Configurar fecha mínima
+            initializeDateInput();
+            initializeTimeSlots();
+            initializeForm();
+            setupFormValidation();
+        });
+
+        // Configurar fecha mínima
+        function initializeDateInput() {
             const dateInput = document.querySelector('input[type="date"]');
-            const today = new Date().toISOString().split('T')[0];
-            dateInput.min = today;
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            dateInput.min = tomorrow.toISOString().split('T')[0];
+            
+            // Configurar fecha máxima (3 meses adelante)
+            const maxDate = new Date(today);
+            maxDate.setMonth(maxDate.getMonth() + 3);
+            dateInput.max = maxDate.toISOString().split('T')[0];
+            
+            // Actualizar slots cuando cambie la fecha
+            dateInput.addEventListener('change', updateTimeSlots);
+        }
 
-            // Manejo de slots de tiempo
-            const timeSlots = document.querySelectorAll('.time-slot');
-            let selectedTime = null;
-
+        // Inicializar slots de tiempo
+        function initializeTimeSlots() {
+            const timeSlots = document.querySelectorAll('.time-slot:not(.disabled)');
+            
             timeSlots.forEach(slot => {
                 slot.addEventListener('click', function() {
                     if (!this.classList.contains('disabled')) {
+                        // Remover selección anterior
                         timeSlots.forEach(s => s.classList.remove('selected'));
+                        
+                        // Agregar selección actual
                         this.classList.add('selected');
                         selectedTime = this.dataset.time;
+                        
+                        // Animación de selección
+                        this.style.transform = 'scale(1.1)';
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 200);
                     }
                 });
             });
+        }
 
-            // Manejo del formulario
+        // Actualizar disponibilidad de horarios
+        function updateTimeSlots() {
+            const dateInput = document.querySelector('input[name="date"]');
+            const selectedDate = new Date(dateInput.value);
+            const today = new Date();
+            const timeSlots = document.querySelectorAll('.time-slot');
+            
+            // Simular disponibilidad (en producción vendría del backend)
+            const unavailableSlots = ['17:00']; // Ejemplo
+            
+            timeSlots.forEach(slot => {
+                const time = slot.dataset.time;
+                const slotDateTime = new Date(selectedDate);
+                const [hours, minutes] = time.split(':');
+                slotDateTime.setHours(parseInt(hours), parseInt(minutes));
+                
+                // Verificar si es hora pasada del día actual
+                const isPastTime = selectedDate.toDateString() === today.toDateString() && 
+                                  slotDateTime < today;
+                
+                // Verificar disponibilidad
+                const isUnavailable = unavailableSlots.includes(time) || isPastTime;
+                
+                if (isUnavailable) {
+                    slot.classList.add('disabled');
+                    slot.querySelector('small').textContent = 'No disponible';
+                } else {
+                    slot.classList.remove('disabled');
+                    slot.querySelector('small').textContent = 'Disponible';
+                }
+            });
+        }
+
+        // Navegación entre pasos
+        function nextStep() {
+            if (validateCurrentStep()) {
+                if (currentStep < 3) {
+                    // Guardar datos del paso actual
+                    saveStepData();
+                    
+                    // Cambiar al siguiente paso
+                    currentStep++;
+                    updateStepDisplay();
+                    
+                    // Si es el último paso, generar resumen
+                    if (currentStep === 3) {
+                        generateSummary();
+                    }
+                    
+                    // Scroll suave al inicio del formulario
+                    document.querySelector('.appointment-form').scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStepDisplay();
+                
+                // Scroll suave
+                document.querySelector('.appointment-form').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Actualizar visualización de pasos
+        function updateStepDisplay() {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostrar sección actual
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            
+            // Actualizar indicadores de pasos
+            document.querySelectorAll('.step').forEach((step, index) => {
+                const stepNumber = index + 1;
+                step.classList.remove('active', 'completed');
+                
+                if (stepNumber < currentStep) {
+                    step.classList.add('completed');
+                } else if (stepNumber === currentStep) {
+                    step.classList.add('active');
+                }
+            });
+        }
+
+        // Validar paso actual
+        function validateCurrentStep() {
+            const currentSection = document.getElementById(`step${currentStep}`);
+            const requiredFields = currentSection.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.classList.add('error');
+                    
+                    // Mostrar mensaje de error
+                    showFieldError(field, 'Este campo es obligatorio');
+                } else {
+                    field.classList.remove('error');
+                    removeFieldError(field);
+                }
+            });
+            
+            // Validaciones específicas
+            if (currentStep === 1) {
+                const email = currentSection.querySelector('[name="email"]');
+                const phone = currentSection.querySelector('[name="phone"]');
+                
+                if (email.value && !isValidEmail(email.value)) {
+                    isValid = false;
+                    showFieldError(email, 'Ingrese un email válido');
+                }
+                
+                if (phone.value && !isValidPhone(phone.value)) {
+                    isValid = false;
+                    showFieldError(phone, 'Ingrese un teléfono válido (10 dígitos)');
+                }
+            } else if (currentStep === 2) {
+                if (!selectedTime) {
+                    isValid = false;
+                    showNotification('Por favor seleccione una hora para su cita', 'error');
+                }
+            }
+            
+            if (!isValid) {
+                showNotification('Por favor complete todos los campos obligatorios', 'error');
+            }
+            
+            return isValid;
+        }
+
+        // Guardar datos del paso
+        function saveStepData() {
+            const currentSection = document.getElementById(`step${currentStep}`);
+            const inputs = currentSection.querySelectorAll('input, select, textarea');
+            
+            inputs.forEach(input => {
+                if (input.type !== 'submit' && input.type !== 'button') {
+                    formData[input.name] = input.value;
+                }
+            });
+            
+            if (selectedTime) {
+                formData.time = selectedTime;
+            }
+        }
+
+        // Generar resumen
+        function generateSummary() {
+            // Actualizar datos en el resumen
+            document.getElementById('summary-name').textContent = formData.name || '-';
+            document.getElementById('summary-phone').textContent = formData.phone || '-';
+            document.getElementById('summary-email').textContent = formData.email || '-';
+            document.getElementById('summary-pet').textContent = formData.pet || '-';
+            document.getElementById('summary-pet-type').textContent = 
+                getSelectLabel('petType', formData.petType) || '-';
+            document.getElementById('summary-breed').textContent = formData.breed || 'No especificada';
+            document.getElementById('summary-service').textContent = 
+                getSelectLabel('service', formData.service) || '-';
+            document.getElementById('summary-branch').textContent = 
+                getSelectLabel('branch', formData.branch) || '-';
+            document.getElementById('summary-date').textContent = 
+                formatDate(formData.date) || '-';
+            document.getElementById('summary-time').textContent = 
+                formatTime(formData.time) || '-';
+                
+            // Mostrar mensaje si existe
+            const messageContainer = document.getElementById('summary-message-container');
+            const messageElement = document.getElementById('summary-message');
+            
+            if (formData.message && formData.message.trim()) {
+                messageContainer.style.display = 'block';
+                messageElement.textContent = formData.message;
+            } else {
+                messageContainer.style.display = 'none';
+            }
+        }
+
+        // Obtener texto de una opción select
+        function getSelectLabel(name, value) {
+            const select = document.querySelector(`select[name="${name}"]`);
+            if (select && value) {
+                const option = select.querySelector(`option[value="${value}"]`);
+                return option ? option.textContent : value;
+            }
+            return value;
+        }
+
+        // Formatear fecha
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString + 'T00:00:00');
+            return date.toLocaleDateString('es-ES', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // Formatear hora
+        function formatTime(timeString) {
+            if (!timeString) return '';
+            const [hours, minutes] = timeString.split(':');
+            const hour = parseInt(hours);
+            const ampm = hour >= 12 ? 'PM' : 'AM';
+            const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+            return `${displayHour}:${minutes} ${ampm}`;
+        }
+
+        // Manejar envío del formulario
+        function initializeForm() {
             const form = document.getElementById('appointmentForm');
             
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                // Validar que se seleccionó una hora
-                if (!selectedTime) {
-                    alert('Por favor seleccione una hora para su cita');
-                    return;
+                if (validateCurrentStep()) {
+                    saveStepData();
+                    submitAppointment();
                 }
-                
-                // Obtener datos del formulario
-                const formData = new FormData(form);
-                const data = {
-                    nombre: formData.get('name'),
-                    telefono: formData.get('phone'),
-                    email: formData.get('email'),
-                    mascota: formData.get('pet'),
-                    tipoMascota: formData.get('petType'),
-                    raza: formData.get('breed'),
-                    servicio: formData.get('service'),
-                    sucursal: formData.get('branch'),
-                    fecha: formData.get('date'),
-                    hora: selectedTime,
-                    mensaje: formData.get('message')
-                };
-                
+            });
+        }
+
+        // Enviar cita
+        function submitAppointment() {
+            // Mostrar loading
+            const loadingElement = document.getElementById('formLoading');
+            loadingElement.classList.add('active');
+            
+            // Simular procesamiento
+            setTimeout(() => {
                 // Crear mensaje para WhatsApp
-                const message = `🗓️ SOLICITUD DE CITA\n\n` +
-                    `👤 Nombre: ${data.nombre}\n` +
-                    `📞 Teléfono: ${data.telefono}\n` +
-                    `📧 Email: ${data.email}\n` +
-                    `🐾 Mascota: ${data.mascota} (${data.tipoMascota})\n` +
-                    `${data.raza ? `🏷️ Raza: ${data.raza}\n` : ''}` +
-                    `🏥 Servicio: ${data.servicio}\n` +
-                    `📍 Sucursal: ${data.sucursal}\n` +
-                    `📅 Fecha: ${data.fecha}\n` +
-                    `⏰ Hora: ${selectedTime}\n` +
-                    `${data.mensaje ? `💬 Mensaje: ${data.mensaje}` : ''}`;
+                const emergencyIcon = formData.emergency === 'emergencia' ? '🚨 ' : 
+                                     formData.emergency === 'urgente' ? '⚡ ' : '';
                 
-                // Enviar por WhatsApp
+                const message = `${emergencyIcon}📅 SOLICITUD DE CITA\n\n` +
+                    `👤 PROPIETARIO:\n` +
+                    `Nombre: ${formData.name}\n` +
+                    `📞 Teléfono: ${formData.phone}\n` +
+                    `📧 Email: ${formData.email}\n\n` +
+                    `🐾 MASCOTA:\n` +
+                    `Nombre: ${formData.pet}\n` +
+                    `Tipo: ${getSelectLabel('petType', formData.petType)}\n` +
+                    `${formData.breed ? `Raza: ${formData.breed}\n` : ''}` +
+                    `${formData.weight ? `Peso: ${getSelectLabel('weight', formData.weight)}\n` : ''}` +
+                    `${formData.age ? `Edad: ${getSelectLabel('age', formData.age)}\n` : ''}\n` +
+                    `🏥 SERVICIO: ${getSelectLabel('service', formData.service)}\n` +
+                    `🏢 Sucursal: ${getSelectLabel('branch', formData.branch)}\n` +
+                    `📅 Fecha: ${formatDate(formData.date)}\n` +
+                    `⏰ Hora: ${formatTime(formData.time)}\n` +
+                    `${formData.emergency !== 'no' ? `🚨 Prioridad: ${getSelectLabel('emergency', formData.emergency)}\n` : ''}` +
+                    `${formData.message ? `\n💬 MOTIVO/SÍNTOMAS:\n${formData.message}` : ''}`;
+                
+                // Abrir WhatsApp
                 window.open(`https://wa.me/593999929069?text=${encodeURIComponent(message)}`, '_blank');
+                
+                // Ocultar loading
+                loadingElement.classList.remove('active');
                 
                 // Mostrar confirmación
                 showSuccessMessage();
-            });
-            
-            function showSuccessMessage() {
-                const successHTML = `
-                    <div style="text-align: center; padding: 40px;">
-                        <i class="fas fa-check-circle" style="font-size: 60px; color: var(--neon-green); margin-bottom: 20px;"></i>
-                        <h2>¡Cita Enviada con Éxito!</h2>
-                        <p style="margin: 20px 0; color: var(--text-secondary);">
-                            Tu solicitud ha sido enviada. Te contactaremos pronto para confirmar tu cita.
-                        </p>
+                
+            }, 2000);
+        }
+
+        // Mostrar mensaje de éxito
+        function showSuccessMessage() {
+            const formContent = document.querySelector('.appointment-form');
+            const successHTML = `
+                <div class="success-animation">
+                    <div class="success-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h2 style="color: var(--neon-green); margin-bottom: 20px; font-family: 'Orbitron', monospace;">
+                        ¡CITA ENVIADA CON ÉXITO!
+                    </h2>
+                    <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 30px; line-height: 1.6;">
+                        Su solicitud de cita ha sido enviada correctamente. Nuestro equipo se contactará 
+                        con usted dentro de las próximas 2 horas para confirmar la disponibilidad.
+                    </p>
+                    
+                    <div style="background: var(--light-bg); padding: 25px; border-radius: 15px; margin: 30px 0; border: 2px solid var(--neon-green);">
+                        <h4 style="color: var(--text-dark); margin-bottom: 15px;">
+                            <i class="fas fa-clock"></i> ¿Qué sigue ahora?
+                        </h4>
+                        <ul style="text-align: left; color: var(--text-secondary); line-height: 1.8;">
+                            <li>✅ Recibirá una confirmación por WhatsApp</li>
+                            <li>📞 Le llamaremos para confirmar la cita</li>
+                            <li>📧 Enviamos recordatorio por email</li>
+                            <li>🏥 Llegue 10 minutos antes de su cita</li>
+                        </ul>
+                    </div>
+
+                    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
                         <a href="../index.html" class="btn btn-primary">
                             <i class="fas fa-home"></i> Volver al Inicio
                         </a>
+                        <a href="tel:0999929069" class="btn btn-emergency">
+                            <i class="fas fa-phone"></i> Llamar Ahora
+                        </a>
                     </div>
-                `;
+                </div>
+            `;
+            
+            formContent.innerHTML = successHTML;
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Mostrar notificación
+            showNotification('¡Cita agendada exitosamente! Revise su WhatsApp.', 'success');
+        }
+
+        // Validaciones
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function isValidPhone(phone) {
+            const phoneRegex = /^[0-9]{10}$/;
+            return phoneRegex.test(phone.replace(/\D/g, ''));
+        }
+
+        // Mostrar error en campo
+        function showFieldError(field, message) {
+            removeFieldError(field);
+            
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'field-error';
+            errorDiv.style.cssText = `
+                color: var(--vibrant-pink);
+                font-size: 12px;
+                margin-top: 5px;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                animation: slideIn 0.3s ease;
+            `;
+            errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+            
+            field.parentNode.appendChild(errorDiv);
+            field.style.borderColor = 'var(--vibrant-pink)';
+        }
+
+        // Remover error de campo
+        function removeFieldError(field) {
+            const existingError = field.parentNode.querySelector('.field-error');
+            if (existingError) {
+                existingError.remove();
+            }
+            field.style.borderColor = '';
+        }
+
+        // Configurar validación en tiempo real
+        function setupFormValidation() {
+            const inputs = document.querySelectorAll('input, select, textarea');
+            
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (this.hasAttribute('required') && !this.value.trim()) {
+                        showFieldError(this, 'Este campo es obligatorio');
+                    } else {
+                        removeFieldError(this);
+                        
+                        // Validaciones específicas
+                        if (this.type === 'email' && this.value) {
+                            if (!isValidEmail(this.value)) {
+                                showFieldError(this, 'Ingrese un email válido');
+                            }
+                        } else if (this.type === 'tel' && this.value) {
+                            if (!isValidPhone(this.value)) {
+                                showFieldError(this, 'Ingrese un teléfono válido (10 dígitos)');
+                            }
+                        }
+                    }
+                });
                 
-                document.querySelector('.appointment-form').innerHTML = successHTML;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                input.addEventListener('input', function() {
+                    if (this.classList.contains('error')) {
+                        removeFieldError(this);
+                        this.classList.remove('error');
+                    }
+                });
+            });
+        }
+
+        // Mostrar notificación
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            
+            const icons = {
+                'success': 'fas fa-check-circle',
+                'error': 'fas fa-exclamation-triangle',
+                'info': 'fas fa-info-circle'
+            };
+            
+            notification.innerHTML = `
+                <i class="${icons[type]}"></i>
+                <span>${message}</span>
+            `;
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                padding: 15px 25px;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-weight: 600;
+                z-index: 10000;
+                animation: slideIn 0.5s ease;
+                max-width: 400px;
+                color: white;
+            `;
+            
+            // Colores según tipo
+            const colors = {
+                'success': 'linear-gradient(135deg, #00ff88, #00cc6a)',
+                'error': 'linear-gradient(135deg, #ff4757, #ff3742)',
+                'info': 'var(--gradient-bg)'
+            };
+            
+            notification.style.background = colors[type];
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.5s ease forwards';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 500);
+            }, 5000);
+        }
+
+        // Formateo automático de teléfono
+        document.addEventListener('DOMContentLoaded', function() {
+            const phoneInput = document.querySelector('input[name="phone"]');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    if (value.length > 10) {
+                        value = value.substring(0, 10);
+                    }
+                    e.target.value = value;
+                });
             }
         });
+
+        // Prevenir envío con Enter en inputs
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA' && e.target.type !== 'submit') {
+                e.preventDefault();
+            }
+        });
+
+        // Auto-scroll suave al cambiar pasos
+        function smoothScrollToForm() {
+            const formElement = document.querySelector('.appointment-form');
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            const targetPosition = formElement.offsetTop - headerHeight - 20;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+
+        // Detectar cambios no guardados
+        let formChanged = false;
+        document.addEventListener('DOMContentLoaded', function() {
+            const formInputs = document.querySelectorAll('#appointmentForm input, #appointmentForm select, #appointmentForm textarea');
+            
+            formInputs.forEach(input => {
+                input.addEventListener('change', () => {
+                    formChanged = true;
+                });
+            });
+            
+            // Advertir antes de salir si hay cambios no guardados
+            window.addEventListener('beforeunload', function(e) {
+                if (formChanged && currentStep < 3) {
+                    e.preventDefault();
+                    e.returnValue = '¿Está seguro de que desea salir? Los cambios no guardados se perderán.';
+                }
+            });
+        });
+
+        // Inicialización de tooltips para información adicional
+        function initializeTooltips() {
+            const tooltipElements = document.querySelectorAll('[data-tooltip]');
+            
+            tooltipElements.forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'tooltip';
+                    tooltip.textContent = this.dataset.tooltip;
+                    tooltip.style.cssText = `
+                        position: absolute;
+                        background: var(--text-dark);
+                        color: white;
+                        padding: 8px 12px;
+                        border-radius: 6px;
+                        font-size: 12px;
+                        white-space: nowrap;
+                        z-index: 1000;
+                        top: -35px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        opacity: 0;
+                        animation: fadeIn 0.3s ease forwards;
+                    `;
+                    
+                    this.style.position = 'relative';
+                    this.appendChild(tooltip);
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    const tooltip = this.querySelector('.tooltip');
+                    if (tooltip) {
+                        tooltip.remove();
+                    }
+                });
+            });
+        }
+
+        // Mejorar accesibilidad
+        document.addEventListener('DOMContentLoaded', function() {
+            // Agregar role y aria-labels apropiados
+            const steps = document.querySelectorAll('.step');
+            steps.forEach((step, index) => {
+                step.setAttribute('role', 'tab');
+                step.setAttribute('aria-label', `Paso ${index + 1}`);
+            });
+            
+            const sections = document.querySelectorAll('.form-section');
+            sections.forEach((section, index) => {
+                section.setAttribute('role', 'tabpanel');
+                section.setAttribute('aria-labelledby', `step-${index + 1}`);
+            });
+            
+            // Navegación con teclado
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                    const focusedElement = document.activeElement;
+                    if (focusedElement.classList.contains('btn-step')) {
+                        e.preventDefault();
+                        if (e.key === 'ArrowRight' && currentStep < 3) {
+                            nextStep();
+                        } else if (e.key === 'ArrowLeft' && currentStep > 1) {
+                            prevStep();
+                        }
+                    }
+                }
+            });
+        });
+
+        // Guardar progreso en localStorage para recuperación
+        function saveProgress() {
+            const progressData = {
+                currentStep: currentStep,
+                formData: formData,
+                selectedTime: selectedTime,
+                timestamp: Date.now()
+            };
+            
+            localStorage.setItem('appointmentProgress', JSON.stringify(progressData));
+        }
+
+        function loadProgress() {
+            try {
+                const saved = localStorage.getItem('appointmentProgress');
+                if (saved) {
+                    const progressData = JSON.parse(saved);
+                    const age = Date.now() - progressData.timestamp;
+                    
+                    // Solo restaurar si es menor a 1 hora
+                    if (age < 3600000) {
+                        if (confirm('¿Desea continuar con el formulario que tenía en progreso?')) {
+                            currentStep = progressData.currentStep;
+                            formData = progressData.formData;
+                            selectedTime = progressData.selectedTime;
+                            
+                            // Restaurar campos
+                            Object.keys(formData).forEach(key => {
+                                const field = document.querySelector(`[name="${key}"]`);
+                                if (field) {
+                                    field.value = formData[key];
+                                }
+                            });
+                            
+                            // Restaurar hora seleccionada
+                            if (selectedTime) {
+                                const timeSlot = document.querySelector(`[data-time="${selectedTime}"]`);
+                                if (timeSlot) {
+                                    timeSlot.classList.add('selected');
+                                }
+                            }
+                            
+                            updateStepDisplay();
+                        } else {
+                            localStorage.removeItem('appointmentProgress');
+                        }
+                    }
+                }
+            } catch (error) {
+                console.log('Error loading progress:', error);
+                localStorage.removeItem('appointmentProgress');
+            }
+        }
+
+        // Cargar progreso al inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(loadProgress, 500);
+        });
+
+        // Guardar progreso en cada paso
+        function nextStep() {
+            if (validateCurrentStep()) {
+                if (currentStep < 3) {
+                    saveStepData();
+                    saveProgress();
+                    currentStep++;
+                    updateStepDisplay();
+                    
+                    if (currentStep === 3) {
+                        generateSummary();
+                    }
+                    
+                    smoothScrollToForm();
+                }
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                saveProgress();
+                updateStepDisplay();
+                smoothScrollToForm();
+            }
+        }
     </script>
+
+    <style>
+        /* Estilos adicionales para mejorar UX */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .field-error {
+            animation: slideIn 0.3s ease;
+        }
+        
+        .form-input.error,
+        .form-select.error,
+        .form-textarea.error {
+            border-color: var(--vibrant-pink);
+            box-shadow: 0 0 0 4px rgba(255, 20, 147, 0.15);
+        }
+        
+        .time-slot {
+            user-select: none;
+        }
+        
+        .form-section {
+            min-height: 400px;
+        }
+        
+        /* Mejoras responsive adicionales */
+        @media (max-width: 640px) {
+            .hero-feature {
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .form-actions {
+                position: sticky;
+                bottom: 20px;
+                background: white;
+                padding: 15px;
+                border-radius: 15px;
+                box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+                margin: 20px -25px -25px -25px;
+            }
+        }
+        
+        /* Loading spinner mejorado */
+        .form-spinner {
+            position: relative;
+        }
+        
+        .form-spinner::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-cyan);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        /* Animación de éxito mejorada */
+        .success-animation {
+            animation: fadeIn 0.8s ease;
+        }
+        
+        .success-icon {
+            animation: successPulse 2s infinite;
+            position: relative;
+        }
+        
+        .success-icon::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 3px solid var(--neon-green);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: ripple 2s infinite;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+        
+        /* Mejora en la selección de horarios */
+        .time-slot small {
+            font-size: 11px;
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+        
+        .time-slot.selected small {
+            opacity: 1;
+            font-weight: bold;
+        }
+    </style>
 </body>
 
 </html>

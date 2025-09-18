@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Transformaciones - Mascotas Store</title>
+    <meta name="description" content="Descubre las increíbles transformaciones de nuestro grooming profesional. Antes y después de nuestros servicios de peluquería canina y spa.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <style>
+        /* Estilos específicos para la galería */
+        .gallery-hero {
+            padding: 140px 0 80px;
+            background: linear-gradient(135deg, var(--primary-cyan) 0%, var(--primary-blue) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 50%);
+            animation: heroFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes heroFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-20px, -10px) rotate(1deg); }
+            66% { transform: translate(20px, -15px) rotate(-1deg); }
+        }
+
+        .gallery-hero h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+            font-weight: 600;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-stat {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px 35px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+            min-width: 160px;
+        }
+
+        .hero-stat:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+        }
+
+        .hero-stat-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .hero-stat-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            opacity: 0.95;
+        }
+
+        /* Filtros de Galería */
+        .gallery-filters {
+            background: white;
+            padding: 40px 0;
+            border-bottom: 3px solid var(--light-bg);
+            position: sticky;
+            top: var(--header-height, 120px);
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+
+        .filters-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 15px 30px;
+            border: 2px solid var(--glass-border);
+            background: white;
+            color: var(--text-secondary);
+            border-radius: 25px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .filter-btn:hover::before {
+            left: 100%;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary-cyan);
+            color: var(--primary-cyan);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.2);
+        }
+
+        .filter-btn.active {
+            background: var(--gradient-bg);
+            color: white;
+            border-color: var(--primary-cyan);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .filter-btn .count {
+            background: rgba(0, 212, 255, 0.2);
+            color: var(--primary-cyan);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 800;
+            margin-left: 8px;
+        }
+
+        .filter-btn.active .count {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        /* Grid de Galería */
+        .gallery-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8fcff 0%, #e6f7ff 50%, #f0f9ff 100%);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+            border: 3px solid transparent;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.15);
+            border-color: var(--primary-cyan);
+        }
+
+        .gallery-item.hidden {
+            display: none;
+        }
+
+        .item-image-container {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .item-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover .item-image {
+            transform: scale(1.1);
+        }
+
+        .item-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.8), rgba(0, 153, 204, 0.8));
+            opacity: 0;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-item:hover .item-overlay {
+            opacity: 1;
+        }
+
+        .overlay-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--primary-cyan);
+            transform: scale(0);
+            transition: transform 0.3s ease 0.2s;
+        }
+
+        .gallery-item:hover .overlay-icon {
+            transform: scale(1);
+            animation: pulseIcon 2s infinite;
+        }
+
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .item-info {
+            padding: 25px;
+        }
+
+        .item-category {
+            background: var(--gradient-bg);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .item-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .item-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .item-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .item-tag {
+            background: var(--light-bg);
+            color: var(--primary-cyan);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            border: 1px solid var(--glass-border);
+        }
+
+        /* Antes y Después */
+        .before-after-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            height: 400px;
+        }
+
+        .before-after-item .item-image-container {
+            height: 100%;
+            position: relative;
+        }
+
+        .before-after-label {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+
+        .before-label {
+            background: rgba(255, 71, 87, 0.9);
+        }
+
+        .after-label {
+            background: rgba(0, 255, 136, 0.9);
+        }
+
+        /* Lightbox Modal */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .lightbox-content {
+            max-width: 1200px;
+            max-height: 90vh;
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        .lightbox-image {
+            width: 100%;
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .lightbox-info {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .lightbox-category {
+            background: var(--gradient-bg);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 20px;
+            align-self: flex-start;
+        }
+
+        .lightbox-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .lightbox-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .lightbox-details {
+            border-top: 2px solid var(--light-bg);
+            padding-top: 25px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .detail-value {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10001;
+        }
+
+        .lightbox-close:hover {
+            background: var(--vibrant-pink);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--primary-cyan);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .lightbox-nav:hover {
+            background: var(--primary-cyan);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 30px;
+        }
+
+        .lightbox-next {
+            right: 30px;
+        }
+
+        /* Loading Animation */
+        .gallery-loading {
+            text-align: center;
+            padding: 60px 0;
+            display: none;
+        }
+
+        .gallery-loading.active {
+            display: block;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--light-bg);
+            border-top: 4px solid var(--primary-cyan);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        /* Estadísticas de la galería */
+        .gallery-stats {
+            background: white;
+            padding: 40px 0;
+            border-top: 3px solid var(--primary-cyan);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary-cyan);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        /* CTA Section */
+        .gallery-cta {
+            background: var(--gradient-bg);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .cta-content p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 18px 35px;
+            border-radius: 25px;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-button:hover {
+            background: rgba(255,255,255,0.25);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .cta-button.primary {
+            background: white;
+            color: var(--primary-cyan);
+            border-color: white;
+        }
+
+        .cta-button.primary:hover {
+            background: var(--light-bg);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 25px;
+            }
+
+            .lightbox-content {
+                grid-template-columns: 1fr;
+                max-width: 90vw;
+            }
+
+            .lightbox-info {
+                padding: 30px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-hero {
+                padding: 120px 0 60px;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+            }
+
+            .hero-stat {
+                min-width: auto;
+                padding: 20px 30px;
+            }
+
+            .filters-container {
+                padding: 0 20px;
+                gap: 10px;
+            }
+
+            .filter-btn {
+                padding: 12px 20px;
+                font-size: 13px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 20px;
+            }
+
+            .before-after-item {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .lightbox-container {
+                padding: 20px;
+            }
+
+            .lightbox-content {
+                max-width: 95vw;
+            }
+
+            .lightbox-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .lightbox-prev {
+                left: 15px;
+            }
+
+            .lightbox-next {
+                right: 15px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .item-image-container {
+                height: 250px;
+            }
+
+            .item-info {
+                padding: 20px;
+            }
+
+            .gallery-hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-stat-number {
+                font-size: 2rem;
+            }
+
+            .cta-content h2 {
+                font-size: 2rem;
+            }
+
+            .cta-content p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <div class="header-info">
+                        <div class="header-info-item">
+                            <i class="fas fa-phone"></i>
+                            <strong>0999929069</strong>
+                        </div>
+                        <div class="header-info-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Lun-Vie 8AM-7PM</span>
+                        </div>
+                    </div>
+                    <div class="header-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <nav class="nav">
+                    <a href="../index.html" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-paw"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h1>MASCOTAS STORE</h1>
+                            <div class="logo-subtitle">Peluquería, Spa Canino & Pet Shop</div>
+                        </div>
+                    </a>
+
+                    <div class="nav-menu" id="navMenu">
+                        <a href="../index.html">INICIO</a>
+                        <a href="../index.html#servicios">SERVICIOS</a>
+                        <a href="../index.html#sucursales">SUCURSALES</a>
+                        <a href="../index.html#contacto">CONTACTO</a>
+                        <a href="./citas.html" class="btn btn-outline" style="margin-left: 15px;">
+                            <i class="fas fa-calendar"></i> AGENDAR CITA
+                        </a>
+                    </div>
+
+                    <div class="nav-actions">
+                        <a href="tel:0999929069" class="btn btn-outline">
+                            <i class="fas fa-phone"></i> LLAMAR
+                        </a>
+                    </div>
+
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero de Galería -->
+    <section class="gallery-hero">
+        <div class="container">
+            <h1>Galería de Transformaciones</h1>
+            <p class="hero-subtitle">Descubre las increíbles transformaciones que realizamos día a día</p>
+            
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number" data-target="500">0</span>
+                    <span class="hero-stat-label">Transformaciones</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number" data-target="100">0</span>
+                    <span class="hero-stat-label">Clientes Felices</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number" data-target="50">0</span>
+                    <span class="hero-stat-label">Antes & Después</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtros -->
+    <div class="gallery-filters">
+        <div class="container">
+            <div class="filters-container">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fas fa-th"></i> Todos <span class="count">24</span>
+                </button>
+                <button class="filter-btn" data-filter="grooming">
+                    <i class="fas fa-cut"></i> Grooming <span class="count">8</span>
+                </button>
+                <button class="filter-btn" data-filter="before-after">
+                    <i class="fas fa-exchange-alt"></i> Antes & Después <span class="count">6</span>
+                </button>
+                <button class="filter-btn" data-filter="spa">
+                    <i class="fas fa-spa"></i> Spa Canino <span class="count">4</span>
+                </button>
+                <button class="filter-btn" data-filter="instalaciones">
+                    <i class="fas fa-hospital"></i> Instalaciones <span class="count">4</span>
+                </button>
+                <button class="filter-btn" data-filter="productos">
+                    <i class="fas fa-shopping-bag"></i> Productos <span class="count">2</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Galería Principal -->
+    <section class="gallery-section">
+        <div class="container">
+            <!-- Loading -->
+            <div class="gallery-loading" id="galleryLoading">
+                <div class="loading-spinner"></div>
+                <p>Cargando imágenes...</p>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Antes y Después Items -->
+                <div class="gallery-item before-after-item" data-category="before-after" data-title="Transformación Golden Retriever" data-description="Increíble cambio de Max, un Golden Retriever que llegó muy despeinado y salió como todo un galán. Grooming completo con baño, corte breed específico y spa relajante.">
+                    <div class="item-image-container">
+                        <div class="before-after-label before-label">ANTES</div>
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-image-container">
+                        <div class="before-after-label after-label">DESPUÉS</div>
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grooming Items -->
+                <div class="gallery-item" data-category="grooming" data-title="Corte Breed Específico - Poodle" data-description="Hermoso corte continental para Princesa, una poodle toy. Técnica profesional que resalta la elegancia natural de la raza.">
+                    <div class="item-image-container">
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1616190260745-447af048a6c5?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <span class="item-category">Grooming</span>
+                        <h3 class="item-title">Corte Continental - Poodle</h3>
+                        <p class="item-description">Técnica profesional que resalta la elegancia natural.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Corte Breed</span>
+                            <span class="item-tag">Poodle</span>
+                            <span class="item-tag">Profesional</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="grooming" data-title="Schnauzer Miniatura - Corte Tradicional" data-description="Bobby lucía espectacular después de su sesión de grooming. Corte tradicional de schnauzer con atención especial a cejas y barba.">
+                    <div class="item-image-container">
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <span class="item-category">Grooming</span>
+                        <h3 class="item-title">Schnauzer Tradicional</h3>
+                        <p class="item-description">Corte breed específico con atención a cejas y barba.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Schnauzer</span>
+                            <span class="item-tag">Tradicional</span>
+                            <span class="item-tag">Cejas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="grooming" data-title="Yorkshire Terrier - Corte Puppy" data-description="Bella con su nuevo look juvenil. El corte puppy es perfecto para mantener un aspecto adorable y fácil mantenimiento.">
+                    <div class="item-image-container">
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <span class="item-category">Grooming</span>
+                        <h3 class="item-title">Yorkshire - Corte Puppy</h3>
+                        <p class="item-description">Look juvenil adorable y de fácil mantenimiento.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Yorkshire</span>
+                            <span class="item-tag">Corte Puppy</span>
+                            <span class="item-tag">Adorable</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Más Antes y Después -->
+                <div class="gallery-item before-after-item" data-category="before-after" data-title="Rescate Shih Tzu" data-description="Increíble transformación de Luna, una Shih Tzu rescatada que necesitaba cuidados especiales. De un estado deplorable a lucir como una reina.">
+                    <div class="item-image-container">
+                        <div class="before-after-label before-label">ANTES</div>
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-image-container">
+                        <div class="before-after-label after-label">DESPUÉS</div>
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1574231164645-d6f0e8553590?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spa Canino -->
+                <div class="gallery-item" data-category="spa" data-title="Sesión de Spa Relajante" data-description="Rocco disfrutando de una sesión completa de spa con aromaterapia, masajes terapéuticos y tratamiento de hidratación profunda.">
+                    <div class="item-image-container">
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1601758174114-e711c0cbaa69?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <span class="item-category">Spa</span>
+                        <h3 class="item-title">Spa Relajante Premium</h3>
+                        <p class="item-description">Aromaterapia y masajes terapéuticos especializados.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Relajación</span>
+                            <span class="item-tag">Aromaterapia</span>
+                            <span class="item-tag">Premium</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="spa" data-title="Tratamiento Anti-Estrés" data-description="Terapia especializada para Max, un perro con ansiedad. Combinamos técnicas de relajación con productos naturales para su bienestar.">
+                    <div class="item-image-container">
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1605568427561-40dd23c2acea?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <span class="item-category">Spa</span>
+                        <h3 class="item-title">Terapia Anti-Estrés</h3>
+                        <p class="item-description">Técnicas especializadas para el bienestar emocional.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Anti-estrés</span>
+                            <span class="item-tag">Terapia</span>
+                            <span class="item-tag">Natural</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instalaciones -->
+                <div class="gallery-item" data-category="instalaciones" data-title="Sala de Grooming Principal" data-description="Nuestras modernas instalaciones cuentan con equipos de última tecnología para brindar el mejor servicio profesional.">
+                    <div class="item-image-container">
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <span class="item-category">Instalaciones</span>
+                        <h3 class="item-title">Sala de Grooming</h3>
+                        <p class="item-description">Equipos de última tecnología y ambiente profesional.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Moderno</span>
+                            <span class="item-tag">Profesional</span>
+                            <span class="item-tag">Tecnología</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="instalaciones" data-title="Área de Consultas" data-description="Consultorios veterinarios equipados con tecnología médica avanzada para diagnósticos precisos y tratamientos efectivos.">
+                    <div class="item-image-container">
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <span class="item-category">Instalaciones</span>
+                        <h3 class="item-title">Consultorio Veterinario</h3>
+                        <p class="item-description">Tecnología médica avanzada para diagnósticos precisos.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Médico</span>
+                            <span class="item-tag">Diagnóstico</span>
+                            <span class="item-tag">Avanzado</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="instalaciones" data-title="Zona de Recuperación" data-description="Espacios cómodos y seguros para la recuperación post-cirugía con monitoreo constante y cuidados especializados.">
+                    <div class="item-image-container">
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1628407582704-5fb2cb80747b?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <span class="item-category">Instalaciones</span>
+                        <h3 class="item-title">Área de Recuperación</h3>
+                        <p class="item-description">Espacios seguros con monitoreo especializado.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Recuperación</span>
+                            <span class="item-tag">Seguro</span>
+                            <span class="item-tag">Monitoreo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Más Grooming -->
+                <div class="gallery-item" data-category="grooming" data-title="Border Collie - Baño y Cepillado" data-description="Storm después de su sesión de baño profundo y cepillado especial. Su pelaje doble requiere técnicas específicas para mantenerlo saludable.">
+                    <div class="item-image-container">
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1551717743-49959800b1f6?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <span class="item-category">Grooming</span>
+                        <h3 class="item-title">Border Collie - Cepillado</h3>
+                        <p class="item-description">Técnicas especiales para pelaje doble y cepillado profundo.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Pelaje Doble</span>
+                            <span class="item-tag">Cepillado</span>
+                            <span class="item-tag">Border Collie</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Productos -->
+                <div class="gallery-item" data-category="productos" data-title="Línea Premium de Cuidado" data-description="Productos profesionales que utilizamos en nuestros servicios. Shampoos, acondicionadores y tratamientos de las mejores marcas.">
+                    <div class="item-image-container">
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <span class="item-category">Productos</span>
+                        <h3 class="item-title">Línea Premium</h3>
+                        <p class="item-description">Productos profesionales de las mejores marcas internacionales.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Premium</span>
+                            <span class="item-tag">Professional</span>
+                            <span class="item-tag">Importado</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Más Antes y Después -->
+                <div class="gallery-item before-after-item" data-category="before-after" data-title="Transformación Husky Siberiano" data-description="Ajax llegó con el pelaje muy enredado después de meses sin cuidado. Con paciencia y técnica, logramos esta increíble transformación.">
+                    <div class="item-image-container">
+                        <div class="before-after-label before-label">ANTES</div>
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1605568427561-40dd23c2acea?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-image-container">
+                        <div class="before-after-label after-label">DESPUÉS</div>
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1605568427746-e7f5ec4e4dc8?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Más Grooming y Spa -->
+                <div class="gallery-item" data-category="grooming" data-title="Corte de Verano - Labrador" data-description="Corte refrescante para el verano que mantiene la elegancia de Duke mientras lo ayuda a estar cómodo en el clima cálido.">
+                    <div class="item-image-container">
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <span class="item-category">Grooming</span>
+                        <h3 class="item-title">Corte de Verano</h3>
+                        <p class="item-description">Refrescante y elegante para la temporada cálida.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Verano</span>
+                            <span class="item-tag">Refrescante</span>
+                            <span class="item-tag">Labrador</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="spa" data-title="Hidroterapia Canina" data-description="Sesión de hidroterapia para rehabilitación y relajación. Perfecta para perros mayores o en recuperación de lesiones.">
+                    <div class="item-image-container">
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <span class="item-category">Spa</span>
+                        <h3 class="item-title">Hidroterapia Canina</h3>
+                        <p class="item-description">Rehabilitación y relajación especializada en agua.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Hidroterapia</span>
+                            <span class="item-tag">Rehabilitación</span>
+                            <span class="item-tag">Senior</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Más items para completar -->
+                <div class="gallery-item" data-category="grooming" data-title="French Bulldog - Corte Higiénico" data-description="Bruno con su corte higiénico especializado. Especial atención a pliegues faciales y zonas sensibles de esta raza tan especial.">
+                    <div class="item-image-container">
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <span class="item-category">Grooming</span>
+                        <h3 class="item-title">French Bulldog - Higiénico</h3>
+                        <p class="item-description">Cuidado especializado para pliegues faciales.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Higiénico</span>
+                            <span class="item-tag">Pliegues</span>
+                            <span class="item-tag">French Bulldog</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item before-after-item" data-category="before-after" data-title="Transformación Cocker Spaniel" data-description="Bella transformación de Charlie, un Cocker Spaniel con el pelaje muy descuidado. El resultado habla por sí mismo.">
+                    <div class="item-image-container">
+                        <div class="before-after-label before-label">ANTES</div>
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-image-container">
+                        <div class="before-after-label after-label">DESPUÉS</div>
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="spa" data-title="Tratamiento de Piel Sensible" data-description="Tratamiento especializado para pieles sensibles con productos hipoalergénicos y técnicas suaves de aplicación.">
+                    <div class="item-image-container">
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1574231164645-d6f0e8553590?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <span class="item-category">Spa</span>
+                        <h3 class="item-title">Piel Sensible</h3>
+                        <p class="item-description">Tratamiento hipoalergénico especializado.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Hipoalergénico</span>
+                            <span class="item-tag">Piel Sensible</span>
+                            <span class="item-tag">Suave</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="instalaciones" data-title="Área de Descanso" data-description="Zona cómoda y tranquila donde las mascotas pueden relajarse antes y después de sus tratamientos.">
+                    <div class="item-image-container">
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1628407582704-5fb2cb80747b?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <span class="item-category">Instalaciones</span>
+                        <h3 class="item-title">Área de Descanso</h3>
+                        <p class="item-description">Espacio tranquilo para relajación pre y post tratamiento.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Descanso</span>
+                            <span class="item-tag">Tranquilo</span>
+                            <span class="item-tag">Cómodo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="productos" data-title="Accesorios Premium" data-description="Selección de collares, correas y accesorios premium que complementan nuestros servicios de grooming.">
+                    <div class="item-image-container">
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1601758174114-e711c0cbaa69?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <span class="item-category">Productos</span>
+                        <h3 class="item-title">Accesorios Premium</h3>
+                        <p class="item-description">Collares, correas y accesorios de alta calidad.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Accesorios</span>
+                            <span class="item-tag">Premium</span>
+                            <span class="item-tag">Calidad</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item before-after-item" data-category="before-after" data-title="Transformación Completa - Maltés" data-description="Increíble transformación de Nieve, una Maltés que necesitaba cuidados especiales. De un estado descuidado a lucir como una verdadera princesa.">
+                    <div class="item-image-container">
+                        <div class="before-after-label before-label">ANTES</div>
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-image-container">
+                        <div class="before-after-label after-label">DESPUÉS</div>
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1616190260745-447af048a6c5?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="grooming" data-title="Samoyedo - Cepillado Intensivo" data-description="Koda después de su sesión de cepillado intensivo. Los Samoyedos requieren cuidado especial para mantener su hermoso pelaje blanco.">
+                    <div class="item-image-container">
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1605568427746-e7f5ec4e4dc8?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <span class="item-category">Grooming</span>
+                        <h3 class="item-title">Samoyedo - Cepillado</h3>
+                        <p class="item-description">Cuidado especializado para pelaje denso y blanco.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Samoyedo</span>
+                            <span class="item-tag">Pelaje Denso</span>
+                            <span class="item-tag">Blanco</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item before-after-item" data-category="before-after" data-title="Transformación Pastor Alemán" data-description="Rex llegó muy descuidado después de estar perdido. Con dedicación y cuidado profesional, logramos devolverle su dignidad y belleza natural.">
+                    <div class="item-image-container">
+                        <div class="before-after-label before-label">ANTES</div>
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-image-container">
+                        <div class="before-after-label after-label">DESPUÉS</div>
+                        <div class="item-image" style="background-image: url('https://images.unsplash.com/photo-1551717743-49959800b1f6?w=400&h=400&fit=crop')"></div>
+                        <div class="item-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estadísticas -->
+    <section class="gallery-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="500">0</span>
+                    <span class="stat-label">Fotos en Galería</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="120">0</span>
+                    <span class="stat-label">Transformaciones</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="50">0</span>
+                    <span class="stat-label">Antes & Después</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="25">0</span>
+                    <span class="stat-label">Razas Diferentes</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="gallery-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>¿Listo para la Transformación?</h2>
+                <p>Tu mascota también puede lucir espectacular. Agenda tu cita y forma parte de nuestra galería de éxitos.</p>
+                
+                <div class="cta-buttons">
+                    <a href="./citas.html" class="cta-button primary">
+                        <i class="fas fa-calendar-check"></i> Agendar Cita Ahora
+                    </a>
+                    <a href="https://wa.me/593999929069?text=Hola! Me interesa agendar una cita de grooming para mi mascota" class="cta-button">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Directo
+                    </a>
+                    <a href="tel:0999929069" class="cta-button">
+                        <i class="fas fa-phone"></i> Llamar Ahora
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-container">
+            <button class="lightbox-close" id="lightboxClose">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <button class="lightbox-nav lightbox-prev" id="lightboxPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            
+            <button class="lightbox-nav lightbox-next" id="lightboxNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <div class="lightbox-content">
+                <div class="lightbox-image" id="lightboxImage"></div>
+                <div class="lightbox-info">
+                    <div>
+                        <div class="lightbox-category" id="lightboxCategory">Grooming</div>
+                        <h2 class="lightbox-title" id="lightboxTitle">Título de la imagen</h2>
+                        <p class="lightbox-description" id="lightboxDescription">Descripción detallada de la imagen...</p>
+                    </div>
+                    
+                    <div class="lightbox-details" id="lightboxDetails">
+                        <div class="detail-item">
+                            <span class="detail-label">Tipo de servicio:</span>
+                            <span class="detail-value" id="detailService">Grooming Premium</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Tiempo de trabajo:</span>
+                            <span class="detail-value" id="detailTime">2-3 horas</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Técnicas aplicadas:</span>
+                            <span class="detail-value" id="detailTechniques">Corte, Baño, Secado</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Precio aproximado:</span>
+                            <span class="detail-value" id="detailPrice">$35 - $50</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mascotas Store</h3>
+                    <p>Más de 10 años creando transformaciones increíbles y cuidando la salud de tu mascota con amor y profesionalismo.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="../index.html#servicios">Servicios</a></li>
+                        <li><a href="./citas.html">Agendar Cita</a></li>
+                        <li><a href="./testimonios.html">Testimonios</a></li>
+                        <li><a href="../index.html#sucursales">Sucursales</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Servicios</h3>
+                    <ul>
+                        <li><a href="./citas.html">Grooming Premium</a></li>
+                        <li><a href="./citas.html">Spa Canino</a></li>
+                        <li><a href="./citas.html">Consultas Veterinarias</a></li>
+                        <li><a href="./citas.html">Emergencias 24/7</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> 0999929069</li>
+                        <li><i class="fas fa-envelope"></i> info@mascotasstore.ec</li>
+                        <li><i class="fas fa-clock"></i> Lun-Vie: 8AM-7PM</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Ibarra, Tulcán, Otavalo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2024 Mascotas Store - Todos los derechos reservados | Galería actualizada diariamente</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/593999929069" class="whatsapp-btn" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script>
+        // Variables globales
+        let currentImageIndex = 0;
+        let filteredImages = [];
+        let allImages = [];
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeGallery();
+            initializeFilters();
+            initializeLightbox();
+            initializeCounters();
+            simulateLoading();
+        });
+
+        // Inicializar galería
+        function initializeGallery() {
+            allImages = Array.from(document.querySelectorAll('.gallery-item'));
+            filteredImages = [...allImages];
+            
+            // Agregar event listeners a las imágenes
+            allImages.forEach((item, index) => {
+                item.addEventListener('click', () => openLightbox(index));
+                
+                // Efecto hover adicional
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+        }
+
+        // Inicializar filtros
+        function initializeFilters() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remover clase activa de todos los botones
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Agregar clase activa al botón clickeado
+                    this.classList.add('active');
+                    
+                    // Filtrar imágenes
+                    const filter = this.dataset.filter;
+                    filterImages(filter);
+                    
+                    // Efecto de animación
+                    animateFilterChange();
+                });
+            });
+        }
+
+        // Filtrar imágenes
+        function filterImages(category) {
+            const allItems = document.querySelectorAll('.gallery-item');
+            
+            allItems.forEach((item, index) => {
+                const itemCategory = item.dataset.category;
+                
+                if (category === 'all' || itemCategory === category) {
+                    item.classList.remove('hidden');
+                    // Animación de entrada escalonada
+                    setTimeout(() => {
+                        item.style.transform = 'translateY(0) scale(1)';
+                        item.style.opacity = '1';
+                    }, index * 50);
+                } else {
+                    item.classList.add('hidden');
+                    item.style.transform = 'translateY(20px) scale(0.8)';
+                    item.style.opacity = '0';
+                }
+            });
+            
+            // Actualizar array filtrado
+            filteredImages = Array.from(document.querySelectorAll('.gallery-item:not(.hidden)'));
+        }
+
+        // Animación al cambiar filtros
+        function animateFilterChange() {
+            const gallery = document.getElementById('galleryGrid');
+            gallery.style.transform = 'scale(0.95)';
+            gallery.style.opacity = '0.7';
+            
+            setTimeout(() => {
+                gallery.style.transform = 'scale(1)';
+                gallery.style.opacity = '1';
+            }, 200);
+        }
+
+        // Inicializar lightbox
+        function initializeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const closeBtn = document.getElementById('lightboxClose');
+            const prevBtn = document.getElementById('lightboxPrev');
+            const nextBtn = document.getElementById('lightboxNext');
+            
+            // Cerrar lightbox
+            closeBtn.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeLightbox();
+                }
+            });
+            
+            // Navegación del lightbox
+            prevBtn.addEventListener('click', () => navigateLightbox(-1));
+            nextBtn.addEventListener('click', () => navigateLightbox(1));
+            
+            // Navegación con teclado
+            document.addEventListener('keydown', function(e) {
+                if (lightbox.classList.contains('active')) {
+                    switch(e.key) {
+                        case 'Escape':
+                            closeLightbox();
+                            break;
+                        case 'ArrowLeft':
+                            navigateLightbox(-1);
+                            break;
+                        case 'ArrowRight':
+                            navigateLightbox(1);
+                            break;
+                    }
+                }
+            });
+        }
+
+        // Abrir lightbox
+        function openLightbox(index) {
+            const visibleItems = filteredImages;
+            const item = visibleItems[index];
+            
+            if (!item) return;
+            
+            currentImageIndex = index;
+            
+            // Obtener información de la imagen
+            const title = item.dataset.title || 'Imagen sin título';
+            const description = item.dataset.description || 'Sin descripción disponible';
+            const category = item.dataset.category || 'general';
+            
+            // Obtener imagen de fondo
+            const imageElement = item.querySelector('.item-image');
+            const imageUrl = imageElement.style.backgroundImage.slice(5, -2);
+            
+            // Actualizar contenido del lightbox
+            document.getElementById('lightboxImage').style.backgroundImage = `url(${imageUrl})`;
+            document.getElementById('lightboxTitle').textContent = title;
+            document.getElementById('lightboxDescription').textContent = description;
+            document.getElementById('lightboxCategory').textContent = category.toUpperCase();
+            
+            // Actualizar detalles específicos según la categoría
+            updateLightboxDetails(category);
+            
+            // Mostrar lightbox
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Actualizar navegación
+            updateLightboxNavigation();
+        }
+
+        // Cerrar lightbox
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Navegar en lightbox
+        function navigateLightbox(direction) {
+            const newIndex = currentImageIndex + direction;
+            
+            if (newIndex >= 0 && newIndex < filteredImages.length) {
+                openLightbox(newIndex);
+            } else if (direction === 1 && newIndex >= filteredImages.length) {
+                openLightbox(0); // Volver al inicio
+            } else if (direction === -1 && newIndex < 0) {
+                openLightbox(filteredImages.length - 1); // Ir al final
+            }
+        }
+
+        // Actualizar navegación del lightbox
+        function updateLightboxNavigation() {
+            const prevBtn = document.getElementById('lightboxPrev');
+            const nextBtn = document.getElementById('lightboxNext');
+            
+            prevBtn.style.display = filteredImages.length > 1 ? 'flex' : 'none';
+            nextBtn.style.display = filteredImages.length > 1 ? 'flex' : 'none';
+        }
+
+        // Actualizar detalles del lightbox según categoría
+        function updateLightboxDetails(category) {
+            const serviceEl = document.getElementById('detailService');
+            const timeEl = document.getElementById('detailTime');
+            const techniquesEl = document.getElementById('detailTechniques');
+            const priceEl = document.getElementById('detailPrice');
+            
+            switch(category) {
+                case 'grooming':
+                    serviceEl.textContent = 'Grooming Premium';
+                    timeEl.textContent = '2-3 horas';
+                    techniquesEl.textContent = 'Corte, Baño, Secado, Cepillado';
+                    priceEl.textContent = '$35 - $50';
+                    break;
+                    
+                case 'spa':
+                    serviceEl.textContent = 'Spa Canino';
+                    timeEl.textContent = '3-4 horas';
+                    techniquesEl.textContent = 'Relajación, Masajes, Aromaterapia';
+                    priceEl.textContent = '$45 - $65';
+                    break;
+                    
+                case 'before-after':
+                    serviceEl.textContent = 'Transformación Completa';
+                    timeEl.textContent = '4-6 horas';
+                    techniquesEl.textContent = 'Rehabilitación, Grooming, Spa';
+                    priceEl.textContent = '$50 - $80';
+                    break;
+                    
+                case 'instalaciones':
+                    serviceEl.textContent = 'Instalaciones Premium';
+                    timeEl.textContent = 'Todo el día';
+                    techniquesEl.textContent = 'Tecnología avanzada';
+                    priceEl.textContent = 'Incluido en servicio';
+                    break;
+                    
+                case 'productos':
+                    serviceEl.textContent = 'Productos Premium';
+                    timeEl.textContent = 'Disponible';
+                    techniquesEl.textContent = 'Marcas internacionales';
+                    priceEl.textContent = '$15 - $45';
+                    break;
+                    
+                default:
+                    serviceEl.textContent = 'Servicio Profesional';
+                    timeEl.textContent = '2-4 horas';
+                    techniquesEl.textContent = 'Técnicas especializadas';
+                    priceEl.textContent = '$30 - $60';
+            }
+        }
+
+        // Inicializar contadores
+        function initializeCounters() {
+            const counters = document.querySelectorAll('.stat-number, .hero-stat-number');
+            
+            const animateCounter = (counter) => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const increment = target / 100;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    counter.textContent = Math.floor(current);
+                    
+                    if (current >= target) {
+                        counter.textContent = target.toLocaleString();
+                        if (target === 500) counter.textContent = '500+';
+                        if (target === 120) counter.textContent = '120+';
+                        if (target === 50) counter.textContent = '50+';
+                        if (target === 25) counter.textContent = '25+';
+                        if (target === 100) counter.textContent = '100%';
+                        clearInterval(timer);
+                    }
+                }, 20);
+            };
+            
+            // Observer para animar cuando sean visibles
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.target.textContent === '0') {
+                        animateCounter(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            counters.forEach(counter => observer.observe(counter));
+        }
+
+        // Simular loading
+        function simulateLoading() {
+            const loading = document.getElementById('galleryLoading');
+            const gallery = document.getElementById('galleryGrid');
+            
+            loading.classList.add('active');
+            gallery.style.opacity = '0';
+            
+            // Simular tiempo de carga
+            setTimeout(() => {
+                loading.classList.remove('active');
+                gallery.style.opacity = '1';
+                gallery.style.transition = 'opacity 0.5s ease';
+                
+                // Animar entrada de elementos
+                const items = document.querySelectorAll('.gallery-item');
+                items.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }, 1500);
+        }
+
+        // Efectos adicionales
+        document.addEventListener('scroll', function() {
+            const items = document.querySelectorAll('.gallery-item');
+            const windowHeight = window.innerHeight;
+            
+            items.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                
+                if (itemTop < windowHeight - 100) {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Lazy loading para imágenes
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    // Aquí podrías implementar lazy loading real
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+
+        document.querySelectorAll('.item-image').forEach(img => {
+            imageObserver.observe(img);
+        });
+
+        // Funcionalidad adicional para compartir
+        function shareImage(title, url) {
+            if (navigator.share) {
+                navigator.share({
+                    title: `${title} - Mascotas Store`,
+                    text: 'Mira esta increíble transformación en Mascotas Store',
+                    url: url
+                });
+            } else {
+                // Fallback para navegadores que no soportan Web Share API
+                const shareUrl = `https://wa.me/?text=Mira esta increíble transformación en Mascotas Store: ${encodeURIComponent(title)} ${url}`;
+                window.open(shareUrl, '_blank');
+            }
+        }
+    </script>
+</body>
+
+</html>
