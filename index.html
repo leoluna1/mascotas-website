@@ -5,1367 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mascotas Store - Peluquería, Spa Canino & Pet Shop | Ecuador</title>
-    <meta name="description"
-        content="Centro veterinario profesional con servicios de peluquería, grooming, consultas veterinarias y productos premium. Sucursales en Ibarra, Tulcán y Otavalo">
-
+    <meta name="description" content="Centro veterinario profesional con servicios de peluquería, grooming, consultas veterinarias y productos premium. Sucursales en Ibarra, Tulcán y Otavalo">
+    
     <!-- Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <style>
-        /* Variables CSS */
-        :root {
-            --primary-cyan: #00d4ff;
-            --primary-blue: #0099cc;
-            --bright-cyan: #00f0ff;
-            --accent-blue: #0066ff;
-            --neon-green: #00ff88;
-            --vibrant-pink: #ff1493;
-            --light-bg: #f0f9ff;
-            --card-bg: #ffffff;
-            --gradient-bg: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
-
-            --glass-bg: rgba(255, 255, 255, 0.95);
-            --glass-border: rgba(0, 212, 255, 0.3);
-
-            --text-white: #ffffff;
-            --text-dark: #1a365d;
-            --text-primary: #00d4ff;
-            --text-secondary: #4a5568;
-            --text-light: #718096;
-
-            --shadow-card: 0 10px 25px rgba(0, 212, 255, 0.15);
-            --shadow-hover: 0 20px 40px rgba(0, 212, 255, 0.25);
-            --shadow-glow: 0 0 30px rgba(0, 240, 255, 0.4);
-
-            --transition: all 0.3s ease;
-            --radius: 15px;
-            --spacing: 1rem;
-        }
-
-        /* Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background: linear-gradient(135deg, var(--light-bg) 0%, #e6f7ff 50%, var(--light-bg) 100%);
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-
-        /* Fondo animado */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(ellipse 80% 60% at 20% 40%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse 60% 80% at 80% 20%, rgba(0, 240, 255, 0.06) 0%, transparent 50%),
-                radial-gradient(circle at 60% 60%, rgba(0, 153, 204, 0.04) 0%, transparent 50%);
-            animation: backgroundFloat 20s ease-in-out infinite;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        @keyframes backgroundFloat {
-
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-
-            33% {
-                transform: translate(-20px, -20px) scale(1.02);
-            }
-
-            66% {
-                transform: translate(20px, -10px) scale(0.98);
-            }
-        }
-
-        /* Utilities */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 var(--spacing);
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            border-radius: var(--radius);
-            font-weight: 700;
-            font-size: 14px;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: var(--transition);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary {
-            background: var(--gradient-bg);
-            color: var(--text-white);
-            border-color: var(--primary-cyan);
-            box-shadow: var(--shadow-card);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-            background: linear-gradient(135deg, var(--bright-cyan) 0%, var(--primary-blue) 100%);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--primary-cyan);
-            border-color: var(--primary-cyan);
-        }
-
-        .btn-outline:hover {
-            background: var(--primary-cyan);
-            color: var(--text-white);
-            box-shadow: var(--shadow-card);
-        }
-
-        .btn-emergency {
-            background: linear-gradient(135deg, var(--vibrant-pink), #e91e63);
-            color: var(--text-white);
-            border-color: var(--vibrant-pink);
-            animation: emergencyPulse 2s infinite;
-            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
-        }
-
-        @keyframes emergencyPulse {
-
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 0.9;
-                transform: scale(1.02);
-            }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Header */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            transition: var(--transition);
-            border-bottom: 3px solid var(--primary-cyan);
-            box-shadow: var(--shadow-card);
-        }
-
-        .header.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .header-top {
-            background: var(--gradient-bg);
-            padding: 10px 0;
-            font-size: 13px;
-        }
-
-        .header-top-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .header-info {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .header-info-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 600;
-        }
-
-        .header-social {
-            display: flex;
-            gap: 8px;
-        }
-
-        .header-social a {
-            width: 28px;
-            height: 28px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .header-social a:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-        }
-
-        .header-main {
-            padding: 15px 0;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            width: 55px;
-            height: 55px;
-            background: var(--gradient-bg);
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            color: white;
-            box-shadow: var(--shadow-glow);
-        }
-
-        .logo-text h1 {
-            font-family: 'Orbitron', monospace;
-            font-size: 30px;
-            font-weight: 900;
-            background: var(--gradient-bg);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 2px;
-        }
-
-        .logo-subtitle {
-            font-size: 12px;
-            color: var(--primary-cyan);
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-            align-items: center;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: var(--transition);
-            position: relative;
-            padding: 8px 0;
-        }
-
-        .nav-menu a::before {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 3px;
-            bottom: 0;
-            left: 50%;
-            background: var(--primary-cyan);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        .nav-menu a:hover::before,
-        .nav-menu a.active::before {
-            width: 100%;
-        }
-
-        .nav-menu a:hover,
-        .nav-menu a.active {
-            color: var(--primary-cyan);
-        }
-
-        .nav-actions {
-            display: flex;
-            gap: 12px;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--primary-cyan);
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 160px 0 80px;
-            position: relative;
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .hero h1 {
-            font-family: 'Orbitron', monospace;
-            font-size: clamp(2.8rem, 5vw, 4.5rem);
-            font-weight: 900;
-            background: var(--gradient-bg);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0, 212, 255, 0.1);
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            color: var(--primary-cyan);
-            font-weight: 800;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-            letter-spacing: 1px;
-        }
-
-        .hero-description {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 35px;
-            line-height: 1.8;
-        }
-
-        .hero-features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .hero-feature {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px;
-            background: var(--card-bg);
-            border: 2px solid var(--glass-border);
-            border-radius: var(--radius);
-            transition: var(--transition);
-            box-shadow: var(--shadow-card);
-        }
-
-        .hero-feature:hover {
-            border-color: var(--primary-cyan);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .hero-feature-icon {
-            width: 45px;
-            height: 45px;
-            background: var(--gradient-bg);
-            color: white;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            box-shadow: var(--shadow-glow);
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .hero-image {
-            text-align: center;
-        }
-
-        .hero-main-image {
-            width: 100%;
-            max-width: 450px;
-            height: 350px;
-            background: var(--card-bg);
-            border: 3px solid var(--primary-cyan);
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 100px;
-            color: var(--primary-cyan);
-            position: relative;
-            margin: 0 auto;
-            box-shadow: var(--shadow-hover);
-            overflow: hidden;
-        }
-
-        .hero-main-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(0, 240, 255, 0.1));
-            z-index: 1;
-        }
-
-        .hero-main-image i {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-badges {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .hero-badge {
-            background: var(--gradient-bg);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 800;
-            text-transform: uppercase;
-            box-shadow: var(--shadow-card);
-        }
-
-        /* Pets Gallery Section */
-        .pets-main-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
-            color: #333;
-            text-align: center;
-            margin-bottom: 20px;
-            letter-spacing: -0.5px;
-        }
-
-        .pets-subtitle {
-            font-size: 1.1rem;
-            color: #666;
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto 60px;
-            line-height: 1.6;
-        }
-
-        .pets-gallery {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .pet-card {
-            position: relative;
-            cursor: pointer;
-            border-radius: 25px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            transition: var(--transition);
-        }
-
-        .pet-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        .pet-image-container {
-            position: relative;
-            width: 100%;
-            height: 300px;
-        }
-
-        .pet-image {
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-
-        /* Imágenes reales de mascotas */
-        .dog-image {
-            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
-                        url('https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=400&fit=crop&crop=face') no-repeat center;
-            background-size: cover;
-        }
-
-        .cat-image {
-            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
-                        url('https://images.unsplash.com/photo-1574231164645-d6f0e8553590?w=400&h=400&fit=crop&crop=face') no-repeat center;
-            background-size: cover;
-        }
-
-        .bird-image {
-            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
-                        url('https://images.unsplash.com/photo-1544737151-6e4b21de3d35?w=400&h=400&fit=crop') no-repeat center;
-            background-size: cover;
-        }
-
-        .other-image {
-            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
-                        url('https://images.unsplash.com/photo-1548767797-d8c844163c4c?w=400&h=400&fit=crop&crop=face') no-repeat center;
-            background-size: cover;
-        }
-
-        .pet-category-label {
-            position: absolute;
-            bottom: 60px;
-            left: 25px;
-            font-family: 'Inter', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: white;
-            text-transform: uppercase;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
-            letter-spacing: 2px;
-        }
-
-        .pet-add-btn {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.95);
-            border: none;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: var(--primary-cyan);
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .pet-add-btn:hover {
-            background: var(--primary-cyan);
-            color: white;
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
-        }
-
-        /* Sections */
-        .section {
-            padding: 80px 0;
-        }
-
-        .section-alt {
-            background: linear-gradient(135deg, #f8fcff 0%, #e6f7ff 100%);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-title {
-            font-family: 'Orbitron', monospace;
-            font-size: clamp(2.2rem, 4vw, 3.5rem);
-            font-weight: 900;
-            background: var(--gradient-bg);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0, 212, 255, 0.1);
-        }
-
-        .section-subtitle {
-            font-size: 1.2rem;
-            color: var(--primary-cyan);
-            font-weight: 800;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-        }
-
-        .section-description {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 900px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        /* Cards */
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(15px);
-            border: 2px solid var(--glass-border);
-            border-radius: 25px;
-            padding: 35px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-card);
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.03), rgba(0, 240, 255, 0.08));
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary-cyan);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .card>* {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .service-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--gradient-bg);
-            color: white;
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            margin-bottom: 25px;
-            box-shadow: var(--shadow-glow);
-        }
-
-        .service-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--primary-cyan);
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-        }
-
-        .service-features {
-            list-style: none;
-            margin: 20px 0;
-        }
-
-        .service-features li {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        .service-features li::before {
-            content: '✓';
-            color: var(--neon-green);
-            font-weight: bold;
-            width: 24px;
-            height: 24px;
-            background: rgba(0, 255, 136, 0.15);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-
-        /* Branches Grid */
-        .branches-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .branch-card {
-            text-align: center;
-        }
-
-        .branch-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-bg);
-            color: white;
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            margin: 0 auto 25px;
-            box-shadow: var(--shadow-glow);
-        }
-
-        .branch-name {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--primary-cyan);
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-        }
-
-        .branch-info-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-
-        .branch-phone {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--neon-green);
-            cursor: pointer;
-            margin: 20px 0;
-            transition: var(--transition);
-        }
-
-        .branch-phone:hover {
-            transform: scale(1.05);
-            color: var(--primary-cyan);
-        }
-
-        /* About Features */
-        .about-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
-
-        .about-feature {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding: 25px;
-            background: var(--card-bg);
-            border: 2px solid var(--glass-border);
-            border-radius: var(--radius);
-            transition: var(--transition);
-            box-shadow: var(--shadow-card);
-        }
-
-        .about-feature:hover {
-            border-color: var(--primary-cyan);
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .about-feature-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--gradient-bg);
-            color: white;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            flex-shrink: 0;
-            box-shadow: var(--shadow-glow);
-        }
-
-        .about-feature h4 {
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-        }
-
-        .about-feature p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin: 0;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            background: var(--gradient-bg);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.9) 0%, rgba(0, 153, 204, 0.95) 100%);
-            z-index: 1;
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .contact-info h2 {
-            font-family: 'Orbitron', monospace;
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: white;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .contact-info p {
-            color: white;
-            opacity: 0.95;
-            margin-bottom: 35px;
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
-
-        .contact-details {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: var(--radius);
-            border: 2px solid rgba(255, 255, 255, 0.25);
-            transition: var(--transition);
-        }
-
-        .contact-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: translateX(5px);
-        }
-
-        .contact-item-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: white;
-            flex-shrink: 0;
-        }
-
-        .contact-item h4 {
-            font-weight: 800;
-            margin-bottom: 5px;
-            color: white;
-            font-size: 1.1rem;
-        }
-
-        .contact-item p {
-            margin: 0;
-            opacity: 0.95;
-            font-size: 0.95rem;
-        }
-
-        .emergency-card {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(20px);
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 25px;
-            padding: 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .emergency-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            animation: emergencyGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes emergencyGlow {
-
-            0%,
-            100% {
-                opacity: 0.5;
-            }
-
-            50% {
-                opacity: 1;
-            }
-        }
-
-        .emergency-card h3 {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.6rem;
-            font-weight: 900;
-            color: white;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .emergency-phone {
-            font-family: 'Orbitron', monospace;
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: var(--neon-green);
-            cursor: pointer;
-            margin: 20px 0;
-            transition: var(--transition);
-            position: relative;
-            z-index: 2;
-            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
-        }
-
-        .emergency-phone:hover {
-            transform: scale(1.05);
-            color: white;
-        }
-
-        /* Footer */
-        .footer {
-            background: linear-gradient(135deg, var(--text-dark) 0%, #0f2027 100%);
-            border-top: 3px solid var(--primary-cyan);
-            padding: 70px 0 25px;
-            position: relative;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.02), rgba(0, 240, 255, 0.05));
-            pointer-events: none;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 50px;
-            margin-bottom: 50px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .footer-section h3 {
-            font-family: 'Orbitron', monospace;
-            color: var(--primary-cyan);
-            font-weight: 800;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            font-size: 1.1rem;
-        }
-
-        .footer-section p {
-            color: var(--text-light);
-            line-height: 1.8;
-            margin-bottom: 25px;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-section ul li a {
-            color: var(--text-light);
-            text-decoration: none;
-            transition: var(--transition);
-            padding: 5px 0;
-            display: inline-block;
-        }
-
-        .footer-section ul li a:hover {
-            color: var(--primary-cyan);
-            transform: translateX(5px);
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .footer-social a {
-            width: 45px;
-            height: 45px;
-            background: var(--gradient-bg);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: var(--transition);
-            box-shadow: var(--shadow-card);
-        }
-
-        .footer-social a:hover {
-            transform: scale(1.1);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .footer-bottom {
-            border-top: 2px solid rgba(0, 212, 255, 0.3);
-            padding-top: 25px;
-            text-align: center;
-            color: var(--text-light);
-            position: relative;
-            z-index: 2;
-        }
-
-        /* WhatsApp Button */
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #25d366, #128c7e);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: white;
-            text-decoration: none;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            transition: var(--transition);
-            z-index: 1000;
-            animation: whatsappPulse 3s infinite;
-        }
-
-        .whatsapp-btn:hover {
-            transform: scale(1.1);
-        }
-
-        @keyframes whatsappPulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-            }
-
-            70% {
-                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-            }
-        }
-
-        /* Loading Screen */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading-screen.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loader {
-            width: 70px;
-            height: 70px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-
-            .hero-content,
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                text-align: center;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-                gap: 30px;
-            }
-
-            .pets-gallery {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 25px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 15px;
-            }
-
-            .header-info {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-
-            .menu-toggle {
-                display: block;
-                color: var(--primary-cyan);
-            }
-
-            .nav-menu {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(255, 255, 255, 0.98);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                padding: 25px;
-                gap: 20px;
-                border-top: 3px solid var(--primary-cyan);
-                box-shadow: var(--shadow-hover);
-            }
-
-            .nav-menu.active {
-                display: flex;
-            }
-
-            .nav-actions {
-                display: none;
-            }
-
-            .hero {
-                padding: 140px 0 70px;
-            }
-
-            .hero-features {
-                grid-template-columns: 1fr;
-            }
-
-            .services-grid,
-            .branches-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-
-            .about-features {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-
-            .section {
-                padding: 70px 0;
-            }
-
-            .contact-content {
-                gap: 40px;
-            }
-
-            .pets-gallery {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-            
-            .pet-image-container {
-                height: 250px;
-            }
-            
-            .pet-category-label {
-                font-size: 1.3rem;
-                bottom: 50px;
-                left: 20px;
-            }
-            
-            .pet-add-btn {
-                width: 45px;
-                height: 45px;
-                font-size: 18px;
-                bottom: 15px;
-                right: 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-buttons {
-                flex-direction: column;
-            }
-
-            .card {
-                padding: 20px;
-            }
-
-            .whatsapp-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-            }
-
-            .pets-gallery {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                padding: 0 20px;
-            }
-            
-            .pet-image-container {
-                height: 280px;
-            }
-            
-            .pet-category-label {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+    
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
@@ -1374,9 +21,9 @@
         <div class="loader"></div>
     </div>
 
-    <!-- Header -->
+    <!-- Header Fijo -->
     <header class="header" id="header">
-        <!-- Top Bar -->
+        <!-- Top Bar con información -->
         <div class="header-top">
             <div class="container">
                 <div class="header-top-content">
@@ -1404,11 +51,11 @@
             </div>
         </div>
 
-        <!-- Main Navigation -->
+        <!-- Navegación Principal -->
         <div class="header-main">
             <div class="container">
                 <nav class="nav">
-                    <a href="#" class="logo">
+                    <a href="index.html" class="logo">
                         <div class="logo-icon">
                             <i class="fas fa-paw"></i>
                         </div>
@@ -1419,20 +66,30 @@
                     </a>
 
                     <div class="nav-menu" id="navMenu">
-                        <a href="#inicio" class="active">Inicio</a>
-                        <a href="#mascotas">Mascotas</a>
-                        <a href="#servicios">Servicios</a>
-                        <a href="#sucursales">Sucursales</a>
-                        <a href="#nosotros">Nosotros</a>
-                        <a href="#contacto">Contacto</a>
+                        <a href="index.html" class="active">INICIO</a>
+                        <a href="#mascotas">MASCOTAS</a>
+                        <a href="#servicios">SERVICIOS</a>
+                        <a href="#sucursales">SUCURSALES</a>
+                        <a href="#nosotros">NOSOTROS</a>
+                        <a href="#contacto">CONTACTO</a>
+                        <!-- Enlaces a páginas separadas -->
+                        <div class="nav-dropdown">
+                            <a href="#" class="dropdown-toggle">MÁS <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-menu">
+                                <a href="pages/citas.html">Agendar Cita</a>
+                                <a href="pages/galeria.html">Galería</a>
+                                <a href="pages/testimonios.html">Testimonios</a>
+                                <a href="pages/productos.html">Productos</a>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="nav-actions">
                         <a href="tel:0999929069" class="btn btn-outline">
-                            <i class="fas fa-phone"></i> Llamar
+                            <i class="fas fa-phone"></i> LLAMAR
                         </a>
                         <a href="https://wa.me/593999929069" class="btn btn-emergency">
-                            <i class="fas fa-ambulance"></i> Emergencias
+                            <i class="fas fa-ambulance"></i> EMERGENCIAS
                         </a>
                     </div>
 
@@ -1444,12 +101,12 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section Principal -->
     <section class="hero section" id="inicio">
         <div class="container">
             <div class="hero-content fade-in">
                 <div class="hero-text">
-                    <h1>MASCOTAS STORE</h1>
+                    <h1 class="hero-title">MASCOTAS STORE</h1>
                     <div class="hero-subtitle">Peluquería, Spa Canino & Pet Shop</div>
                     <p class="hero-description">
                         Centro veterinario profesional especializado en servicios de peluquería, grooming,
@@ -1485,8 +142,8 @@
                     </div>
 
                     <div class="hero-buttons">
-                        <a href="#servicios" class="btn btn-primary">
-                            <i class="fas fa-hospital"></i> Ver Servicios
+                        <a href="pages/citas.html" class="btn btn-primary">
+                            <i class="fas fa-calendar"></i> Agendar Cita Online
                         </a>
                         <a href="tel:0999929069" class="btn btn-emergency">
                             <i class="fas fa-phone"></i> Emergencias 24/7
@@ -1508,20 +165,42 @@
         </div>
     </section>
 
-    <!-- Pets Store Section -->
+    <!-- Stats Counter Rápido -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-container">
+                <div class="stat-item fade-in">
+                    <div class="stat-number" data-target="10000">0</div>
+                    <div class="stat-label">Mascotas Atendidas</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number" data-target="15">0</div>
+                    <div class="stat-label">Años de Experiencia</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number" data-target="3">0</div>
+                    <div class="stat-label">Sucursales</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number" data-target="24">0</div>
+                    <div class="stat-label">Horas Disponibles</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categorías de Mascotas -->
     <section class="section section-alt" id="mascotas">
         <div class="container">
             <div class="section-header fade-in">
-                <h1 class="pets-main-title">Somos una tienda de mascotas completa</h1>
-                <p class="pets-subtitle">En Mascotas Store te ofrecemos una gran variedad de productos y alimentos para todo tipo de mascotas</p>
+                <h2 class="section-title">CATEGORÍAS DE MASCOTAS</h2>
+                <p class="section-subtitle">En Mascotas Store te ofrecemos productos y servicios para todo tipo de mascotas</p>
             </div>
 
             <div class="pets-gallery">
                 <div class="pet-card fade-in">
                     <div class="pet-image-container">
-                        <div class="pet-image dog-image">
-                            <!-- Imagen placeholder para perro beagle -->
-                        </div>
+                        <div class="pet-image dog-image"></div>
                         <h3 class="pet-category-label">PERROS</h3>
                         <button class="pet-add-btn">
                             <i class="fas fa-plus"></i>
@@ -1531,9 +210,7 @@
 
                 <div class="pet-card fade-in">
                     <div class="pet-image-container">
-                        <div class="pet-image cat-image">
-                            <!-- Imagen placeholder para gato gris -->
-                        </div>
+                        <div class="pet-image cat-image"></div>
                         <h3 class="pet-category-label">GATOS</h3>
                         <button class="pet-add-btn">
                             <i class="fas fa-plus"></i>
@@ -1543,9 +220,7 @@
 
                 <div class="pet-card fade-in">
                     <div class="pet-image-container">
-                        <div class="pet-image bird-image">
-                            <!-- Imagen placeholder para periquito -->
-                        </div>
+                        <div class="pet-image bird-image"></div>
                         <h3 class="pet-category-label">AVES</h3>
                         <button class="pet-add-btn">
                             <i class="fas fa-plus"></i>
@@ -1555,9 +230,7 @@
 
                 <div class="pet-card fade-in">
                     <div class="pet-image-container">
-                        <div class="pet-image other-image">
-                            <!-- Imagen placeholder para hámster -->
-                        </div>
+                        <div class="pet-image other-image"></div>
                         <h3 class="pet-category-label">OTROS</h3>
                         <button class="pet-add-btn">
                             <i class="fas fa-plus"></i>
@@ -1568,16 +241,12 @@
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- Servicios Principales -->
     <section class="section" id="servicios">
         <div class="container">
             <div class="section-header fade-in">
                 <h2 class="section-title">SERVICIOS PROFESIONALES</h2>
                 <div class="section-subtitle">Atención Integral de Excelencia</div>
-                <p class="section-description">
-                    Ofrecemos servicios veterinarios especializados, peluquería profesional y productos premium
-                    con tecnología de vanguardia y profesionales altamente capacitados.
-                </p>
             </div>
 
             <div class="services-grid">
@@ -1586,19 +255,14 @@
                         <i class="fas fa-stethoscope"></i>
                     </div>
                     <h3 class="service-title">Consultorio Veterinario</h3>
-                    <p class="section-description">
-                        Atención médica integral con veterinarios especializados y equipos modernos
-                        para garantizar la salud de tu mascota.
-                    </p>
+                    <p>Atención médica integral con veterinarios especializados y equipos modernos.</p>
                     <ul class="service-features">
-                        <li>Esterilizaciones profesionales</li>
-                        <li>Hospitalizaciones con monitoreo 24/7</li>
-                        <li>Consultas médicas especializadas</li>
-                        <li>Profilaxis y vacunación completa</li>
-                        <li>Cirugías con tecnología avanzada</li>
-                        <li>Análisis clínicos y radiografías</li>
+                        <li>Consultas médicas</li>
+                        <li>Vacunación completa</li>
+                        <li>Cirugías</li>
+                        <li>Emergencias 24/7</li>
                     </ul>
-                    <a href="https://wa.me/593999929069" class="btn btn-primary">
+                    <a href="pages/citas.html" class="btn btn-primary">
                         <i class="fas fa-calendar"></i> Agendar Consulta
                     </a>
                 </div>
@@ -1608,20 +272,15 @@
                         <i class="fas fa-cut"></i>
                     </div>
                     <h3 class="service-title">Peluquería Profesional</h3>
-                    <p class="section-description">
-                        Servicios estéticos especializados con técnicas profesionales y productos premium
-                        para mantener a tu mascota siempre hermosa.
-                    </p>
+                    <p>Servicios estéticos especializados con técnicas profesionales y productos premium.</p>
                     <ul class="service-features">
-                        <li>Corte breed específico profesional</li>
-                        <li>Baño completo con productos premium</li>
-                        <li>Limpieza de oídos especializada</li>
-                        <li>Corte de uñas y cuidado de almohadillas</li>
-                        <li>Desparasitación externa</li>
-                        <li>Tratamientos de piel especializados</li>
+                        <li>Corte breed específico</li>
+                        <li>Baño y secado</li>
+                        <li>Limpieza de oídos</li>
+                        <li>Corte de uñas</li>
                     </ul>
-                    <a href="https://wa.me/593999929069" class="btn btn-primary">
-                        <i class="fas fa-calendar"></i> Reservar Cita
+                    <a href="pages/citas.html" class="btn btn-primary">
+                        <i class="fas fa-scissors"></i> Reservar Cita
                     </a>
                 </div>
 
@@ -1630,172 +289,95 @@
                         <i class="fas fa-bath"></i>
                     </div>
                     <h3 class="service-title">Grooming & Spa</h3>
-                    <p class="section-description">
-                        Servicios de spa y relajación canina con tratamientos especializados
-                        para el bienestar completo de tu mascota.
-                    </p>
+                    <p>Servicios de spa y relajación canina con tratamientos especializados.</p>
                     <ul class="service-features">
-                        <li>Spa relajante con aromaterapia</li>
-                        <li>Masajes terapéuticos caninos</li>
-                        <li>Tratamientos de hidratación profunda</li>
-                        <li>Limpieza dental sin anestesia</li>
-                        <li>Paquetes de embellecimiento completo</li>
-                        <li>Ambiente relajante y profesional</li>
+                        <li>Spa relajante</li>
+                        <li>Masajes terapéuticos</li>
+                        <li>Tratamientos de piel</li>
+                        <li>Aromaterapia</li>
                     </ul>
-                    <a href="https://wa.me/593999929069" class="btn btn-primary">
-                        <i class="fas fa-calendar"></i> Reservar Spa
+                    <a href="pages/citas.html" class="btn btn-primary">
+                        <i class="fas fa-spa"></i> Reservar Spa
                     </a>
                 </div>
             </div>
-        </div>
-    </section>
- <!-- Products Section -->
-    <section class="section section-alt" id="productos">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2 class="section-title">PET SHOP PREMIUM</h2>
-                <div class="section-subtitle">Productos de Calidad Internacional</div>
-                <p class="section-description">
-                    Seleccionamos cuidadosamente los mejores productos para la nutrición, cuidado e higiene de tu mascota.
-                </p>
-            </div>
 
-            <div class="products-grid">
-                <div class="product-category card fade-in">
-                    <div class="product-icon">
-                        <i class="fas fa-drumstick-bite"></i>
-                    </div>
-                    <h3 class="product-title">Alimentos Premium</h3>
-                    <ul class="product-list">
-                        <li>Royal Canin - Todas las edades</li>
-                        <li>Hill's Science Diet</li>
-                        <li>Pro Plan - Línea completa</li>
-                        <li>Eukanuba - Razas específicas</li>
-                        <li>Alimentos naturales y orgánicos</li>
-                    </ul>
-                    <div class="product-badge">Garantía de Frescura</div>
-                </div>
-
-                <div class="product-category card fade-in">
-                    <div class="product-icon">
-                        <i class="fas fa-medkit"></i>
-                    </div>
-                    <h3 class="product-title">Medicamentos</h3>
-                    <ul class="product-list">
-                        <li>Antiparasitarios internos/externos</li>
-                        <li>Vitaminas y suplementos</li>
-                        <li>Antibióticos veterinarios</li>
-                        <li>Analgésicos y antiinflamatorios</li>
-                        <li>Productos dermatológicos</li>
-                    </ul>
-                    <div class="product-badge">Prescripción Médica</div>
-                </div>
-
-                <div class="product-category card fade-in">
-                    <div class="product-icon">
-                        <i class="fas fa-soap"></i>
-                    </div>
-                    <h3 class="product-title">Higiene & Cuidado</h3>
-                    <ul class="product-list">
-                        <li>Shampoos medicados</li>
-                        <li>Acondicionadores profesionales</li>
-                        <li>Perfumes y colonias</li>
-                        <li>Cepillos y peines especializados</li>
-                        <li>Productos para limpieza dental</li>
-                    </ul>
-                    <div class="product-badge">Calidad Profesional</div>
-                </div>
-
-                <div class="product-category card fade-in">
-                    <div class="product-icon">
-                        <i class="fas fa-home"></i>
-                    </div>
-                    <h3 class="product-title">Accesorios</h3>
-                    <ul class="product-list">
-                        <li>Camas ortopédicas</li>
-                        <li>Collares y correas premium</li>
-                        <li>Juguetes interactivos</li>
-                        <li>Transportadoras certificadas</li>
-                        <li>Comederos automáticos</li>
-                    </ul>
-                    <div class="product-badge">Diseño Innovador</div>
-                </div>
-            </div>
-
-            <div class="product-cta fade-in">
-                <h3>¿Buscas algo específico?</h3>
-                <p>Consulta disponibilidad de productos y precios especiales</p>
-                <a href="https://wa.me/593999929069?text=Hola! Me interesa consultar productos disponibles" class="btn btn-primary">
-                    <i class="fas fa-shopping-cart"></i> Consultar Productos
+            <div class="services-cta">
+                <a href="pages/productos.html" class="btn btn-outline">
+                    Ver Todos los Servicios y Productos <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section class="section" id="galeria">
+    <!-- Testimonios Preview -->
+    <section class="testimonials-preview section section-alt">
         <div class="container">
             <div class="section-header fade-in">
-                <h2 class="section-title">GALERÍA</h2>
-                <div class="section-subtitle">Nuestras Instalaciones y Trabajos</div>
-                <p class="section-description">
-                    Conoce nuestras modernas instalaciones y algunos de nuestros trabajos más destacados.
-                </p>
+                <h2 class="section-title">LO QUE DICEN NUESTROS CLIENTES</h2>
             </div>
 
-            <div class="gallery-grid fade-in">
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <i class="fas fa-hospital"></i>
-                        <span>Consultorio Veterinario</span>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Excelente atención y profesionalismo. Mi perrito Max siempre sale feliz!"</p>
+                    <div class="testimonial-author">
+                        <strong>María González</strong>
+                        <span>Dueña de Max</span>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <i class="fas fa-bath"></i>
-                        <span>Área de Grooming</span>
+
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Salvaron la vida de mi gatita en una emergencia. Eternamente agradecida."</p>
+                    <div class="testimonial-author">
+                        <strong>Carlos Mendoza</strong>
+                        <span>Dueño de Luna</span>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <i class="fas fa-cut"></i>
-                        <span>Peluquería Profesional</span>
+
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"El mejor lugar para el cuidado de mascotas en Ibarra. 100% recomendado."</p>
+                    <div class="testimonial-author">
+                        <strong>Ana Rodríguez</strong>
+                        <span>Dueña de Bella</span>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <i class="fas fa-paw"></i>
-                        <span>Antes y Después</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <i class="fas fa-microscope"></i>
-                        <span>Laboratorio</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <i class="fas fa-shopping-bag"></i>
-                        <span>Pet Shop</span>
-                    </div>
-                </div>
+            </div>
+
+            <div class="testimonials-cta">
+                <a href="pages/testimonios.html" class="btn btn-primary">
+                    Ver Más Testimonios <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </section>
 
-
-    
-    <!-- Branches Section -->
-    <section class="section section-alt" id="sucursales">
+    <!-- Sucursales -->
+    <section class="section" id="sucursales">
         <div class="container">
             <div class="section-header fade-in">
                 <h2 class="section-title">NUESTRAS SUCURSALES</h2>
                 <div class="section-subtitle">Atención Profesional en Todo el Norte del País</div>
-                <p class="section-description">
-                    Contamos con sucursales estratégicamente ubicadas en las principales ciudades del norte
-                    de Ecuador para brindar servicios veterinarios de calidad cerca de ti.
-                </p>
             </div>
 
             <div class="branches-grid">
@@ -1805,25 +387,12 @@
                     </div>
                     <h3 class="branch-name">IBARRA</h3>
                     <div class="branch-info">
-                        <div class="branch-info-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Centro de Ibarra, Imbabura</span>
-                        </div>
-                        <div class="branch-info-item">
-                            <i class="fas fa-clock"></i>
-                            <span>Lun-Vie: 8AM-7PM | Sáb: 8AM-6PM</span>
-                        </div>
-                        <div class="branch-info-item">
-                            <i class="fas fa-hospital"></i>
-                            <span>Servicios Completos</span>
-                        </div>
+                        <p><i class="fas fa-map-marker-alt"></i> Centro de Ibarra</p>
+                        <p><i class="fas fa-clock"></i> Lun-Vie: 8AM-7PM</p>
+                        <p><i class="fas fa-phone"></i> 0999929069</p>
                     </div>
-                    <div class="branch-phone" onclick="window.location.href='tel:0999929069'">
-                        <i class="fas fa-phone"></i> 0999929069
-                    </div>
-                    <a href="https://wa.me/593999929069?text=Hola! Me interesa información sobre la sucursal de Ibarra"
-                        class="btn btn-primary">
-                        <i class="fab fa-whatsapp"></i> WhatsApp Ibarra
+                    <a href="https://wa.me/593999929069" class="btn btn-primary">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
                 </div>
 
@@ -1833,25 +402,12 @@
                     </div>
                     <h3 class="branch-name">TULCÁN</h3>
                     <div class="branch-info">
-                        <div class="branch-info-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Centro de Tulcán, Carchi</span>
-                        </div>
-                        <div class="branch-info-item">
-                            <i class="fas fa-clock"></i>
-                            <span>Lun-Vie: 8AM-6PM | Sáb: 9AM-5PM</span>
-                        </div>
-                        <div class="branch-info-item">
-                            <i class="fas fa-hospital"></i>
-                            <span>Servicios Especializados</span>
-                        </div>
+                        <p><i class="fas fa-map-marker-alt"></i> Centro de Tulcán</p>
+                        <p><i class="fas fa-clock"></i> Lun-Vie: 8AM-6PM</p>
+                        <p><i class="fas fa-phone"></i> 0999929069</p>
                     </div>
-                    <div class="branch-phone" onclick="window.location.href='tel:0999929069'">
-                        <i class="fas fa-phone"></i> 0999929069
-                    </div>
-                    <a href="https://wa.me/593999929069?text=Hola! Me interesa información sobre la sucursal de Tulcán"
-                        class="btn btn-primary">
-                        <i class="fab fa-whatsapp"></i> WhatsApp Tulcán
+                    <a href="https://wa.me/593999929069" class="btn btn-primary">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
                 </div>
 
@@ -1861,79 +417,55 @@
                     </div>
                     <h3 class="branch-name">OTAVALO</h3>
                     <div class="branch-info">
-                        <div class="branch-info-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Centro de Otavalo, Imbabura</span>
-                        </div>
-                        <div class="branch-info-item">
-                            <i class="fas fa-clock"></i>
-                            <span>Lun-Vie: 8AM-6PM | Sáb: 9AM-4PM</span>
-                        </div>
-                        <div class="branch-info-item">
-                            <i class="fas fa-hospital"></i>
-                            <span>Atención Integral</span>
-                        </div>
+                        <p><i class="fas fa-map-marker-alt"></i> Centro de Otavalo</p>
+                        <p><i class="fas fa-clock"></i> Lun-Vie: 8AM-6PM</p>
+                        <p><i class="fas fa-phone"></i> 0999929069</p>
                     </div>
-                    <div class="branch-phone" onclick="window.location.href='tel:0999929069'">
-                        <i class="fas fa-phone"></i> 0999929069
-                    </div>
-                    <a href="https://wa.me/593999929069?text=Hola! Me interesa información sobre la sucursal de Otavalo"
-                        class="btn btn-primary">
-                        <i class="fab fa-whatsapp"></i> WhatsApp Otavalo
+                    <a href="https://wa.me/593999929069" class="btn btn-primary">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="section" id="nosotros">
+    <!-- Sobre Nosotros -->
+    <section class="section section-alt" id="nosotros">
         <div class="container">
             <div class="section-header fade-in">
                 <h2 class="section-title">SOBRE NOSOTROS</h2>
                 <div class="section-subtitle">Más de 10 Años de Experiencia</div>
-                <p class="section-description">
-                    Somos un equipo de profesionales especializados en el cuidado integral de mascotas,
-                    comprometidos con brindar servicios de excelencia y tecnología de vanguardia.
-                </p>
             </div>
 
-            <div class="about-features fade-in">
-                <div class="about-feature">
-                    <div class="about-feature-icon">
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <p>
+                        Somos un equipo de profesionales especializados en el cuidado integral de mascotas,
+                        comprometidos con brindar servicios de excelencia y tecnología de vanguardia.
+                    </p>
+                </div>
+
+                <div class="about-features">
+                    <div class="about-feature fade-in">
                         <i class="fas fa-user-md"></i>
-                    </div>
-                    <div>
                         <h4>Tecnología Avanzada</h4>
                         <p>Equipos modernos y técnicas innovadoras</p>
                     </div>
-                </div>
 
-                <div class="about-feature">
-                    <div class="about-feature-icon">
+                    <div class="about-feature fade-in">
                         <i class="fas fa-heart"></i>
-                    </div>
-                    <div>
                         <h4>Atención Personalizada</h4>
                         <p>Cuidado individualizado para cada mascota</p>
                     </div>
-                </div>
 
-                <div class="about-feature">
-                    <div class="about-feature-icon">
+                    <div class="about-feature fade-in">
                         <i class="fas fa-ambulance"></i>
-                    </div>
-                    <div>
                         <h4>Emergencias 24/7</h4>
                         <p>Disponibles cuando más nos necesitas</p>
                     </div>
-                </div>
 
-                <div class="about-feature">
-                    <div class="about-feature-icon">
+                    <div class="about-feature fade-in">
                         <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div>
                         <h4>Capacitación Continua</h4>
                         <p>Actualización constante en nuevas técnicas</p>
                     </div>
@@ -1942,7 +474,20 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- CTA Galería -->
+    <section class="gallery-cta section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Conoce Nuestras Instalaciones y Trabajos</h2>
+                <p>Mira las transformaciones increíbles y nuestras modernas instalaciones</p>
+                <a href="pages/galeria.html" class="btn btn-primary">
+                    <i class="fas fa-images"></i> Ver Galería Completa
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
     <section class="contact-section section" id="contacto">
         <div class="container">
             <div class="contact-content">
@@ -1950,68 +495,50 @@
                     <h2>CONTÁCTANOS AHORA</h2>
                     <p>
                         Estamos disponibles para atender todas tus consultas y brindar la mejor atención a tu mascota.
-                        Nuestro equipo de profesionales está listo para ayudarte las 24 horas del día.
                     </p>
 
                     <div class="contact-details">
                         <div class="contact-item">
-                            <div class="contact-item-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
+                            <i class="fas fa-phone"></i>
                             <div>
                                 <h4>Línea Principal</h4>
-                                <p>0999929069 (Llamadas y WhatsApp)</p>
+                                <p>0999929069</p>
                             </div>
                         </div>
 
                         <div class="contact-item">
-                            <div class="contact-item-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
+                            <i class="fas fa-clock"></i>
                             <div>
-                                <h4>Horarios de Atención</h4>
-                                <p>Lun-Vie: 8AM-7PM | Sáb: 8AM-6PM</p>
+                                <h4>Horarios</h4>
+                                <p>Lun-Vie: 8AM-7PM</p>
                             </div>
                         </div>
 
                         <div class="contact-item">
-                            <div class="contact-item-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
+                            <i class="fas fa-envelope"></i>
                             <div>
-                                <h4>Email Corporativo</h4>
+                                <h4>Email</h4>
                                 <p>info@mascotasstore.ec</p>
                             </div>
                         </div>
 
                         <div class="contact-item">
-                            <div class="contact-item-icon">
-                                <i class="fas fa-user-md"></i>
-                            </div>
+                            <i class="fas fa-ambulance"></i>
                             <div>
-                                <h4>Asesoramiento Técnico</h4>
-                                <p>Disponible en todas nuestras sucursales</p>
+                                <h4>Emergencias</h4>
+                                <p>24/7 Disponible</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="fade-in">
-                    <div class="emergency-card">
-                        <h3><i class="fas fa-ambulance"></i> EMERGENCIAS 24/7</h3>
-                        <p>Para casos urgentes y emergencias veterinarias, contáctanos inmediatamente</p>
-                        <div class="emergency-phone" onclick="window.location.href='tel:0999929069'">
-                            0999929069
-                        </div>
-                        <a href="https://wa.me/593999929069?text=🚨 EMERGENCIA - Necesito atención veterinaria urgente"
-                            class="btn btn-outline" style="color: white; border-color: white;">
-                            <i class="fab fa-whatsapp"></i> WhatsApp Emergencia
-                        </a>
-                        <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8; position: relative; z-index: 2;">
-                            Atención inmediata para: Intoxicaciones, accidentes, crisis convulsivas,
-                            problemas respiratorios y emergencias cardiacas.
-                        </p>
-                    </div>
+                <div class="emergency-card fade-in">
+                    <h3><i class="fas fa-ambulance"></i> EMERGENCIAS 24/7</h3>
+                    <p>Para casos urgentes, contáctanos inmediatamente</p>
+                    <div class="emergency-phone">0999929069</div>
+                    <a href="https://wa.me/593999929069?text=🚨 EMERGENCIA - Necesito atención veterinaria urgente" class="btn btn-emergency">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Emergencia
+                    </a>
                 </div>
             </div>
         </div>
@@ -2021,279 +548,59 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section fade-in">
+                <div class="footer-section">
                     <h3>Mascotas Store</h3>
-                    <p>
-                        Centro veterinario integral con más de 10 años de experiencia brindando servicios
-                        profesionales de salud animal, peluquería especializada, grooming y productos premium
-                        en Ibarra, Tulcán y Otavalo.
-                    </p>
+                    <p>Centro veterinario integral con más de 10 años de experiencia.</p>
                     <div class="footer-social">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
 
-                <div class="footer-section fade-in">
-                    <h3>Servicios</h3>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
                     <ul>
-                        <li><a href="#servicios">Consultorio Veterinario</a></li>
-                        <li><a href="#servicios">Esterilizaciones</a></li>
-                        <li><a href="#servicios">Hospitalizaciones</a></li>
-                        <li><a href="#servicios">Cirugías</a></li>
-                        <li><a href="#servicios">Peluquería Profesional</a></li>
-                        <li><a href="#servicios">Grooming & Spa</a></li>
-                        <li><a href="#servicios">Pet Shop Premium</a></li>
-                        <li><a href="#servicios">Emergencias 24/7</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="pages/citas.html">Agendar Cita</a></li>
+                        <li><a href="pages/galeria.html">Galería</a></li>
+                        <li><a href="pages/testimonios.html">Testimonios</a></li>
                     </ul>
                 </div>
 
-                <div class="footer-section fade-in">
+                <div class="footer-section">
                     <h3>Sucursales</h3>
                     <ul>
-                        <li><a href="#sucursales">Ibarra Centro</a></li>
-                        <li><a href="#sucursales">Tulcán Centro</a></li>
-                        <li><a href="#sucursales">Otavalo Centro</a></li>
-                        <li><a href="#contacto">Horarios de Atención</a></li>
-                        <li><a href="#contacto">Teléfonos y Contactos</a></li>
-                        <li><a href="#contacto">Emergencias 24/7</a></li>
+                        <li><a href="#sucursales">Ibarra</a></li>
+                        <li><a href="#sucursales">Tulcán</a></li>
+                        <li><a href="#sucursales">Otavalo</a></li>
                     </ul>
                 </div>
 
-                <div class="footer-section fade-in">
-                    <h3>Enlaces</h3>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
                     <ul>
-                        <li><a href="#inicio">Inicio</a></li>
-                        <li><a href="#mascotas">Mascotas Disponibles</a></li>
-                        <li><a href="#nosotros">Sobre Nosotros</a></li>
-                        <li><a href="#servicios">Servicios</a></li>
-                        <li><a href="#contacto">Contacto</a></li>
-                        <li><a href="#">Políticas de Privacidad</a></li>
-                        <li><a href="#">Términos y Condiciones</a></li>
+                        <li><i class="fas fa-phone"></i> 0999929069</li>
+                        <li><i class="fas fa-envelope"></i> info@mascotasstore.ec</li>
+                        <li><i class="fas fa-clock"></i> Lun-Vie: 8AM-7PM</li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p>
-                    © 2024 <strong>Mascotas Store</strong> - Todos los derechos reservados |
-                    Diseñado por <strong>Leonardo Luna</strong>
-                </p>
+                <p>© 2024 Mascotas Store - Todos los derechos reservados | Diseñado por Leonardo Luna</p>
             </div>
         </div>
     </footer>
 
     <!-- WhatsApp Button -->
-    <a href="https://wa.me/593999929069" class="whatsapp-btn" aria-label="Contactar por WhatsApp">
+    <a href="https://wa.me/593999929069" class="whatsapp-btn" aria-label="WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- JavaScript -->
-    <script>
-        // App Class
-        class MascotasStoreApp {
-            constructor() {
-                this.lastScroll = 0;
-                this.init();
-            }
-
-            init() {
-                this.bindEvents();
-                this.setupAnimations();
-                this.handleLoadingScreen();
-            }
-
-            // Event Binding
-            bindEvents() {
-                window.addEventListener('load', () => this.handleLoadingScreen());
-                window.addEventListener('scroll', () => this.handleScroll());
-                window.addEventListener('resize', () => this.handleResize());
-
-                // Mobile menu toggle
-                const menuToggle = document.getElementById('menuToggle');
-                const navMenu = document.getElementById('navMenu');
-
-                if (menuToggle && navMenu) {
-                    menuToggle.addEventListener('click', () => {
-                        navMenu.classList.toggle('active');
-                        const isActive = navMenu.classList.contains('active');
-                        menuToggle.innerHTML = isActive
-                            ? '<i class="fas fa-times"></i>'
-                            : '<i class="fas fa-bars"></i>';
-                    });
-                }
-
-                // Smooth scroll for navigation links
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const target = document.querySelector(anchor.getAttribute('href'));
-                        if (target) {
-                            const headerHeight = document.getElementById('header').offsetHeight;
-                            const targetPosition = target.offsetTop - headerHeight;
-
-                            window.scrollTo({
-                                top: targetPosition,
-                                behavior: 'smooth'
-                            });
-
-                            // Close mobile menu
-                            if (navMenu && navMenu.classList.contains('active')) {
-                                navMenu.classList.remove('active');
-                                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                            }
-                        }
-                    });
-                });
-
-                // Close mobile menu when clicking outside
-                document.addEventListener('click', (e) => {
-                    if (navMenu && !navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-                        navMenu.classList.remove('active');
-                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                    }
-                });
-
-                // Phone clicks
-                document.querySelectorAll('.branch-phone, .emergency-phone').forEach(phone => {
-                    phone.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const phoneNumber = phone.textContent.replace(/\D/g, '');
-                        window.location.href = `tel:${phoneNumber}`;
-                    });
-                });
-
-                // Pet category clicks
-                document.querySelectorAll('.pet-add-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const petCard = btn.closest('.pet-card');
-                        const category = petCard.querySelector('.pet-category-label').textContent;
-                        const message = `Hola! Me interesa información sobre ${category.toLowerCase()} disponibles`;
-                        window.open(`https://wa.me/593999929069?text=${encodeURIComponent(message)}`, '_blank');
-                    });
-                });
-
-                // Pet card clicks
-                document.querySelectorAll('.pet-card').forEach(card => {
-                    card.addEventListener('click', (e) => {
-                        if (!e.target.classList.contains('pet-add-btn')) {
-                            const category = card.querySelector('.pet-category-label').textContent;
-                            const message = `Hola! Me interesa información sobre ${category.toLowerCase()} disponibles`;
-                            window.open(`https://wa.me/593999929069?text=${encodeURIComponent(message)}`, '_blank');
-                        }
-                    });
-                });
-            }
-
-            // Loading Screen
-            handleLoadingScreen() {
-                const loadingScreen = document.getElementById('loadingScreen');
-                if (loadingScreen) {
-                    setTimeout(() => {
-                        loadingScreen.classList.add('hidden');
-                        setTimeout(() => {
-                            loadingScreen.style.display = 'none';
-                        }, 500);
-                    }, 1000);
-                }
-            }
-
-            // Scroll Handling
-            handleScroll() {
-                const header = document.getElementById('header');
-                const currentScroll = window.pageYOffset;
-
-                // Header scroll effect
-                if (currentScroll > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-
-                // Update animations
-                this.updateAnimations();
-
-                // Update active navigation
-                this.updateActiveNavigation();
-
-                this.lastScroll = currentScroll;
-            }
-
-            // Animations
-            setupAnimations() {
-                this.fadeElements = document.querySelectorAll('.fade-in');
-                this.updateAnimations();
-            }
-
-            updateAnimations() {
-                this.fadeElements.forEach(element => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    const elementVisible = 150;
-
-                    if (elementTop < window.innerHeight - elementVisible) {
-                        element.classList.add('visible');
-                    }
-                });
-            }
-
-            // Navigation
-            updateActiveNavigation() {
-                const sections = document.querySelectorAll('section[id]');
-                const navLinks = document.querySelectorAll('.nav-menu a');
-                let current = '';
-
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-
-                    if (window.pageYOffset >= sectionTop - 200) {
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-
-            // Resize Handling
-            handleResize() {
-                const navMenu = document.getElementById('navMenu');
-                const menuToggle = document.getElementById('menuToggle');
-
-                if (window.innerWidth > 768) {
-                    if (navMenu && navMenu.classList.contains('active')) {
-                        navMenu.classList.remove('active');
-                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                    }
-                }
-
-                this.updateAnimations();
-            }
-        }
-
-        // Initialize App
-        document.addEventListener('DOMContentLoaded', () => {
-            new MascotasStoreApp();
-        });
-
-        // Error Handling
-        window.addEventListener('error', (e) => {
-            console.error('Error:', e.error);
-        });
-
-        // Performance
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                // Service worker would go here for PWA
-            });
-        }
-    </script>
+    <!-- JavaScript Principal -->
+    <script src="js/main.js"></script>
 </body>
+
+</html>
