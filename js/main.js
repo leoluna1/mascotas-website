@@ -266,8 +266,10 @@ class MascotasStoreApp {
     showNotification(message, type = 'success') {
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;
+        notification.setAttribute('role', 'alert');
+        notification.setAttribute('aria-live', 'polite');
         notification.innerHTML = `
-            <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+            <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}" aria-hidden="true"></i>
             <span>${message}</span>
         `;
         
@@ -286,6 +288,8 @@ class MascotasStoreApp {
             font-weight: 600;
             z-index: 10000;
             animation: slideIn 0.5s ease;
+            max-width: 300px;
+            word-wrap: break-word;
         `;
         
         document.body.appendChild(notification);

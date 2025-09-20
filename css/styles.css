@@ -1552,5 +1552,55 @@ textarea:focus {
 }
 
 /* =====================================================
+   OPTIMIZACIONES ADICIONALES
+   ===================================================== */
+
+/* Mejora de rendimiento para animaciones */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Optimización de fuentes */
+@font-face {
+    font-family: 'Inter';
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Orbitron';
+    font-display: swap;
+}
+
+/* Mejora de contraste para accesibilidad */
+@media (prefers-contrast: high) {
+    .btn-outline {
+        border-width: 3px;
+    }
+    
+    .nav-menu a::before {
+        height: 4px;
+    }
+}
+
+/* Optimización de imágenes */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Mejora de focus para navegación por teclado */
+*:focus {
+    outline: 3px solid var(--primary-cyan);
+    outline-offset: 2px;
+}
+
+/* =====================================================
    FIN DEL ARCHIVO CSS
    ===================================================== */

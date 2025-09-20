@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perros - Servicios y Productos Especializados | Mascotas Store</title>
+    <meta name="description" content="Servicios especializados para perros: grooming, spa canino, productos premium y atención veterinaria. Todo lo que tu perro necesita en Mascotas Store.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <style>
+        /* Estilos específicos para categoría perros */
+        .category-hero {
+            padding: 140px 0 80px;
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff6b35 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M30 30c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            animation: dogFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes dogFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-15px, -10px) rotate(0.5deg); }
+            66% { transform: translate(10px, -20px) rotate(-0.5deg); }
+        }
+
+        .category-hero h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .category-hero h1::before {
+            content: '🐕';
+            font-size: 0.8em;
+            margin-right: 20px;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-8px); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+            font-weight: 600;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-stat {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 25px 35px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: var(--transition);
+            min-width: 150px;
+        }
+
+        .hero-stat:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .hero-stat-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.8rem;
+            font-weight: 900;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .hero-stat-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* Servicios para perros */
+        .dog-services {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8fcff 0%, #fff8f0 50%, #f0f9ff 100%);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.1);
+            transition: var(--transition);
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b35, #f7931e);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff6b35;
+            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.2);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        .service-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ff6b35;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .service-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .service-features li::before {
+            content: '🐾';
+            font-size: 16px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Galería de razas */
+        .breeds-gallery {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .breeds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .breed-card {
+            position: relative;
+            height: 350px;
+            border-radius: 25px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .breed-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.2);
+        }
+
+        .breed-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .breed-card:hover .breed-image {
+            transform: scale(1.1);
+        }
+
+        .breed-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 40px 25px 25px;
+            color: white;
+        }
+
+        .breed-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .breed-description {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* Productos recomendados */
+        .recommended-products {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #fff8f0 0%, #f8fcff 50%, #fff8f0 100%);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border: 3px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: #ff6b35;
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #ff6b35;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: #ff6b35;
+            margin-bottom: 15px;
+        }
+
+        .product-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+        }
+
+        .product-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        /* CTA Section */
+        .dog-cta {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dog-cta::before {
+            content: '🐕🦴🎾';
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            font-size: 3rem;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .dog-cta::after {
+            content: '🐾🏠🥎';
+            position: absolute;
+            bottom: 20%;
+            right: 10%;
+            font-size: 2.5rem;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .cta-content h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-content p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-button {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.4);
+            color: white;
+            padding: 18px 35px;
+            border-radius: 25px;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-button:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .cta-button.primary {
+            background: white;
+            color: #ff6b35;
+            border-color: white;
+        }
+
+        .cta-button.primary:hover {
+            background: #f0f0f0;
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .category-hero {
+                padding: 120px 0 60px;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+            }
+
+            .hero-stat {
+                min-width: auto;
+                padding: 20px 30px;
+            }
+
+            .services-grid,
+            .breeds-grid,
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 20px;
+            }
+
+            .service-card {
+                padding: 30px 25px;
+            }
+
+            .breed-card {
+                height: 300px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-content h2 {
+                font-size: 2rem;
+            }
+
+            .cta-content p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <div class="header-info">
+                        <div class="header-info-item">
+                            <i class="fas fa-phone"></i>
+                            <strong>0999929069</strong>
+                        </div>
+                        <div class="header-info-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Lun-Vie 8AM-7PM</span>
+                        </div>
+                    </div>
+                    <div class="header-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <nav class="nav">
+                    <a href="../index.html" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-paw"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h1>MASCOTAS STORE</h1>
+                            <div class="logo-subtitle">Peluquería, Spa Canino & Pet Shop</div>
+                        </div>
+                    </a>
+
+                    <div class="nav-menu" id="navMenu">
+                        <a href="../index.html">INICIO</a>
+                        <a href="../index.html#servicios">SERVICIOS</a>
+                        <a href="./galeria.html">GALERÍA</a>
+                        <a href="../index.html#contacto">CONTACTO</a>
+                        <div class="nav-dropdown">
+                            <a href="#" class="dropdown-toggle">CATEGORÍAS <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-menu">
+                                <a href="./categoria-perros.html">🐕 Perros</a>
+                                <a href="./categoria-gatos.html">🐱 Gatos</a>
+                                <a href="./categoria-aves.html">🦅 Aves</a>
+                                <a href="./categoria-otros.html">🐹 Otros</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="nav-actions">
+                        <a href="./citas.html" class="btn btn-primary">
+                            <i class="fas fa-calendar"></i> AGENDAR CITA
+                        </a>
+                    </div>
+
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero de Perros -->
+    <section class="category-hero">
+        <div class="container">
+            <a href="../index.html" class="back-btn" style="position: absolute; top: 20px; left: 20px; color: white; text-decoration: none; font-size: 1.2rem; z-index: 10;">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+            <h1>PERROS</h1>
+            <p class="hero-subtitle">Servicios especializados y productos premium para tu mejor amigo</p>
+            
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">150+</span>
+                    <span class="hero-stat-label">Razas Atendidas</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">5000+</span>
+                    <span class="hero-stat-label">Perros Felices</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">15+</span>
+                    <span class="hero-stat-label">Años de Experiencia</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios para Perros -->
+    <section class="dog-services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Servicios Especializados para Perros</h2>
+                <p class="section-subtitle">Cuidado integral adaptado a las necesidades de tu perro</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3 class="service-title">Grooming Breed Específico</h3>
+                    <p class="service-description">
+                        Cortes especializados según la raza de tu perro, respetando los estándares internacionales y resaltando su belleza natural.
+                    </p>
+                    <ul class="service-features">
+                        <li>Corte breed específico profesional</li>
+                        <li>Baño con productos premium</li>
+                        <li>Secado y cepillado especializado</li>
+                        <li>Corte de uñas y limpieza de oídos</li>
+                        <li>Perfume canino de larga duración</li>
+                    </ul>
+                    <a href="./citas.html" class="btn btn-primary">
+                        <i class="fas fa-scissors"></i> Reservar Grooming
+                    </a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3 class="service-title">Spa Canino Premium</h3>
+                    <p class="service-description">
+                        Tratamientos de relajación y bienestar diseñados especialmente para perros estresados o ansiosos.
+                    </p>
+                    <ul class="service-features">
+                        <li>Hidroterapia relajante</li>
+                        <li>Masajes terapéuticos</li>
+                        <li>Aromaterapia canina</li>
+                        <li>Tratamiento de piel y pelaje</li>
+                        <li>Musicoterapia especializada</li>
+                    </ul>
+                    <a href="./citas.html" class="btn btn-primary">
+                        <i class="fas fa-leaf"></i> Reservar Spa
+                    </a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h3 class="service-title">Consultas Veterinarias</h3>
+                    <p class="service-description">
+                        Atención médica integral con veterinarios especializados en comportamiento y salud canina.
+                    </p>
+                    <ul class="service-features">
+                        <li>Consultas médicas generales</li>
+                        <li>Vacunación completa</li>
+                        <li>Desparasitación interna y externa</li>
+                        <li>Control de peso y nutrición</li>
+                        <li>Cirugías menores y mayores</li>
+                    </ul>
+                    <a href="./citas.html" class="btn btn-primary">
+                        <i class="fas fa-calendar-check"></i> Agendar Consulta
+                    </a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="service-title">Entrenamiento Canino</h3>
+                    <p class="service-description">
+                        Programas de entrenamiento personalizados para cachorros y perros adultos con problemas de comportamiento.
+                    </p>
+                    <ul class="service-features">
+                        <li>Educación básica para cachorros</li>
+                        <li>Corrección de conductas</li>
+                        <li>Socialización controlada</li>
+                        <li>Entrenamiento de obediencia</li>
+                        <li>Terapia de comportamiento</li>
+                    </ul>
+                    <a href="./citas.html" class="btn btn-primary">
+                        <i class="fas fa-dog"></i> Iniciar Entrenamiento
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería de Razas Populares -->
+    <section class="breeds-gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Razas que Más Atendemos</h2>
+                <p class="section-subtitle">Experiencia especializada en las razas más populares</p>
+            </div>
+
+            <div class="breeds-grid">
+                <div class="breed-card">
+                    <div class="breed-image" style="background-image: url('https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=400&fit=crop')"></div>
+                    <div class="breed-overlay">
+                        <h3 class="breed-name">Golden Retriever</h3>
+                        <p class="breed-description">Perros amigables y energéticos que requieren grooming regular para mantener su pelaje dorado brillante.</p>
+                    </div>
+                </div>
+
+                <div class="breed-card">
+                    <div class="breed-image" style="background-image: url('https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400&h=400&fit=crop')"></div>
+                    <div class="breed-overlay">
+                        <h3 class="breed-name">Schnauzer</h3>
+                        <p class="breed-description">Raza distintiva que requiere cortes específicos para mantener su característico look con cejas y barba.</p>
+                    </div>
+                </div>
+
+                <div class="breed-card">
+                    <div class="breed-image" style="background-image: url('https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=400&fit=crop')"></div>
+                    <div class="breed-overlay">
+                        <h3 class="breed-name">Labrador</h3>
+                        <p class="breed-description">Perros activos y sociables ideales para familias, necesitan cuidado regular de su pelaje impermeable.</p>
+                    </div>
+                </div>
+
+                <div class="breed-card">
+                    <div class="breed-image" style="background-image: url('https://images.unsplash.com/photo-1616190260745-447af048a6c5?w=400&h=400&fit=crop')"></div>
+                    <div class="breed-overlay">
+                        <h3 class="breed-name">Poodle</h3>
+                        <p class="breed-description">Raza elegante con pelaje rizado que requiere cortes artísticos y mantenimiento frecuente.</p>
+                    </div>
+                </div>
+
+                <div class="breed-card">
+                    <div class="breed-image" style="background-image: url('https://images.unsplash.com/photo-1551717743-49959800b1f6?w=400&h=400&fit=crop')"></div>
+                    <div class="breed-overlay">
+                        <h3 class="breed-name">Border Collie</h3>
+                        <p class="breed-description">Perros inteligentes y activos con pelaje doble que necesita cepillado especializado regular.</p>
+                    </div>
+                </div>
+
+                <div class="breed-card">
+                    <div class="breed-image" style="background-image: url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=400&fit=crop')"></div>
+                    <div class="breed-overlay">
+                        <h3 class="breed-name">Yorkshire Terrier</h3>
+                        <p class="breed-description">Pequeños pero valientes, requieren cuidado especial de su pelaje sedoso y delicado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos Recomendados -->
+    <section class="recommended-products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Productos Recomendados para Perros</h2>
+                <p class="section-subtitle">Los mejores productos para el cuidado y bienestar de tu perro</p>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=300&h=200&fit=crop')">
+                        <div class="product-badge">Premium</div>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="product-title">Royal Canin Perro Adulto</h4>
+                        <div class="product-price">$28.99</div>
+                        <button class="product-btn" onclick="orderProduct('Royal Canin Perro Adulto', 28.99)">
+                            <i class="fas fa-shopping-cart"></i> Ordenar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=300&h=200&fit=crop')">
+                        <div class="product-badge">Nuevo</div>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="product-title">Pelota Interactiva LED</h4>
+                        <div class="product-price">$15.50</div>
+                        <button class="product-btn" onclick="orderProduct('Pelota Interactiva LED', 15.50)">
+                            <i class="fas fa-shopping-cart"></i> Ordenar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?w=300&h=200&fit=crop')">
+                        <div class="product-badge">Popular</div>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="product-title">Collar GPS Smart</h4>
+                        <div class="product-price">$22.90</div>
+                        <button class="product-btn" onclick="orderProduct('Collar GPS Smart', 22.90)">
+                            <i class="fas fa-shopping-cart"></i> Ordenar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1605568427561-40dd23c2acea?w=300&h=200&fit=crop')">
+                        <div class="product-badge">Premium</div>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="product-title">Correa Extensible Pro</h4>
+                        <div class="product-price">$35.60</div>
+                        <button class="product-btn" onclick="orderProduct('Correa Extensible Pro', 35.60)">
+                            <i class="fas fa-shopping-cart"></i> Ordenar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=300&h=200&fit=crop')">
+                        <div class="product-badge">Oferta</div>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="product-title">Shampoo Breed Specific</h4>
+                        <div class="product-price">$18.75</div>
+                        <button class="product-btn" onclick="orderProduct('Shampoo Breed Specific', 18.75)">
+                            <i class="fas fa-shopping-cart"></i> Ordenar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=300&h=200&fit=crop')">
+                        <div class="product-badge">Recomendado</div>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="product-title">Juguete Dental Natural</h4>
+                        <div class="product-price">$12.30</div>
+                        <button class="product-btn" onclick="orderProduct('Juguete Dental Natural', 12.30)">
+                            <i class="fas fa-shopping-cart"></i> Ordenar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center" style="margin-top: 40px;">
+                <a href="./productos.html" class="btn btn-primary btn-large">
+                    <i class="fas fa-store"></i> Ver Todos los Productos para Perros
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="dog-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>¿Listo para Consentir a tu Perro?</h2>
+                <p>Tu mejor amigo merece el mejor cuidado. Agenda una cita hoy mismo y déjanos hacer que tu perro se vea y se sienta increíble.</p>
+                
+                <div class="cta-buttons">
+                    <a href="./citas.html" class="cta-button primary">
+                        <i class="fas fa-calendar-check"></i> Agendar Cita Online
+                    </a>
+                    <a href="https://wa.me/593999929069?text=Hola! Me interesa agendar una cita para mi perro" class="cta-button">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Directo
+                    </a>
+                    <a href="tel:0999929069" class="cta-button">
+                        <i class="fas fa-phone"></i> Llamar Ahora
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mascotas Store</h3>
+                    <p>Especialistas en cuidado canino con más de 15 años de experiencia. Tu perro es nuestra pasión.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Servicios para Perros</h3>
+                    <ul>
+                        <li><a href="./citas.html">Grooming Breed Específico</a></li>
+                        <li><a href="./citas.html">Spa Canino Premium</a></li>
+                        <li><a href="./citas.html">Consultas Veterinarias</a></li>
+                        <li><a href="./citas.html">Entrenamiento Canino</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Otras Categorías</h3>
+                    <ul>
+                        <li><a href="./categoria-gatos.html">🐱 Gatos</a></li>
+                        <li><a href="./categoria-aves.html">🦅 Aves</a></li>
+                        <li><a href="./categoria-otros.html">🐹 Otros</a></li>
+                        <li><a href="./productos.html">🛍️ Todos los Productos</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> 0999929069</li>
+                        <li><i class="fas fa-envelope"></i> info@mascotasstore.ec</li>
+                        <li><i class="fas fa-clock"></i> Lun-Vie: 8AM-7PM</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Ibarra, Tulcán, Otavalo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2024 Mascotas Store - Especialistas en cuidado canino | Tu perro, nuestra pasión</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/593999929069" class="whatsapp-btn" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script>
+        // JavaScript específico para la categoría de perros
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDogCategory();
+            setupBreedCards();
+            setupProductOrdering();
+            animateOnScroll();
+        });
+
+        function initializeDogCategory() {
+            // Animación de entrada para las estadísticas
+            const stats = document.querySelectorAll('.hero-stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounter(entry.target);
+                    }
+                });
+            });
+
+            stats.forEach(stat => observer.observe(stat));
+        }
+
+        function animateCounter(element) {
+            const target = element.textContent.replace(/[^0-9]/g, '');
+            const targetNumber = parseInt(target);
+            const duration = 2000;
+            const step = targetNumber / (duration / 50);
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= targetNumber) {
+                    current = targetNumber;
+                    clearInterval(timer);
+                }
+                
+                // Formatear el número según el valor original
+                if (element.textContent.includes('+')) {
+                    element.textContent = Math.floor(current).toLocaleString() + '+';
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 50);
+        }
+
+        function setupBreedCards() {
+            const breedCards = document.querySelectorAll('.breed-card');
+            
+            breedCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const breedName = this.querySelector('.breed-name').textContent;
+                    const message = `Hola! Me interesa información sobre servicios especializados para ${breedName}. ¿Podrían ayudarme?`;
+                    
+                    window.open(`https://wa.me/593999929069?text=${encodeURIComponent(message)}`, '_blank');
+                });
+
+                // Efecto de hover mejorado
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+        }
+
+        function setupProductOrdering() {
+            // Esta función se define globalmente para los botones onclick
+            window.orderProduct = function(productName, price) {
+                const message = `🐕 PEDIDO PARA PERROS\n\n` +
+                    `Producto: ${productName}\n` +
+                    `Precio: ${price}\n\n` +
+                    `¿Podrían confirmar disponibilidad y tiempo de entrega?`;
+                
+                window.open(`https://wa.me/593999929069?text=${encodeURIComponent(message)}`, '_blank');
+                showNotification(`${productName} agregado a tu consulta de WhatsApp`, 'success');
+            };
+        }
+
+        function animateOnScroll() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Aplicar animación a elementos específicos
+            const animatedElements = document.querySelectorAll('.service-card, .breed-card, .product-card');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: ${type === 'success' ? 'linear-gradient(135deg, #ff6b35, #f7931e)' : 'var(--gradient-bg)'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-weight: 600;
+                z-index: 10000;
+                animation: slideInNotification 0.5s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutNotification 0.5s ease';
+                setTimeout(() => notification.remove(), 500);
+            }, 4000);
+        }
+
+        // Animaciones CSS adicionales
+        const dogStyles = document.createElement('style');
+        dogStyles.textContent = `
+            @keyframes slideInNotification {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOutNotification {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+
+            /* Mejoras para la experiencia de usuario */
+            .service-card, .breed-card, .product-card {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .breed-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(45deg, rgba(255, 107, 53, 0.1), transparent);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                z-index: 1;
+            }
+
+            .breed-card:hover::before {
+                opacity: 1;
+            }
+
+            .breed-overlay {
+                position: relative;
+                z-index: 2;
+            }
+
+            /* Efecto de pulsación para botones */
+            .product-btn:active, .cta-button:active {
+                transform: scale(0.95);
+            }
+
+            /* Smooth scroll para navegación */
+            html {
+                scroll-behavior: smooth;
+            }
+        `;
+        document.head.appendChild(dogStyles);
+    </script>
+</body>
+
+</html>
