@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aves - Servicios y Productos Especializados | Mascotas Store</title>
+    <meta name="description" content="Servicios especializados para aves: grooming, consultas veterinarias, productos premium y cuidado especializado. Todo lo que tu ave necesita en Mascotas Store.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <style>
+        /* Estilos específicos para categoría aves */
+        .category-hero {
+            padding: 140px 0 80px;
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 50%, #27ae60 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M30 30c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            animation: birdFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes birdFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-15px, -10px) rotate(0.5deg); }
+            66% { transform: translate(10px, -20px) rotate(-0.5deg); }
+        }
+
+        .category-hero h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .category-hero h1::before {
+            content: '🐦';
+            font-size: 0.8em;
+            margin-right: 20px;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-8px); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+            font-weight: 600;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-stat {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 25px 35px;
+            text-align: center;
+            min-width: 150px;
+            transition: all 0.3s ease;
+        }
+
+        .hero-stat:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .hero-stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .hero-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Servicios especializados para aves */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(39, 174, 96, 0.15);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(39, 174, 96, 0.25);
+            border-color: #27ae60;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .service-description {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .service-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #27ae60;
+        }
+
+        /* Especies populares */
+        .breeds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .breed-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .breed-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(39, 174, 96, 0.2);
+        }
+
+        .breed-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .breed-info {
+            padding: 20px;
+        }
+
+        .breed-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .breed-description {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Productos recomendados */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(39, 174, 96, 0.2);
+        }
+
+        .product-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+
+        .product-btn {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .product-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(39, 174, 96, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .category-hero {
+                padding: 120px 0 60px;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+            }
+
+            .hero-stat {
+                min-width: auto;
+                padding: 20px 30px;
+            }
+
+            .services-grid,
+            .breeds-grid,
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <div class="header-info">
+                        <div class="header-info-item">
+                            <i class="fas fa-phone"></i>
+                            <strong>0999929069</strong>
+                        </div>
+                        <div class="header-info-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Lun-Vie 8AM-7PM</span>
+                        </div>
+                        <div class="header-info-item">
+                            <i class="fas fa-ambulance"></i>
+                            <span>Emergencias 24/7</span>
+                        </div>
+                    </div>
+                    <div class="header-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <nav class="nav">
+                    <a href="../index.html" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-paw"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h1>MASCOTAS</h1>
+                            <span class="logo-subtitle">STORE</span>
+                        </div>
+                    </a>
+
+                    <div class="nav-menu" id="navMenu">
+                        <a href="../index.html">INICIO</a>
+                        <a href="../index.html#mascotas">MASCOTAS</a>
+                        <a href="../index.html#servicios">SERVICIOS</a>
+                        <a href="../index.html#sucursales">SUCURSALES</a>
+                        <a href="../index.html#nosotros">NOSOTROS</a>
+                        <a href="../index.html#contacto">CONTACTO</a>
+                    </div>
+
+                    <div class="nav-actions">
+                        <a href="tel:0999929069" class="btn btn-outline">
+                            <i class="fas fa-phone"></i> LLAMAR
+                        </a>
+                        <a href="https://wa.me/593999929069" class="btn btn-primary">
+                            <i class="fas fa-ambulance"></i> EMERGENCIAS
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero de Aves -->
+    <section class="category-hero">
+        <div class="container">
+            <a href="../index.html" class="back-btn" style="position: absolute; top: 20px; left: 20px; color: white; text-decoration: none; font-size: 1.2rem; z-index: 10;">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+            <h1>AVES</h1>
+            <p class="hero-subtitle">Servicios especializados y productos premium para tus aves</p>
+            
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">50+</span>
+                    <span class="hero-stat-label">Especies Atendidas</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">2000+</span>
+                    <span class="hero-stat-label">Aves Felices</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">10+</span>
+                    <span class="hero-stat-label">Años de Experiencia</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Especializados -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">SERVICIOS PARA AVES</h2>
+                <p class="section-subtitle">Cuidado especializado para tus aves</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3 class="service-title">Grooming Avícola</h3>
+                    <p class="service-description">Corte de uñas, limpieza de pico, recorte de plumas y cuidado especializado para aves.</p>
+                    <div class="service-price">Desde $20</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h3 class="service-title">Consulta Veterinaria</h3>
+                    <p class="service-description">Exámenes de salud, vacunación y atención médica especializada para aves.</p>
+                    <div class="service-price">Desde $35</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="service-title">Hospedaje Avícola</h3>
+                    <p class="service-description">Alojamiento seguro y cómodo para tus aves durante tus viajes.</p>
+                    <div class="service-price">Desde $12/día</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="service-title">Entrenamiento</h3>
+                    <p class="service-description">Entrenamiento básico y socialización para aves domésticas.</p>
+                    <div class="service-price">Desde $30</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Especies Populares -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">ESPECIES POPULARES</h2>
+                <p class="section-subtitle">Conoce las aves que más atendemos</p>
+            </div>
+
+            <div class="breeds-grid">
+                <div class="breed-card">
+                    <div class="breed-image" style="background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23f8f9fa"/><text x="200" y="150" text-anchor="middle" font-size="24" fill="%236c757d">Canario</text></svg>')"></div>
+                    <div class="breed-info">
+                        <h3 class="breed-name">Canario</h3>
+                        <p class="breed-description">Aves cantoras pequeñas, ideales para principiantes. Requieren cuidados básicos.</p>
+                    </div>
+                </div>
+
+                <div class="breed-card">
+                    <div class="breed-image" style="background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23f8f9fa"/><text x="200" y="150" text-anchor="middle" font-size="24" fill="%236c757d">Perico</text></svg>')"></div>
+                    <div class="breed-info">
+                        <h3 class="breed-name">Perico</h3>
+                        <p class="breed-description">Aves sociables y coloridas, perfectas para familias con niños.</p>
+                    </div>
+                </div>
+
+                <div class="breed-card">
+                    <div class="breed-image" style="background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23f8f9fa"/><text x="200" y="150" text-anchor="middle" font-size="24" fill="%236c757d">Cacatúa</text></svg>')"></div>
+                    <div class="breed-info">
+                        <h3 class="breed-name">Cacatúa</h3>
+                        <p class="breed-description">Aves inteligentes y cariñosas, requieren atención y espacio.</p>
+                    </div>
+                </div>
+
+                <div class="breed-card">
+                    <div class="breed-image" style="background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23f8f9fa"/><text x="200" y="150" text-anchor="middle" font-size="24" fill="%236c757d">Loro</text></svg>')"></div>
+                    <div class="breed-info">
+                        <h3 class="breed-name">Loro</h3>
+                        <p class="breed-description">Aves muy inteligentes, pueden aprender a hablar y realizar trucos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos Recomendados -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">PRODUCTOS PARA AVES</h2>
+                <p class="section-subtitle">Lo mejor para el cuidado de tus aves</p>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23f8f9fa"/><text x="200" y="150" text-anchor="middle" font-size="24" fill="%236c757d">Alimento Premium</text></svg>')"></div>
+                    <div class="product-info">
+                        <h3 class="product-name">Alimento Premium para Aves</h3>
+                        <div class="product-price">$12.99</div>
+                        <button class="product-btn" onclick="orderProduct('Alimento Premium para Aves', 12.99)">
+                            <i class="fas fa-shopping-cart"></i> Pedir por WhatsApp
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23f8f9fa"/><text x="200" y="150" text-anchor="middle" font-size="24" fill="%236c757d">Jaula</text></svg>')"></div>
+                    <div class="product-info">
+                        <h3 class="product-name">Jaula Premium</h3>
+                        <div class="product-price">$89.99</div>
+                        <button class="product-btn" onclick="orderProduct('Jaula Premium', 89.99)">
+                            <i class="fas fa-shopping-cart"></i> Pedir por WhatsApp
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23f8f9fa"/><text x="200" y="150" text-anchor="middle" font-size="24" fill="%236c757d">Juguetes</text></svg>')"></div>
+                    <div class="product-info">
+                        <h3 class="product-name">Juguetes para Aves</h3>
+                        <div class="product-price">$15.99</div>
+                        <button class="product-btn" onclick="orderProduct('Juguetes para Aves', 15.99)">
+                            <i class="fas fa-shopping-cart"></i> Pedir por WhatsApp
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23f8f9fa"/><text x="200" y="150" text-anchor="middle" font-size="24" fill="%236c757d">Accesorios</text></svg>')"></div>
+                    <div class="product-info">
+                        <h3 class="product-name">Accesorios para Jaula</h3>
+                        <div class="product-price">$25.99</div>
+                        <button class="product-btn" onclick="orderProduct('Accesorios para Jaula', 25.99)">
+                            <i class="fas fa-shopping-cart"></i> Pedir por WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">¿LISTO PARA CUIDAR A TU AVE?</h2>
+                <p class="section-subtitle">Agenda una cita o consulta nuestros productos</p>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="citas.html" class="btn btn-primary" style="margin-right: 20px;">
+                    <i class="fas fa-calendar"></i> Agendar Cita
+                </a>
+                <a href="https://wa.me/593999929069" class="btn btn-outline">
+                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mascotas Store</h3>
+                    <p>Tu centro de confianza para el cuidado de tus mascotas. Servicios profesionales y productos premium.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-phone"></i> 0999929069</p>
+                    <p><i class="fas fa-envelope"></i> info@mascotasstore.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mascotas Store. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/593999929069" class="whatsapp-btn" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script>
+        // JavaScript específico para la categoría de aves
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeBirdCategory();
+            setupBreedCards();
+            setupProductOrdering();
+            animateOnScroll();
+        });
+
+        function initializeBirdCategory() {
+            // Animación de contadores
+            animateCounters();
+        }
+
+        function animateCounters() {
+            const counters = document.querySelectorAll('.hero-stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent.replace('+', ''));
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = target + '+';
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.floor(current) + '+';
+                    }
+                }, 30);
+            });
+        }
+
+        function setupBreedCards() {
+            const breedCards = document.querySelectorAll('.breed-card');
+            breedCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const breedName = this.querySelector('.breed-name').textContent;
+                    showNotification(`Información sobre ${breedName} enviada por WhatsApp`, 'success');
+                });
+            });
+        }
+
+        function setupProductOrdering() {
+            // La función orderProduct se define globalmente
+            window.orderProduct = function(productName, price) {
+                const message = `Hola! Me interesa el producto: ${productName} - Precio: $${price}`;
+                window.open(`https://wa.me/593999929069?text=${encodeURIComponent(message)}`, '_blank');
+                showNotification('Redirigiendo a WhatsApp...', 'success');
+            };
+        }
+
+        function animateOnScroll() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.service-card, .breed-card, .product-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        }
+    </script>
+</body>
+
+</html>

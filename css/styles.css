@@ -635,6 +635,11 @@ body::before {
                 url('https://images.unsplash.com/photo-1548767797-d8c844163c4c?w=400&h=400&fit=crop') center/cover;
 }
 
+.fish-image {
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)),
+                url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=400&fit=crop') center/cover;
+}
+
 .pet-category-label {
     position: absolute;
     bottom: 60px;
