@@ -2,6 +2,52 @@
 // MASCOTAS STORE - JAVASCRIPT PRINCIPAL
 // =====================================================
 
+// Funciones de seguridad
+const SecurityUtils = {
+    // Sanitizar HTML para prevenir XSS
+    sanitizeHTML: function(str) {
+        if (typeof str !== 'string') return '';
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    },
+
+    // Escapar caracteres especiales
+    escapeHTML: function(str) {
+        if (typeof str !== 'string') return '';
+        return str
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#x27;')
+            .replace(/\//g, '&#x2F;');
+    },
+
+    // Validar entrada de usuario
+    validateInput: function(input, type = 'text') {
+        if (typeof input !== 'string') return false;
+        
+        switch (type) {
+            case 'email':
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input);
+            case 'phone':
+                return /^[\+]?[0-9\s\-\(\)]{10,}$/.test(input);
+            case 'text':
+                return input.length > 0 && input.length < 1000;
+            case 'name':
+                return /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,50}$/.test(input);
+            default:
+                return true;
+        }
+    },
+
+    // Generar nonce para CSP
+    generateNonce: function() {
+        return btoa(Math.random().toString(36).substring(2, 15));
+    }
+};
+
 class MascotasStoreApp {
     constructor() {
         this.lastScroll = 0;
@@ -272,7 +318,7 @@ class MascotasStoreApp {
         notification.setAttribute('aria-live', 'polite');
         notification.innerHTML = `
             <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}" aria-hidden="true"></i>
-            <span>${message}</span>
+            <span>${SecurityUtils.escapeHTML(message)}</span>
         `;
         
         notification.style.cssText = `

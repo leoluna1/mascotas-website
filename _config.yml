@@ -1,0 +1,28 @@
+# Configuración para GitHub Pages
+title: Mascotas Store
+description: Centro veterinario profesional especializado en servicios de peluquería, grooming, consultas veterinarias y productos premium
+author: Mascotas Store
+email: info@mascotasstore.com
+
+# Configuración del sitio
+baseurl: "/mascotas"  # Cambia esto por el nombre de tu repositorio
+url: "https://tuusuario.github.io"  # Cambia por tu usuario de GitHub
+
+# Configuración de GitHub Pages
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
+
+# Configuración de seguridad
+security:
+  headers:
+    X-Frame-Options: DENY
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: "1; mode=block"
+    Referrer-Policy: strict-origin-when-cross-origin
+
+# Configuración de SEO
+seo:
+  title: Mascotas Store - Peluquería, Spa Canino & Pet Shop
+  description: Centro veterinario profesional con servicios de peluquería, grooming, consultas veterinarias y productos premium. Sucursales en Ibarra, Tulcán y Otavalo
+  keywords: veterinario, peluquería canina, grooming, spa canino, pet shop, mascotas, Ecuador, Ibarra, Tulcán, Otavalo

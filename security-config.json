@@ -1,0 +1,47 @@
+{
+  "security": {
+    "headers": {
+      "X-Frame-Options": "DENY",
+      "X-Content-Type-Options": "nosniff",
+      "X-XSS-Protection": "1; mode=block",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload"
+    },
+    "csp": {
+      "default-src": "'self'",
+      "script-src": "'self' 'unsafe-inline' https://wa.me",
+      "style-src": "'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com",
+      "font-src": "'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
+      "img-src": "'self' data: https: blob:",
+      "connect-src": "'self' https://wa.me",
+      "frame-src": "'none'",
+      "object-src": "'none'",
+      "base-uri": "'self'",
+      "form-action": "'self' https://wa.me tel:",
+      "upgrade-insecure-requests": true
+    },
+    "rateLimiting": {
+      "maxAttempts": 5,
+      "timeWindow": 900000,
+      "enabled": true
+    },
+    "validation": {
+      "maxTextLength": 1000,
+      "maxEmailLength": 254,
+      "maxPhoneLength": 15,
+      "allowedFileTypes": ["jpg", "jpeg", "png", "gif", "svg"],
+      "maxFileSize": 10485760
+    },
+    "sanitization": {
+      "escapeHtml": true,
+      "removeScripts": true,
+      "validateInputs": true
+    }
+  },
+  "monitoring": {
+    "logSecurityEvents": true,
+    "alertOnSuspiciousActivity": true,
+    "maxFailedAttempts": 10
+  }
+}
