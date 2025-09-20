@@ -83,7 +83,7 @@ body::before {
 }
 
 .section {
-    padding: 80px 0;
+    padding: 60px 0;
 }
 
 .section-alt {
@@ -92,13 +92,13 @@ body::before {
 
 .section-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
 .section-title {
     font-family: 'Orbitron', monospace;
-    font-size: clamp(2.2rem, 4vw, 3.5rem);
-    font-weight: 900;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 800;
     background: var(--gradient-bg);
     -webkit-background-clip: text;
     background-clip: text;
@@ -212,7 +212,7 @@ body::before {
 
 .header-top {
     background: var(--gradient-bg);
-    padding: 10px 0;
+    padding: 8px 0;
     color: white;
 }
 
@@ -261,7 +261,7 @@ body::before {
 }
 
 .header-main {
-    padding: 15px 0;
+    padding: 10px 0;
 }
 
 .nav {
@@ -278,22 +278,22 @@ body::before {
 }
 
 .logo-icon {
-    width: 55px;
-    height: 55px;
+    width: 45px;
+    height: 45px;
     background: var(--gradient-bg);
     border-radius: var(--radius);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 26px;
+    font-size: 22px;
     color: white;
     box-shadow: var(--shadow-glow);
 }
 
 .logo-text h1 {
     font-family: 'Orbitron', monospace;
-    font-size: 30px;
-    font-weight: 900;
+    font-size: 26px;
+    font-weight: 800;
     background: var(--gradient-bg);
     -webkit-background-clip: text;
     background-clip: text;
@@ -400,21 +400,21 @@ body::before {
    HERO SECTION
    ===================================================== */
 .hero {
-    padding: 160px 0 80px;
+    padding: 120px 0 60px;
     position: relative;
 }
 
 .hero-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    gap: 40px;
     align-items: center;
 }
 
 .hero-title {
     font-family: 'Orbitron', monospace;
-    font-size: clamp(2.8rem, 5vw, 4.5rem);
-    font-weight: 900;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 800;
     background: var(--gradient-bg);
     -webkit-background-clip: text;
     background-clip: text;
@@ -484,8 +484,8 @@ body::before {
 
 .hero-main-image {
     width: 100%;
-    max-width: 450px;
-    height: 350px;
+    max-width: 400px;
+    height: 300px;
     background: var(--card-bg);
     border: 3px solid var(--primary-cyan);
     border-radius: 25px;
@@ -605,7 +605,7 @@ body::before {
 .pet-image-container {
     position: relative;
     width: 100%;
-    height: 300px;
+    height: 250px;
 }
 
 .pet-image {

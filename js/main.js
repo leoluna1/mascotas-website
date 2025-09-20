@@ -56,23 +56,25 @@ class MascotasStoreApp {
 
     // Inicializar tarjetas de mascotas
     initPetCards() {
-        document.querySelectorAll('.pet-add-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const petCard = btn.closest('.pet-card');
-                const category = petCard.querySelector('.pet-category-label').textContent;
-                this.sendWhatsAppMessage(`Hola! Me interesa información sobre ${category.toLowerCase()} disponibles`);
-            });
-        });
+        // Funcionalidad de WhatsApp desactivada para botones de mascotas
+        // document.querySelectorAll('.pet-add-btn').forEach(btn => {
+        //     btn.addEventListener('click', (e) => {
+        //         e.stopPropagation();
+        //         const petCard = btn.closest('.pet-card');
+        //         const category = petCard.querySelector('.pet-category-label').textContent;
+        //         this.sendWhatsAppMessage(`Hola! Me interesa información sobre ${category.toLowerCase()} disponibles`);
+        //     });
+        // });
 
-        document.querySelectorAll('.pet-card').forEach(card => {
-            card.addEventListener('click', (e) => {
-                if (!e.target.classList.contains('pet-add-btn')) {
-                    const category = card.querySelector('.pet-category-label').textContent;
-                    this.sendWhatsAppMessage(`Hola! Me interesa información sobre ${category.toLowerCase()} disponibles`);
-                }
-            });
-        });
+        // Funcionalidad de WhatsApp desactivada para tarjetas de mascotas
+        // document.querySelectorAll('.pet-card').forEach(card => {
+        //     card.addEventListener('click', (e) => {
+        //         if (!e.target.classList.contains('pet-add-btn')) {
+        //             const category = card.querySelector('.pet-category-label').textContent;
+        //             this.sendWhatsAppMessage(`Hola! Me interesa información sobre ${category.toLowerCase()} disponibles`);
+        //         }
+        //     });
+        // });
     }
 
     // Enviar mensaje WhatsApp
