@@ -7,6 +7,11 @@
     <title>Perros - Servicios y Productos Especializados | Mascotas Store</title>
     <meta name="description" content="Servicios especializados para perros: grooming, spa canino, productos premium y atención veterinaria. Todo lo que tu perro necesita en Mascotas Store.">
     
+    <meta name="theme-color" content="#00d4ff">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preload" href="../css/styles.css" as="style">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -935,7 +940,7 @@
     </a>
 
     <!-- JavaScript -->
-    <script src="../js/main.js"></script>
+    <script src="../js/main.js" defer></script>
     <script>
         // JavaScript específico para la categoría de perros
         document.addEventListener('DOMContentLoaded', function() {
@@ -1139,6 +1144,11 @@
         `;
         document.head.appendChild(dogStyles);
     </script>
+    <noscript>
+        <div style="background:#ffebee;color:#b71c1c;padding:12px;text-align:center;font-weight:600">
+            Para una mejor experiencia, habilita JavaScript en tu navegador.
+        </div>
+    </noscript>
 </body>
 
 </html>
